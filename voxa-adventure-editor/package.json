@@ -1,0 +1,65 @@
+{
+  "name": "voxa-adventure-editor",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@emotion/core": "^10.0.28",
+    "@emotion/styled": "^10.0.27",
+    "@projectstorm/react-diagrams": "^6.0.1-beta.7",
+    "@testing-library/jest-dom": "^4.2.4",
+    "@testing-library/react": "^9.5.0",
+    "@testing-library/user-event": "^7.2.1",
+    "bootstrap": "^4.5.0",
+    "closest": "0.0.1",
+    "cross-env": "^7.0.2",
+    "dagre": "^0.8.5",
+    "electron-is-dev": "^1.2.0",
+    "lodash": "^4.17.19",
+    "ml-matrix": "^6.5.0",
+    "pathfinding": "^0.4.18",
+    "paths-js": "^0.4.10",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-rnd": "^10.1.10",
+    "react-scripts": "3.4.1",
+    "resize-observer-polyfill": "^1.5.1"
+  },
+  "scripts": {
+    "react-start": "react-scripts start",
+    "react-build": "react-scripts build",
+    "react-test": "react-scripts test",
+    "react-eject": "react-scripts eject",
+    "electron-build": "electron-builder",
+    "build": "npm run react-build && npm run electron-build",
+    "start": "concurrently \"cross-env BROWSER=none npm run react-start\" \"wait-on http://localhost:3000 && electron .\""
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "concurrently": "^5.2.0",
+    "electron": "^9.1.0",
+    "electron-builder": "^22.7.0",
+    "typescript": "^3.9.6",
+    "wait-on": "^5.1.0"
+  },
+  "description": "<your project description>",
+  "author": "<author of app>",
+  "build": {
+    "appId": "<com.your_app>"
+  },
+  "homepage": "./",
+  "main": "public/electron.js"
+}
