@@ -1,0 +1,31 @@
+{
+  "es": {
+    "translation": {
+      "LaunchMainMenu": {
+        "card": {
+          "text": "Hola, bienvenido",
+          "title": "Aventura Conversacional",
+          "type": "Standard"
+        },
+        "say": "Hola, bienvenido al juego."
+      },
+      "notDesiredIntentView": {
+        "say": "Intent no deseado"
+      },
+
+      "tellMainMenuOptionView": {
+        "say": "¿Qué quiere hacer? ¿Empezar una nueva partida, continuar tu última partida o jugar el tutorial?"
+      },
+
+      "startGameView": {
+        "say": "De acuerdo, empecemos una nueva aventura."
+      },
+      "continueGameView": {
+        "say": "De acuerdo, continuaremos con la aventura."
+      },
+      "startTutorialView": {
+        "say": "De acuerdo, allá van algunos consejos."
+      }
+    }
+  }
+}
