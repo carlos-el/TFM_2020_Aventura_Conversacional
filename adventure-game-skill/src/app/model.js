@@ -2,7 +2,16 @@ const _ = require("lodash");
 
 class Model {
   constructor(data = {}) {
-    this.name = "World";
+    this.player = {playerName: null, 
+      playerSex: null //male or female
+    };
+    this.control = {
+      confirmation: {
+        nextState: null,
+        previousState: null,
+      },
+    }
+    
     _.assign(this, data);
   }
 
@@ -12,6 +21,12 @@ class Model {
 
   serialize() {
     return this;
+  }
+
+  // This function must be called in all states at the end 
+  setLastState(state) {
+    this.control.penultimateState = this.control.lastState;
+    this.control.lastState = state;
   }
 }
 
