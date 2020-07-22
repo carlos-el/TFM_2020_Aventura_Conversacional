@@ -12,20 +12,52 @@
       "notDesiredIntentView": {
         "say": "Intent no deseado"
       },
+      "empty": {
+        "say": ""
+      },
 
       "tellMainMenuOptionView": {
         "say": "¿Qué quiere hacer? ¿Empezar una nueva partida, continuar tu última partida o jugar el tutorial?"
       },
 
       "startGameView": {
-        "say": "De acuerdo, empecemos una nueva aventura."
+        "say": "De acuerdo, aquí comienza tu nueva aventura."
       },
       "continueGameView": {
-        "say": "De acuerdo, continuaremos con la aventura."
+        "say": "De acuerdo, continuaremos con la aventura. {playerName} {playerSex}"
       },
       "startTutorialView": {
         "say": "De acuerdo, allá van algunos consejos."
+      },
+
+
+      "scene1_intro_NarrativeView": {
+        "say": "(Sonidos) Ir en un coche. El coche se para y nos bajamos. Andamos unos cuantos metros. Tu padre dice: Como los abuelos no están tienes que venir conmigo al trabajo. Te quedarás en la guardería del laboratorio hasta que salga, ¿vale?. Hola Sandra, mis padres están de viaje, se quedará contigo hasta que acabe mi turno. Sandra dice: Buenos dias joven"
+      },
+      "scene1_askPlayerName_NarrativeView": {
+        "say": "Bueno, ¿como te llamas?"
+      },
+      "scene1_getPlayerNameConfirm_NarrativeView": {
+        "say": "¿Entonces tu nombre es {playerName}, cierto?"
+      },
+
+      "scene1_sendToBath_NarrativeView": {
+        "say": "Sandra dice: Bueno, espero que nos llevemos bien {playerName}. Vaya, parece que te has levantado algo tarde, aún tienes legañas jajaja. Puedes lavarte la cara en los baños, estan ahí enfrente. Te dirijes hacia los baños lentamente. Cuando llegas hay dos puertas. La puerta de la derecha tiene un triangulo pintado por encima del pomo y es de color rosa y la de la izquierda tiene un círculo en el mismo sitio y es azul."
+      },
+      "scene1_askPlayerSex_NarrativeView": {
+        "say": "¿Por que puerta entras? ¿La rosa de la derecha o la azul de la izquierda?"
+      },
+      "scene1_getPlayerSexConfirm_NarrativeView": {
+        "say": "Entonces ¿escoges la puerta {playerDoorColor}?"
+      },
+
+      "scene1_describePlayground_NarrativeView": {
+        "say": "Despues de desperezarte y refrescarte sales del baño. Te encuentras en el parque de juegos de la guardería. A la derecha, entorno a un pequeño tobogán está Sandra junto a unos cuantos niños. A la izquierda, en un rincón, hay una pila de juguetes. Mientras los miras Sandra te dice: Anda, ven a jugar con nosotros."
+      },
+      "scene1_askPlaygroundSide_NarrativeView": {
+        "say": "¿Qué haces? ¿Jugar con los juguetes o jugar con los niños?"
       }
+
     }
   }
 }
