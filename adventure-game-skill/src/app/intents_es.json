@@ -1,0 +1,176 @@
+{
+    "interactionModel": {
+        "languageModel": {
+            "invocationName": "aventura conversacional",
+            "intents": [
+                {
+                    "name": "AMAZON.CancelIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.HelpIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.StopIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.NavigateHomeIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.YesIntent",
+                    "samples": [
+                        "claro",
+                        "si"
+                    ]
+                },
+                {
+                    "name": "AMAZON.NoIntent",
+                    "samples": [
+                        "nunca",
+                        "no"
+                    ]
+                },
+                {
+                    "name": "ContinueGameIntent",
+                    "slots": [],
+                    "samples": [
+                        "continuar partida",
+                        "continuar última partida"
+                    ]
+                },
+                {
+                    "name": "StartNewGameIntent",
+                    "slots": [],
+                    "samples": [
+                        "nueva partida",
+                        "empezar nueva partida",
+                        "empezar una nueva partida",
+                        "comenzar nueva partida",
+                        "comenzar una nueva partida"
+                    ]
+                },
+                {
+                    "name": "PlayTutorialIntent",
+                    "slots": [],
+                    "samples": [
+                        "jugar tutorial",
+                        "jugar el tutorial",
+                        "jugar al tutorial",
+                        "tutorial"
+                    ]
+                },
+                {
+                    "name": "GetPlayerNameIntent",
+                    "slots": [
+                        {
+                            "name": "playerName",
+                            "type": "AMAZON.FirstName"
+                        }
+                    ],
+                    "samples": [
+                        "{playerName}",
+                        "mi nombre es {playerName}",
+                        "me llamo {playerName}"
+                    ]
+                },
+                {
+                    "name": "GetPlayerSexIntent",
+                    "slots": [
+                        {
+                            "name": "color",
+                            "type": "AMAZON.Color"
+                        },
+                        {
+                            "name": "position",
+                            "type": "AMAZON.RelativePosition"
+                        }
+                    ],
+                    "samples": [
+                        "puerta {color} de la {position}",
+                        "{color} de la {position}",
+                        "puerta {position}",
+                        "por la {position}",
+                        "por la {color}",
+                        "puerta {color}"
+                    ]
+                },
+                {
+                    "name": "GetColor",
+                    "slots": [
+                        {
+                            "name": "color",
+                            "type": "AMAZON.Color"
+                        }
+                    ],
+                    "samples": [
+                        "{color}",
+                        "color {color}"
+                    ]
+                },
+                {
+                    "name": "GetPosition",
+                    "slots": [
+                        {
+                            "name": "position",
+                            "type": "AMAZON.RelativePosition"
+                        }
+                    ],
+                    "samples": [
+                        "para la {position}",
+                        "hacia la {position}",
+                        "{position}"
+                    ]
+                },
+                {
+                    "name": "GetPlaygroundSide",
+                    "slots": [
+                        {
+                            "name": "playgroundObject",
+                            "type": "playgroundObject"
+                        }
+                    ],
+                    "samples": [
+                        "{playgroundObject}",
+                        "con los {playgroundObject}",
+                        "jugar con los {playgroundObject}"
+                    ]
+                }
+            ],
+            "types": [
+                {
+                    "name": "AMAZON.FirstName",
+                    "values": [
+                        {
+                            "name": {
+                                "value": "irene"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "carlos"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "playgroundObject",
+                    "values": [
+                        {
+                            "name": {
+                                "value": "juguetes"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "niños"
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    }
+}
