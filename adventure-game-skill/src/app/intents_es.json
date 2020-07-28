@@ -137,6 +137,39 @@
                         "con los {playgroundObject}",
                         "jugar con los {playgroundObject}"
                     ]
+                },
+                {
+                    "name": "ActionInspect",
+                    "slots": [
+                        {
+                            "name": "object",
+                            "type": "object"
+                        },
+                        {
+                            "name": "element",
+                            "type": "element"
+                        }
+                    ],
+                    "samples": [
+                        "investigo {element}",
+                        "investiga {element}",
+                        "investigar {element}",
+                        "investigo el {element}",
+                        "investiga el {element}",
+                        "investigar el {element}",
+                        "investigo la {element}",
+                        "investiga la {element}",
+                        "investigar la {element}",
+                        "investigo {object}",
+                        "investiga {object}",
+                        "investigar {object}",
+                        "investigo el {object}",
+                        "investiga el {object}",
+                        "investigar el {object}",
+                        "investigo la {object}",
+                        "investiga la {object}",
+                        "investigar la {object}"
+                    ]
                 }
             ],
             "types": [
@@ -166,6 +199,31 @@
                         {
                             "name": {
                                 "value": "niños"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "object",
+                    "values": [
+                        {
+                            "name": {
+                                "value": "linterna"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "element",
+                    "values": [
+                        {
+                            "name": {
+                                "value": "bolsa"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "cofre"
                             }
                         }
                     ]
