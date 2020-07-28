@@ -17,7 +17,7 @@
       },
 
       "tellMainMenuOptionView": {
-        "say": "¿Qué quiere hacer? ¿Empezar una nueva partida, continuar tu última partida o jugar el tutorial?"
+        "say": "¿Qué quieres hacer? ¿Empezar una nueva partida, continuar tu última partida o jugar el tutorial?"
       },
 
       "startGameView": {
@@ -31,18 +31,29 @@
       },
 
 
+      "DescribePlaceView": {
+        "say": "<voice name='{playerVoice}'>{describeFullQuote}</voice>"
+      },
+      "DescribePlaceWithStoryView": {
+        "say": "<voice name='{playerVoice}'>{describeFullQuoteWithStory}</voice>"
+      },
+      "DescribeInspectElementOrObjectView": {
+        "say": "<voice name='{playerVoice}'>{describeInspectElementOrObject}</voice>"
+      },
+
+
       "scene1_intro_NarrativeView": {
-        "say": "(Sonidos) Ir en un coche. El coche se para y nos bajamos. Andamos unos cuantos metros. Tu padre dice: Como los abuelos no están tienes que venir conmigo al trabajo. Te quedarás en la guardería del laboratorio hasta que salga, ¿vale?. Hola Sandra, mis padres están de viaje, se quedará contigo hasta que acabe mi turno. Sandra dice: Buenos dias joven"
+        "say": "(Sonidos) Ir en un coche. El coche se para y nos bajamos. Andamos unos cuantos metros. Tu padre dice: Como los abuelos no están tienes que venir conmigo al trabajo. Te quedarás en la guardería del laboratorio hasta que salga, ¿vale?. Hola Sandra, mis padres están de viaje, se quedará contigo hasta que acabe mi turno. Sandra dice: <voice name='{sandraVoice}'>Buenos dias joven</voice>"
       },
       "scene1_askPlayerName_NarrativeView": {
-        "say": "Bueno, ¿como te llamas?"
+        "say": "<voice name='{sandraVoice}'>Bueno, ¿cómo te llamas?</voice>"
       },
       "scene1_getPlayerNameConfirm_NarrativeView": {
-        "say": "¿Entonces tu nombre es {playerName}, cierto?"
+        "say": "<voice name='{sandraVoice}'>¿Entonces tu nombre es {playerName}, cierto?</voice>"
       },
 
       "scene1_sendToBath_NarrativeView": {
-        "say": "Sandra dice: Bueno, espero que nos llevemos bien {playerName}. Vaya, parece que te has levantado algo tarde, aún tienes legañas jajaja. Puedes lavarte la cara en los baños, estan ahí enfrente. Te dirijes hacia los baños lentamente. Cuando llegas hay dos puertas. La puerta de la derecha tiene un triangulo pintado por encima del pomo y es de color rosa y la de la izquierda tiene un círculo en el mismo sitio y es azul."
+        "say": "<voice name='{sandraVoice}'>Bueno, espero que nos llevemos bien {playerName}. Vaya, parece que te has levantado algo tarde, aún tienes legañas jajaja. Puedes lavarte la cara en los baños, estan ahí enfrente.</voice> Te dirijes hacia los baños lentamente. Cuando llegas hay dos puertas. La puerta de la derecha tiene un triangulo pintado por encima del pomo y es de color rosa y la de la izquierda tiene un círculo en el mismo sitio y es azul."
       },
       "scene1_askPlayerSex_NarrativeView": {
         "say": "¿Por que puerta entras? ¿La rosa de la derecha o la azul de la izquierda?"
@@ -52,10 +63,16 @@
       },
 
       "scene1_describePlayground_NarrativeView": {
-        "say": "Despues de desperezarte y refrescarte sales del baño. Te encuentras en el parque de juegos de la guardería. A la derecha, entorno a un pequeño tobogán está Sandra junto a unos cuantos niños. A la izquierda, en un rincón, hay una pila de juguetes. Mientras los miras Sandra te dice: Anda, ven a jugar con nosotros."
+        "say": "Despues de desperezarte y refrescarte sales del baño. Te encuentras en el parque de juegos de la guardería. A la derecha, entorno a un pequeño tobogán está Sandra junto a unos cuantos niños. A la izquierda, en un rincón, hay una pila de juguetes. Mientras los miras Sandra te dice:<voice name='{sandraVoice}'> Anda, ven a jugar con nosotros.</voice>"
       },
       "scene1_askPlaygroundSide_NarrativeView": {
         "say": "¿Qué haces? ¿Jugar con los juguetes o jugar con los niños?"
+      },
+      "scene1_2_explosionWithSandra_NarrativeView": {
+        "say": "El resto de niños montan alboroto mientras caminas hacia el tobogán. Subes las escaleras lentamente mientras Sandra te mira sonriente desde un lado. De repente se oye un sonido atronador. La habitación comienza a temblar y caen enormes bloques de escombros del techo. Sandra se avalanza rapidamente sobre ti y te coge entre sus brazos."
+      },
+      "scene1_2_wakeUpWithSandra_NarrativeView": {
+        "say": "Sonido de salir del sueño. <voice name='{playerVoice}'>aggggh, mi cabeza. Solo era un sueño</voice>. <voice name='{sandraVoice}'>Vaya, ya era hora de que despertaras. Pareces aturdid{sexSuffix}. Toma algo de agua.</voice> <voice name='{playerVoice}'>Hola Sandra, ¿que me ha pasado?</voice> <voice name='{sandraVoice}'>¿No te acuerdas? Ibas corriendo detrás de un conejo y te has dado un golpe en la cabeza con una rama. Ha sido lo más penoso que he visto en mucho tiempo. Deberias ir pensando en levantarte. Tenemos que recoger lo que hemos encontrado y volver al campamento. Te estaré esperando más adelante.</voice> <voice name='{playerVoice}'>De acuerdo. Dame un segundo y me pongo en marcha. Vale, creo que ya empiezo a recordar.</voice>"
       }
 
     }
