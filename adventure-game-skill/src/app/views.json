@@ -29,6 +29,9 @@
       "startTutorialView": {
         "say": "De acuerdo, allá van algunos consejos."
       },
+      "saveGameView": {
+        "say": "Partida guardada con éxito. Puede continuar jugando."
+      },
 
 
       "DescribePlaceView": {
