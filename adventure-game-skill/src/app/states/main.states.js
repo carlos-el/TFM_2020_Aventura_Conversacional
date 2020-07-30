@@ -87,7 +87,7 @@ function register(voxaApp) {
         let elementOrObjectProperties = "";
         let isObject = false;
         // Inspect FIRST the elements in the location
-        for (e in voxaEvent.model.map.locations[voxaEvent.model.map.currentLocation].elements) {
+        for (e in voxaEvent.model.game.map.locations[voxaEvent.model.game.map.currentLocation].elements) {
           let ep = voxaEvent.model.getElementProperties(e);
           if (ep.names.includes(elementOrObjectName)) {
             elementOrObject = e;
@@ -99,7 +99,7 @@ function register(voxaApp) {
 
         // If nothing found inspect the objects
         // if(!elementOrObject){
-        //   for(o of voxaEvent.model.map.locations[voxaEvent.model.map.currentlocation].objects){
+        //   for(o of voxaEvent.model.game.map.locations[voxaEvent.model.game.map.currentlocation].objects){
         //     op = voxaEvent.model.getObjectProperties(o);
         //     if (elementOrObjectName in op.names){
         //       elementOrObject = o;
@@ -115,10 +115,10 @@ function register(voxaApp) {
           let alreadyInspected = false;
           if (!isObject) {
             // If it is element, check that has not been already inspected and execute action and set the inspected value to true if that is the case
-            alreadyInspected = voxaEvent.model.map.locations[voxaEvent.model.map.currentLocation].elements[elementOrObject];
+            alreadyInspected = voxaEvent.model.game.map.locations[voxaEvent.model.game.map.currentLocation].elements[elementOrObject];
             if (!alreadyInspected) {
               elementOrObjectProperties.inspectActionTaken(voxaEvent.model);
-              voxaEvent.model.map.locations[voxaEvent.model.map.currentLocation].elements[elementOrObject] = true;
+              voxaEvent.model.game.map.locations[voxaEvent.model.game.map.currentLocation].elements[elementOrObject] = true;
             }
           } else {
             //If it is object do the appropiate things
@@ -137,16 +137,21 @@ function register(voxaApp) {
 
       }
 
-    } else if (voxaEvent.intent.name === "other intent") {
-
+    } else if (voxaEvent.intent.name === "ActionSaveGame") {
+      voxaEvent.user.userDator.saveUserGame(voxaEvent.user.id, voxaEvent.model.game);
+      return {
+        flow: "yield",
+        reply: "saveGameView",
+        to: "freeRoamState",
+      };
     } else if (voxaEvent.model.control.toFreeFromScene) { // Control when coming from an scene
       let reply = "DescribePlaceView"
       voxaEvent.model.control.toFreeFromScene = false;
 
       // Current location must be set in the last scene. 
       // If current location is a new place we add it to the locations and describe it with the story
-      if (!(voxaEvent.model.map.currentLocation in voxaEvent.model.map.locations)) {
-        voxaEvent.model.discoverLocation(voxaEvent.model.map.currentLocation);
+      if (!(voxaEvent.model.game.map.currentLocation in voxaEvent.model.game.map.locations)) {
+        voxaEvent.model.discoverLocation(voxaEvent.model.game.map.currentLocation);
         reply = "DescribePlaceWithStoryView"
       }
 
@@ -187,7 +192,7 @@ function register(voxaApp) {
   voxaApp.onState("scene1_getPlayerNameConfirm", voxaEvent => {
     if (voxaEvent.intent.name === "GetPlayerNameIntent") {
       // set player name 
-      voxaEvent.model.choices.name = voxaEvent.intent.params.playerName;
+      voxaEvent.model.game.choices.name = voxaEvent.intent.params.playerName;
       // set next state after confirmation and the state to return if confirmantion y negative
       voxaEvent.model.control.confirmation.nextState = "scene1_sendToBath";
       voxaEvent.model.control.confirmation.previousState = "scene1_askPlayerName"
@@ -228,9 +233,9 @@ function register(voxaApp) {
 
       // set player sex based on the door chosen
       if (voxaEvent.intent.params.color === "rosa" || voxaEvent.intent.params.position === "derecha" || voxaEvent.intent.params.position === "de la derecha") {
-        voxaEvent.model.choices.sex = "female";
+        voxaEvent.model.game.choices.sex = "female";
       } else if (voxaEvent.intent.params.color === "azul" || voxaEvent.intent.params.position === "izquierda" || voxaEvent.intent.params.position === "de la izquierda") {
-        voxaEvent.model.choices.sex = "male";
+        voxaEvent.model.game.choices.sex = "male";
       }
 
       // set next state after confirmation and the state to return if confirmantion y negative
@@ -290,7 +295,7 @@ function register(voxaApp) {
   });
 
   voxaApp.onState("scene1_2_explosionWithSandra", voxaEvent => {
-    voxaEvent.model.choices.explosionWith = "sandra";
+    voxaEvent.model.game.choices.explosionWith = "sandra";
 
     return {
       flow: "continue",
@@ -299,12 +304,12 @@ function register(voxaApp) {
     };
   });
   voxaApp.onState("scene1_2_wakeUpWithSandra", voxaEvent => {
-    voxaEvent.model.resources.water += 5;
+    voxaEvent.model.game.resources.water += 5;
     // As the next state is the freeRoam state we set in control 
     // variable so the next state can manage it.
     // Set the current location as well.
     voxaEvent.model.control.toFreeFromScene = true;
-    voxaEvent.model.map.currentLocation = "southForest1";
+    voxaEvent.model.game.map.currentLocation = "southForest1";
     return {
       flow: "continue",
       reply: "scene1_2_wakeUpWithSandra_NarrativeView",
