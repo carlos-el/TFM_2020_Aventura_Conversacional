@@ -1,5 +1,5 @@
-const Map = require("./content/map.js");
-const ElementCollection = require("./content/elementCollection.js");
+const Map = require("./models/map.js");
+const ElementCollection = require("./models/elementCollection.js");
 
 const m = new Map()
 const ec = new ElementCollection()
@@ -7,31 +7,31 @@ const ec = new ElementCollection()
 
 
 exports.playerName = function (voxaEvent) {
-  return voxaEvent.model.choices.name;
+  return voxaEvent.model.game.choices.name;
 };
 
 exports.playerSex = function (voxaEvent) {
-  return voxaEvent.model.choices.sex;
+  return voxaEvent.model.game.choices.sex;
 };
 
 exports.sexSuffix = function (voxaEvent) {
-  if (voxaEvent.model.choices.sex === "male")
+  if (voxaEvent.model.game.choices.sex === "male")
     return "o";
-  else if (voxaEvent.model.choices.sex === "female")
+  else if (voxaEvent.model.game.choices.sex === "female")
     return "a";
 };
 
 exports.playerVoice = function (voxaEvent) {
-  if (voxaEvent.model.choices.sex === "male")
+  if (voxaEvent.model.game.choices.sex === "male")
     return "Miguel";
-  else if (voxaEvent.model.choices.sex === "female")
+  else if (voxaEvent.model.game.choices.sex === "female")
     return "Lucia";
 };
 
 exports.playerDoorColor = function (voxaEvent) {
-  if (voxaEvent.model.choices.sex === "male")
+  if (voxaEvent.model.game.choices.sex === "male")
     return "azul";
-  else if (voxaEvent.model.choices.sex === "female")
+  else if (voxaEvent.model.game.choices.sex === "female")
     return "rosa";
 };
 
@@ -63,11 +63,11 @@ exports.describeFullQuoteWithStory = function (voxaEvent) {
 
 describeLocation = function (voxaEvent) {
   const intros = ["Parece que estoy en", "Estoy en", "Este lugar es", "Este sitio es", "Ahora me encuentro en"]
-  return intros[Math.floor(Math.random() * intros.length)] + " " + m.locations[voxaEvent.model.map.currentLocation].locationQuote;;
+  return intros[Math.floor(Math.random() * intros.length)] + " " + m.locations[voxaEvent.model.game.map.currentLocation].locationQuote;;
 };
 
 describeStory = function (voxaEvent) {
-  return m.locations[voxaEvent.model.map.currentLocation].storyQuote;
+  return m.locations[voxaEvent.model.game.map.currentLocation].storyQuote;
 };
 
 // Based on session model of the player and elements and objects Collections
@@ -77,9 +77,9 @@ describeElements = function (voxaEvent) {
   const intros2 = ["puedo ver", "hay", "veo", "puedo ver que hay"]
 
   // For each element in the elements object reflected in the session we get the mention quote
-  const length = Object.keys(voxaEvent.model.map.locations[voxaEvent.model.map.currentLocation].elements).length;
+  const length = Object.keys(voxaEvent.model.game.map.locations[voxaEvent.model.game.map.currentLocation].elements).length;
   for (var i = 0; i < length; i++) {
-    res += ec.elements[Object.entries(voxaEvent.model.map.locations[voxaEvent.model.map.currentLocation].elements)[i][0]].mentionQuote;
+    res += ec.elements[Object.entries(voxaEvent.model.game.map.locations[voxaEvent.model.game.map.currentLocation].elements)[i][0]].mentionQuote;
     // add conjuncion before last element
     if (i === length - 2) {
       res += " y ";

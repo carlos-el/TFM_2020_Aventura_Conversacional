@@ -9,7 +9,7 @@ module.exports = class ElementCollection {
                 inspectQuote: "Parece que dentro de la bolsa hay algo de chatarra. La cogeré, me vendrá bien.",
                 alreadyInspectedQuote: "Ya he revisado esta bolsa, no hay nada más de interés.",
                 inspectActionTaken: function (model) {
-                    model.resources.junk += 10;
+                    model.game.resources.junk += 10;
                 },
             }),
         }
