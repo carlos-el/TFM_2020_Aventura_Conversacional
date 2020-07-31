@@ -21,16 +21,22 @@
       },
 
       "startGameView": {
-        "say": "De acuerdo, aquí comienza tu nueva aventura."
-      },
-      "continueGameView": {
-        "say": "De acuerdo, continuaremos con la aventura. {playerName} {playerSex}"
+        "say": "Empezar una nueva partida sobreescribirá la partida que haya guardado previamente. ¿Está seguro de que quiere realizar esta acción?"
       },
       "startTutorialView": {
         "say": "De acuerdo, allá van algunos consejos."
       },
       "saveGameView": {
         "say": "Partida guardada con éxito. Puede continuar jugando."
+      },
+      "gameLoadSuccessView": {
+        "say": "Su partida ha sido cargada con éxito, puede continuar con su aventura, disfrute."
+      },
+      "gameLoadErrorView": {
+        "say": "No hemos podido encontrar una partida guardada para su cuenta."
+      },
+      "startNewGameView": {
+        "say": "De acuerdo, comenzemos."
       },
 
 

@@ -7,6 +7,7 @@ function register(voxaApp) {
     };
   });
 
+  ////// MENU OPTIONS ///////
   // Lists main menu options before starting the game
   voxaApp.onState("tellMainMenu", voxaEvent => {
     return {
@@ -20,14 +21,17 @@ function register(voxaApp) {
   voxaApp.onState("getMainMenuOption", voxaEvent => {
     if (voxaEvent.intent.name === "ContinueGameIntent") {
       return {
-        flow: "terminate",
-        reply: "continueGameView",
+        flow: "continue",
+        reply: "empty",
+        to: "loadGame"
       };
     } else if (voxaEvent.intent.name === "StartNewGameIntent") {
+      voxaEvent.model.control.confirmation.nextState = "startNewGame";
+      voxaEvent.model.control.confirmation.previousState = "tellMainMenu"
       return {
-        flow: "continue",
+        flow: "yield",
         reply: "startGameView",
-        to: "scene1_intro"
+        to: "confirmationState"
       };
     } else if (voxaEvent.intent.name === "PlayTutorialIntent") {
       return {
@@ -40,6 +44,39 @@ function register(voxaApp) {
         reply: "notDesiredIntentView",
       };
     }
+  });
+
+  voxaApp.onState("loadGame", async voxaEvent => {
+    const game = await voxaEvent.userDator.getUserGame(voxaEvent.user.id)
+    // If the player had a saved game then we load it and go to freeRoam 
+    console.log(game)
+    if (game) {
+      voxaEvent.model.game = game;
+
+      // Set toFreeFromScene to true so the location is described in the next state.
+      voxaEvent.model.control.toFreeFromScene = true;
+      return {
+        flow: "continue",
+        reply: "gameLoadSuccessView",
+        to: "freeRoamState"
+      };
+    }
+
+    // If no saved game is found tell it an go to tellMainMenu
+    return {
+      flow: "continue",
+      reply: "gameLoadErrorView",
+      to: "tellMainMenu"
+    };
+  });
+
+  voxaApp.onState("startNewGame", async voxaEvent => {
+    voxaEvent.userDator.saveUserGame(voxaEvent.user.id, voxaEvent.model.getDefultGameModel())
+    return {
+      flow: "continue",
+      reply: "startNewGameView",
+      to: "scene1_intro"
+    };
   });
 
   ////// CONFIRMATION STATE ///////
@@ -58,14 +95,12 @@ function register(voxaApp) {
         reply: "empty",
         to: voxaEvent.model.control.confirmation.previousState
       };
-    } else {
-      // go to penultimateState too
-      return {
-        flow: "continue",
-        reply: "empty",
-        to: voxaEvent.model.control.penultimateState
-      };
     }
+
+    return {
+      flow: "terminate",
+      reply: "notDesiredIntentView",
+    };
   });
 
   //////////////////////////////
@@ -138,7 +173,8 @@ function register(voxaApp) {
       }
 
     } else if (voxaEvent.intent.name === "ActionSaveGame") {
-      voxaEvent.user.userDator.saveUserGame(voxaEvent.user.id, voxaEvent.model.game);
+      console.log(voxaEvent.model.userDator)
+      voxaEvent.userDator.saveUserGame(voxaEvent.user.id, voxaEvent.model.game);
       return {
         flow: "yield",
         reply: "saveGameView",
