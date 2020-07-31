@@ -23,15 +23,10 @@ plugins.replaceIntent(voxaApp);
  */
 
 voxaApp.onRequestStarted(async (voxaEvent) => {
+  console.log("Now onRequestStarted")
   const userDator = await UserDator.getDator();
-  const game = await userDator.getUserGame(voxaEvent.user.id)
 
-  // If the player had a saved game then we load it
-  if (game) {
-    voxaEvent.model.game = game;
-  }
-
-  voxaEvent.user.userDator = userDator;
+  voxaEvent.userDator = userDator;
 });
 
 exports.voxaApp = voxaApp;
