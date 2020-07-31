@@ -77,9 +77,17 @@ describeElements = function (voxaEvent) {
   const intros2 = ["puedo ver", "hay", "veo", "puedo ver que hay"]
 
   // For each element in the elements object reflected in the session we get the mention quote
+  let alreadyInspected = ""
   const length = Object.keys(voxaEvent.model.game.map.locations[voxaEvent.model.game.map.currentLocation].elements).length;
   for (var i = 0; i < length; i++) {
-    res += ec.elements[Object.entries(voxaEvent.model.game.map.locations[voxaEvent.model.game.map.currentLocation].elements)[i][0]].mentionQuote;
+    alreadyInspected = Object.entries(voxaEvent.model.game.map.locations[voxaEvent.model.game.map.currentLocation].elements)[i][1];
+    // If the element has been already inspected select a different quote
+    if (alreadyInspected) {
+      res += ec.elements[Object.entries(voxaEvent.model.game.map.locations[voxaEvent.model.game.map.currentLocation].elements)[i][0]].mentionAlreadyInspectedQuote;
+    } else {
+      res += ec.elements[Object.entries(voxaEvent.model.game.map.locations[voxaEvent.model.game.map.currentLocation].elements)[i][0]].mentionQuote;
+    }
+
     // add conjuncion before last element
     if (i === length - 2) {
       res += " y ";

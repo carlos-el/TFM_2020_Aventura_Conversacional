@@ -6,6 +6,7 @@ module.exports = class ElementCollection {
             bag_1: new Element({
                 names: ["bolsa", "bolsa de tela"],
                 mentionQuote: "una bolsa de tela que parece tener algo dentro",
+                mentionAlreadyInspectedQuote: "Una bolsa de tela que ya he revisado. Contenía algo de chatarra.",
                 inspectQuote: "Parece que dentro de la bolsa hay algo de chatarra. La cogeré, me vendrá bien.",
                 alreadyInspectedQuote: "Ya he revisado esta bolsa, no hay nada más de interés.",
                 inspectActionTaken: function (model) {
