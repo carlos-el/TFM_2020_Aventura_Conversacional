@@ -49,16 +49,14 @@ function register(voxaApp) {
   voxaApp.onState("loadGame", async voxaEvent => {
     const game = await voxaEvent.userDator.getUserGame(voxaEvent.user.id)
     // If the player had a saved game then we load it and go to freeRoam 
-    console.log(game)
     if (game) {
       voxaEvent.model.game = game;
 
-      // Set toFreeFromScene to true so the location is described in the next state.
-      voxaEvent.model.control.toFreeFromScene = true;
+      // Go to describe location to let the player know where he is
       return {
         flow: "continue",
         reply: "gameLoadSuccessView",
-        to: "freeRoamState"
+        to: "describeLocationState"
       };
     }
 
@@ -171,29 +169,47 @@ function register(voxaApp) {
         }
 
       }
+    } else if (voxaEvent.intent.name === "ActionGoTo") {
+      // Get the symbol of the cardinal point the player wants to go
+      const cardinalToSymbol = { norte: "N", sur: "S", este: "E", oeste: "O" }
+      const cardinal = voxaEvent.intent.params.cardinal;
+      const symbol = cardinalToSymbol[cardinal];
+      const to = voxaEvent.model.game.map.locations[voxaEvent.model.game.map.currentLocation].to
 
+      // If there is a path in that direction
+      if (symbol in to) {
+        if (to[symbol].canGo) {
+          // We first select the path to describe
+          voxaEvent.model.control.pathToDescribe = { location: voxaEvent.model.game.map.currentLocation, path: symbol }
+
+          // Go to the new location
+          voxaEvent.model.game.map.currentLocation = to[symbol].goesTo;
+
+          // Describe the path and then the new location in the next state
+          return {
+            flow: "continue",
+            reply: "DescribePathView",
+            to: "describeLocationState"
+          };
+        } else {
+          // Prompt the problem that is not letting the player go to this location and dont change location
+          return {
+            flow: "yield",
+            reply: "DescribePathProblemView",
+            to: "freeRoamState"
+          };
+        }
+      }
+
+      return {
+        flow: "terminate",
+        reply: "notDesiredIntentView",
+      };
     } else if (voxaEvent.intent.name === "ActionSaveGame") {
-      console.log(voxaEvent.model.userDator)
       voxaEvent.userDator.saveUserGame(voxaEvent.user.id, voxaEvent.model.game);
       return {
         flow: "yield",
         reply: "saveGameView",
-        to: "freeRoamState",
-      };
-    } else if (voxaEvent.model.control.toFreeFromScene) { // Control when coming from an scene
-      let reply = "DescribePlaceView"
-      voxaEvent.model.control.toFreeFromScene = false;
-
-      // Current location must be set in the last scene. 
-      // If current location is a new place we add it to the locations and describe it with the story
-      if (!(voxaEvent.model.game.map.currentLocation in voxaEvent.model.game.map.locations)) {
-        voxaEvent.model.discoverLocation(voxaEvent.model.game.map.currentLocation);
-        reply = "DescribePlaceWithStoryView"
-      }
-
-      return {
-        flow: "yield",
-        reply: reply,
         to: "freeRoamState",
       };
     }
@@ -202,6 +218,25 @@ function register(voxaApp) {
       flow: "terminate",
       reply: "notDesiredIntentView",
     };
+  });
+
+
+  ////// Describe Location State ///////
+  voxaApp.onState("describeLocationState", voxaEvent => {
+    let reply = "DescribeLocationView"
+
+      // Current location must be set in the last scene or state. 
+      // If current location is a new location we add it to the locations and describe it with the story
+      if (!(voxaEvent.model.game.map.currentLocation in voxaEvent.model.game.map.locations)) {
+        voxaEvent.model.discoverLocation(voxaEvent.model.game.map.currentLocation);
+        reply = "DescribeLocationWithStoryView"
+      }
+
+      return {
+        flow: "yield",
+        reply: reply,
+        to: "freeRoamState",
+      };
   });
 
 
@@ -319,7 +354,7 @@ function register(voxaApp) {
         return {
           flow: "continue",
           reply: "empty",
-          to: "tellMainMenu"
+          to: "scene1_1_explosionAlone"
         };
       }
     }
@@ -327,6 +362,28 @@ function register(voxaApp) {
     return {
       flow: "terminate",
       reply: "notDesiredIntentView",
+    };
+  });
+
+  voxaApp.onState("scene1_1_explosionAlone", voxaEvent => {
+    voxaEvent.model.game.choices.explosionWith = "alone";
+
+    return {
+      flow: "continue",
+      reply: "scene1_1_explosionAlone_NarrativeView",
+      to: "scene1_1_wakeUpAlone"
+    };
+  });
+  voxaApp.onState("scene1_1_wakeUpAlone", voxaEvent => {
+    // As the next state is the freeRoam state we set in control 
+    // variable so the next state can manage it.
+    // Set the current location as well.
+    voxaEvent.model.game.map.currentLocation = "southForest1";
+
+    return {
+      flow: "continue",
+      reply: "scene1_1_wakeUpAlone_NarrativeView",
+      to: "describeLocationState"
     };
   });
 
@@ -341,15 +398,13 @@ function register(voxaApp) {
   });
   voxaApp.onState("scene1_2_wakeUpWithSandra", voxaEvent => {
     voxaEvent.model.game.resources.water += 5;
-    // As the next state is the freeRoam state we set in control 
-    // variable so the next state can manage it.
+    // Set next state to describeLocationState which leads to freeRoamState 
     // Set the current location as well.
-    voxaEvent.model.control.toFreeFromScene = true;
     voxaEvent.model.game.map.currentLocation = "southForest1";
     return {
       flow: "continue",
       reply: "scene1_2_wakeUpWithSandra_NarrativeView",
-      to: "freeRoamState"
+      to: "describeLocationState"
     };
   });
 
