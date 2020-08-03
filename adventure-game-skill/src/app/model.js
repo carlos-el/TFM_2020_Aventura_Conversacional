@@ -29,9 +29,9 @@ class Model {
         nextState: null,
         previousState: null,
       },
-      toFreeFromScene: false,
       elementOrObjectToDescribe: "",
       elementOrObjectToDescribeAlreadyInspected: false,
+      pathToDescribe: {location: "", path: ""}
     };
 
     _.assign(this, data);
