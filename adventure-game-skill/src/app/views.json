@@ -40,11 +40,17 @@
       },
 
 
-      "DescribePlaceView": {
-        "say": "<voice name='{playerVoice}'>{describeFullQuote}</voice>"
+      "DescribePathView": {
+        "say": "<voice name='{playerVoice}'>{describePath}</voice>"
       },
-      "DescribePlaceWithStoryView": {
-        "say": "<voice name='{playerVoice}'>{describeFullQuoteWithStory}</voice>"
+      "DescribePathProblemView": {
+        "say": "<voice name='{playerVoice}'>{describePathProblem}</voice>"
+      },
+      "DescribeLocationView": {
+        "say": "<voice name='{playerVoice}'>{describeLocationFullQuote}</voice>"
+      },
+      "DescribeLocationWithStoryView": {
+        "say": "<voice name='{playerVoice}'>{describeLocationFullQuoteWithStory}</voice>"
       },
       "DescribeInspectElementOrObjectView": {
         "say": "<voice name='{playerVoice}'>{describeInspectElementOrObject}</voice>"
@@ -76,6 +82,12 @@
       },
       "scene1_askPlaygroundSide_NarrativeView": {
         "say": "¿Qué haces? ¿Jugar con los juguetes o jugar con los niños?"
+      },
+      "scene1_1_explosionAlone_NarrativeView": {
+        "say": "Miras a Sandra durante un segundo. Después bajas la cabeza y te diriges lentamente hacia la pila de juguetes. Pasas un rato jugando con algunos cochecitos y peluches hasta que, de repente, escuchas un sonido atronador. La habitación comienza a temblar y se desprenden enormes bloques de escombros del techo mientras corres hacia la puerta junto con el resto de niños."
+      },
+      "scene1_1_wakeUpAlone_NarrativeView": {
+        "say": "Sonido de salir del sueño. <voice name='{playerVoice}'>aggggh, mi cabeza. Solo era un sueño. Estaba recogiendo materiales y ... ¿Cómo he llegado aquí? No me acuerdo de nada. En cualquier caso, debería coger lo que he venido a buscar y volver al campamento.</voice>"
       },
       "scene1_2_explosionWithSandra_NarrativeView": {
         "say": "El resto de niños montan alboroto mientras caminas hacia el tobogán. Subes las escaleras lentamente mientras Sandra te mira sonriente desde un lado. De repente se oye un sonido atronador. La habitación comienza a temblar y caen enormes bloques de escombros del techo. Sandra se avalanza rapidamente sobre ti y te coge entre sus brazos."
