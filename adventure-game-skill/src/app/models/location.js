@@ -7,11 +7,6 @@ module.exports = class Location {
         this.elements = data.elements; // Funtion that returns the defult names of the elements in the location when the player discovers it for the first time
         this.npcs = data.npcs; // Funtion that returns the defult names of the actors in the location when the player discovers it for the first time
         this.objects = data.objects; // Funtion that returns the defult names of the objects in the location when the player discovers it for the first time
-        this.to = { // TODO ?? another function that executes when trying to enter?
-            N: "", // place id or name
-            S: "",
-            E: "",
-            W: "",
-        }
+        this.to = data.to; //Object with the paths that the player can take to go to other locations
     }
 }
