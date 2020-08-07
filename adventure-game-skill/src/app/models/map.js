@@ -19,7 +19,9 @@ module.exports = class Map {
                     return {};
                 },
                 objects: function (choices) {
-                    return {};
+                    return {
+                        metalShears: false // false for objects that were not dropped by the player
+                    };
                 },
                 to: { // Contains the paths connected with this location
                     N: new Path({
@@ -47,6 +49,35 @@ module.exports = class Map {
                 to: {
                     S: new Path({
                         goesTo: "southForest1",
+                        canGo: true,
+                        problem: 0,
+                        problemMentionQuotes: [],
+                    }),
+                    O: new Path({
+                        goesTo: "hydroelectricPowerPlant",
+                        canGo: false,
+                        problem: 0,
+                        problemMentionQuotes: ["Hay una verja metálica con un candado que me impide el paso. Tal vez pueda encontrar algo con lo que desacerme del candado."],
+                    }),
+                }
+            }),
+            hydroelectricPowerPlant: new Location({
+                names: ["la central", "central", "central hidroeléctrica", "lacentral hidroeléctrica"],
+                locationQuote: "la central hidroeléctrica.",
+                storyQuote: "No hay mucho que decir sobre este sitio.",
+                main: true,
+                elements: function (choices) {
+                    return {}
+                },
+                npcs: function (choices) {
+                    return {};
+                },
+                objects: function (choices) {
+                    return {};
+                },
+                to: {
+                    E: new Path({
+                        goesTo: "hydroelectricPowerPlantOutskirts",
                         canGo: true,
                         problem: 0,
                         problemMentionQuotes: [],
