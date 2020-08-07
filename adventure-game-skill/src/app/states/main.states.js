@@ -120,28 +120,19 @@ function register(voxaApp) {
         let elementOrObjectProperties = "";
         let isObject = false;
         // Inspect FIRST the elements in the location
-        for (e in voxaEvent.model.game.map.locations[voxaEvent.model.game.map.currentLocation].elements) {
-          let ep = voxaEvent.model.getElementProperties(e);
-          if (ep.names.includes(elementOrObjectName)) {
-            elementOrObject = e;
-            elementOrObjectProperties = ep;
-            type = "element";
-            break;
-          }
+        elementOrObject = voxaEvent.model.getCurrentLocationElementIdByName(elementOrObjectName);
+        if (elementOrObject) {
+          elementOrObjectProperties = voxaEvent.model.getElementProperties(elementOrObject)
         }
 
-        // If nothing found inspect the objects
-        // if(!elementOrObject){
-        //   for(o of voxaEvent.model.game.map.locations[voxaEvent.model.game.map.currentlocation].objects){
-        //     op = voxaEvent.model.getObjectProperties(o);
-        //     if (elementOrObjectName in op.names){
-        //       elementOrObject = o;
-        //       elementOrObjectProperties = op;
-        //       isObject = true;
-        //       break;
-        //     }
-        //   }
-        // }
+        //If nothing found, inspect the objects
+        if (!elementOrObject) {
+          elementOrObject = voxaEvent.model.getCurrentLocationObjectIdByName(elementOrObjectName);
+          if (elementOrObject) {
+            elementOrObjectProperties = voxaEvent.model.getObjectProperties(elementOrObject)
+            isObject = true;
+          }
+        }
 
         // If the elementOrObject was found then proceed to describe.
         if (elementOrObject) {
@@ -154,7 +145,7 @@ function register(voxaApp) {
               voxaEvent.model.game.map.locations[voxaEvent.model.game.map.currentLocation].elements[elementOrObject] = true;
             }
           } else {
-            //If it is object do the appropiate things
+            // If it is OBJECT do NOTHING cause object have no actions when are inspected and dont need alreadyInspected state.
           }
 
           // Set the element or object to describe and the alreadyInspected variable (nedded in variable.js for choosing quote)
@@ -169,6 +160,57 @@ function register(voxaApp) {
         }
 
       }
+    } else if (voxaEvent.intent.name === "ActionPickUp") {
+      let object = "";
+      const objectName = voxaEvent.intent.params.object;
+      const currentLocation = voxaEvent.model.game.map.locations[voxaEvent.model.game.map.currentLocation];
+
+      // If the inventory is available
+      if (voxaEvent.model.game.inventory.obtained) {
+        // If there is size in the inventory
+        if (voxaEvent.model.game.inventory.size > Object.keys(voxaEvent.model.game.inventory.objects)) {
+          // If the object requested is in the current location, 
+          if (object = voxaEvent.model.getCurrentLocationObjectIdByName(objectName)) {
+            // add it to the inventory
+            voxaEvent.model.game.inventory.objects[object] = 1; // Add it equal to 1 to be able to add it as an object
+            // remove it from the location
+            delete voxaEvent.model.game.map.locations[voxaEvent.model.game.map.currentLocation].objects[object];
+            // and return description od pick up action
+            voxaEvent.model.control.elementOrObjectToDescribe = object;
+            return {
+              flow: "yield",
+              reply: "DescribePickUpObjectView",
+              to: "freeRoamState",
+            };
+          }
+        }
+      }
+
+      return {
+        flow: "terminate",
+        reply: "notDesiredIntentView",
+      };
+    } else if (voxaEvent.intent.name === "ActionDrop") {
+      const objectName = voxaEvent.intent.params.object;
+      let object = "";
+
+      // If the object is in the inventory
+      if (object = voxaEvent.model.getInventoryObjectIdByName(objectName)) {
+        // delete it from the inventory if it is the last
+        delete voxaEvent.model.game.inventory.objects[object]
+        
+        // add it to the location objects with a value of true (because it was dropped) 
+        voxaEvent.model.game.map.locations[voxaEvent.model.game.map.currentLocation].objects[object] = true
+
+        // return the description of the dropping action
+        voxaEvent.model.control.elementOrObjectToDescribe = object;
+        return {
+          flow: "yield",
+          reply: "DescribeDropObjectView",
+          to: "freeRoamState",
+        };
+      }
+
     } else if (voxaEvent.intent.name === "ActionGoTo") {
       // Get the symbol of the cardinal point the player wants to go
       const cardinalToSymbol = { norte: "N", sur: "S", este: "E", oeste: "O" }
@@ -193,6 +235,7 @@ function register(voxaApp) {
           };
         } else {
           // Prompt the problem that is not letting the player go to this location and dont change location
+          voxaEvent.model.control.pathToDescribe = { location: voxaEvent.model.game.map.currentLocation, path: symbol }
           return {
             flow: "yield",
             reply: "DescribePathProblemView",
@@ -225,18 +268,18 @@ function register(voxaApp) {
   voxaApp.onState("describeLocationState", voxaEvent => {
     let reply = "DescribeLocationView"
 
-      // Current location must be set in the last scene or state. 
-      // If current location is a new location we add it to the locations and describe it with the story
-      if (!(voxaEvent.model.game.map.currentLocation in voxaEvent.model.game.map.locations)) {
-        voxaEvent.model.discoverLocation(voxaEvent.model.game.map.currentLocation);
-        reply = "DescribeLocationWithStoryView"
-      }
+    // Current location must be set in the last scene or state. 
+    // If current location is a new location we add it to the locations and describe it with the story
+    if (!(voxaEvent.model.game.map.currentLocation in voxaEvent.model.game.map.locations)) {
+      voxaEvent.model.discoverLocation(voxaEvent.model.game.map.currentLocation);
+      reply = "DescribeLocationWithStoryView"
+    }
 
-      return {
-        flow: "yield",
-        reply: reply,
-        to: "freeRoamState",
-      };
+    return {
+      flow: "yield",
+      reply: reply,
+      to: "freeRoamState",
+    };
   });
 
 
