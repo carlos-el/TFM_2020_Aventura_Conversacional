@@ -125,9 +125,18 @@ function register(voxaApp) {
           elementOrObjectProperties = voxaEvent.model.getElementProperties(elementOrObject)
         }
 
-        //If nothing found, inspect the objects
+        //If nothing found, inspect the objects in the location
         if (!elementOrObject) {
           elementOrObject = voxaEvent.model.getCurrentLocationObjectIdByName(elementOrObjectName);
+          if (elementOrObject) {
+            elementOrObjectProperties = voxaEvent.model.getObjectProperties(elementOrObject)
+            isObject = true;
+          }
+        }
+
+        //If nothing found, inspect the objects in the player inventory
+        if (!elementOrObject) {
+          elementOrObject = voxaEvent.model.getInventoryObjectIdByName(elementOrObjectName);
           if (elementOrObject) {
             elementOrObjectProperties = voxaEvent.model.getObjectProperties(elementOrObject)
             isObject = true;
@@ -198,7 +207,7 @@ function register(voxaApp) {
       if (object = voxaEvent.model.getInventoryObjectIdByName(objectName)) {
         // delete it from the inventory if it is the last
         delete voxaEvent.model.game.inventory.objects[object]
-        
+
         // add it to the location objects with a value of true (because it was dropped) 
         voxaEvent.model.game.map.locations[voxaEvent.model.game.map.currentLocation].objects[object] = true
 
@@ -211,6 +220,47 @@ function register(voxaApp) {
         };
       }
 
+      return {
+        flow: "terminate",
+        reply: "notDesiredIntentView",
+      };
+    } else if (voxaEvent.intent.name === "ActionUseObject") {
+      const objectName = voxaEvent.intent.params.object;
+      const elementName = voxaEvent.intent.params.element;
+
+      // If params arre correctly set
+      if (objectName && elementName) {
+        // If the object is in the inventory and the element is in the location
+        let object = "";
+        let element = "";
+        if ((object = voxaEvent.model.getInventoryObjectIdByName(objectName)) && (element = voxaEvent.model.getCurrentLocationElementIdByName(elementName))) {
+          // get the element properties
+          const elementProperties = voxaEvent.model.getElementProperties(element)
+          // if the object can be used in the element
+          if (elementProperties.useObjectActionTaken(voxaEvent.model, object)){
+            // return describe use action
+            voxaEvent.model.control.elementOrObjectToDescribe = element;
+            return {
+              flow: "yield",
+              reply: "DescribeUseObjectView",
+              to: "freeRoamState",
+            };
+          } else{
+            // return describe cant use that object on the element
+            voxaEvent.model.control.elementOrObjectToDescribe = element;
+            return {
+              flow: "yield",
+              reply: "DescribeUseObjectCantUseView",
+              to: "freeRoamState",
+            };
+          }
+        }
+      }
+
+      return {
+        flow: "terminate",
+        reply: "notDesiredIntentView",
+      };
     } else if (voxaEvent.intent.name === "ActionGoTo") {
       // Get the symbol of the cardinal point the player wants to go
       const cardinalToSymbol = { norte: "N", sur: "S", este: "E", oeste: "O" }
