@@ -1,8 +1,10 @@
 const Map = require("./models/map.js");
 const ElementCollection = require("./models/elementCollection.js");
+const ObjectCollection = require("./models/objectCollection.js");
 
 const m = new Map()
 const ec = new ElementCollection()
+const oc = new ObjectCollection()
 
 
 
@@ -41,15 +43,26 @@ exports.sandraVoice = function (voxaEvent) {
 
 ///// INSPECT VARIABLES /////
 exports.describeInspectElementOrObject = function (voxaEvent) {
-  if (voxaEvent.model.control.elementOrObjectToDescribeAlreadyInspected) {
-    return ec.elements[voxaEvent.model.control.elementOrObjectToDescribe].alreadyInspectedQuote;
-  } else {
-    return ec.elements[voxaEvent.model.control.elementOrObjectToDescribe].inspectQuote;
+  const objectOrElement = voxaEvent.model.control.elementOrObjectToDescribe;
+  const currentLocation = voxaEvent.model.game.map.locations[voxaEvent.model.game.map.currentLocation];
+
+  if (objectOrElement in currentLocation.elements) {
+    if (voxaEvent.model.control.elementOrObjectToDescribeAlreadyInspected) {
+      return ec.elements[voxaEvent.model.control.elementOrObjectToDescribe].alreadyInspectedQuote;
+    } else {
+      return ec.elements[voxaEvent.model.control.elementOrObjectToDescribe].inspectQuote;
+    }
+  } else if (objectOrElement in currentLocation.objects) {
+    if (currentLocation.objects[objectOrElement]) {
+      return oc.objects[voxaEvent.model.control.elementOrObjectToDescribe].inspectQuote + ". Yo lo dejé en este lugar";
+    } else {
+      return oc.objects[voxaEvent.model.control.elementOrObjectToDescribe].inspectQuote;
+    }
   }
+
 };
 
 ///// MAP EXPLORATION VARIABLES /////
-// Based on default map elements
 exports.describeLocationFullQuote = function (voxaEvent) {
   return describeLocation(voxaEvent) + " " + describeStuff(voxaEvent);
 };
@@ -60,12 +73,51 @@ exports.describeLocationFullQuoteWithStory = function (voxaEvent) {
 exports.describePath = function (voxaEvent) {
   const symbolToCardinal = { N: "norte", S: "sur", E: "este", O: "oeste" }
   const intros = ["Cogeré el camino del", "Iré hacia el", "Viajaré hacia el", "Tomaŕe el camino del"];
-  
+
   return intros[Math.floor(Math.random() * intros.length)] + " " + symbolToCardinal[voxaEvent.model.control.pathToDescribe.path];
 };
 exports.describePathProblem = function (voxaEvent) {
-  return "Describing path problem"
+  const problem = voxaEvent.model.game.map.locations[voxaEvent.model.game.map.currentLocation].to[voxaEvent.model.control.pathToDescribe.path].problem;
+  const problemsArray = m.locations[voxaEvent.model.game.map.currentLocation].to[voxaEvent.model.control.pathToDescribe.path].problemMentionQuotes;
+  return problemsArray[problem];
 };
+
+exports.describePickUpObject = function (voxaEvent) {
+  let intros2 = null
+  const intros = ["Cogeré", "Guardaré", "Meteré en la mochila", "Guardaré en la mochila", "Meteré en mi mochila"]
+  const object = oc.objects[voxaEvent.model.control.elementOrObjectToDescribe]
+
+  if (object.isMale) {
+    intros2 = ["el", "este"];
+  } else {
+    intros2 = ["la", "esta"];
+  }
+
+  return intros[Math.floor(Math.random() * intros.length)] + " " + intros2[Math.floor(Math.random() * intros2.length)] + " " + object.names[0]
+};
+exports.describeDropObject = function (voxaEvent) {
+  let intros2 = null
+  let intros4 = null
+  let pronoun = null
+  const intros = ["Dejaré", "Tiraré", "Soltaré"]
+  const intros3 = ["aquí.", "en este sitio.", "en este lugar."]
+  const object = oc.objects[voxaEvent.model.control.elementOrObjectToDescribe]
+
+  if (object.isMale) {
+    intros2 = ["el", "este"];
+    intros4 = ["", "", "Volveré más tarde a por él", "Ya volveré más tarde a por él", "Lo recogeré en otro momento", "Lo recogeré cuando lo necesite" , "Ya lo recogeré más tarde"];
+  } else {
+    intros2 = ["la", "esta"];
+    intros4 = ["", "", "Volveré más tarde a por ella", "Ya volveré más tarde a por ella", "La recogeré en otro momento", "La recogeré cuando la necesite" , "Ya la recogeré más tarde"];
+  }
+
+  const res = intros[Math.floor(Math.random() * intros.length)] + " " + intros2[Math.floor(Math.random() * intros2.length)] + " " + object.names[0] + " " + intros3[Math.floor(Math.random() * intros3.length)] + " " + intros4[Math.floor(Math.random() * intros4.length)]+".";
+
+  return res;
+};
+
+
+
 
 
 describeLocation = function (voxaEvent) {
@@ -83,13 +135,18 @@ describeStuff = function (voxaEvent) {
 
   const elements = describeElements(voxaEvent);
   const objects = describeObjects(voxaEvent);
-  let instrosElementsObjects = ""
+  let instrosElementsObjects = "";
+  let instrosInter = " "
 
-  if (elements || objects){
-    instrosElementsObjects = intros[Math.floor(Math.random() * intros.length)] + " " + intros2[Math.floor(Math.random() * intros2.length)] 
+  if (elements || objects) {
+    instrosElementsObjects = intros[Math.floor(Math.random() * intros.length)] + " " + intros2[Math.floor(Math.random() * intros2.length)]
   }
 
-  return instrosElementsObjects + " " + elements + " " + objects + " " + describeNpcs(voxaEvent) + " " + describeExistingPaths(voxaEvent);
+  if (elements && objects) {
+    instrosInter = ". También " + intros2[Math.floor(Math.random() * intros2.length)] + " ";
+  }
+
+  return instrosElementsObjects + " " + elements + instrosInter + objects + " " + describeNpcs(voxaEvent) + " " + describeExistingPaths(voxaEvent);
 };
 
 // Based on session model of the player and elements and objects Collections
@@ -122,7 +179,24 @@ describeElements = function (voxaEvent) {
 };
 
 describeObjects = function (voxaEvent) {
-  return "Mencion objectos";
+  let res = "";
+
+  // For each object in the objects object reflected in the session we get the mention quote
+  const length = Object.keys(voxaEvent.model.game.map.locations[voxaEvent.model.game.map.currentLocation].objects).length;
+  for (let i = 0; i < length; i++) {
+    res += oc.objects[Object.entries(voxaEvent.model.game.map.locations[voxaEvent.model.game.map.currentLocation].objects)[i][0]].mentionQuote;
+
+    // add conjuncion before last element
+    if (i === length - 2) {
+      res += " y ";
+    }
+    // add coma
+    if (i < length - 2) {
+      res += ", ";
+    };
+  }
+
+  return res;
 };
 
 describeNpcs = function (voxaEvent) {
@@ -140,7 +214,7 @@ describeExistingPaths = function (voxaEvent) {
   const to = voxaEvent.model.game.map.locations[voxaEvent.model.game.map.currentLocation].to;
   const keys = Object.keys(to)
 
-  if (keys.length === 0){
+  if (keys.length === 0) {
     return "";
   } else if (keys.length === 1) {
     intermediateIntro = "un solo camino,"
@@ -148,13 +222,13 @@ describeExistingPaths = function (voxaEvent) {
     intermediateIntro = "varios caminos."
   }
 
-  for (let i = 0; i < keys.length; i++){
+  for (let i = 0; i < keys.length; i++) {
     key = keys[i];
     locQuote = m.locations[to[key].goesTo].locationQuote;
     cardinal = symbolToCardinal[key];
-    intros2 = ["el camino del "+cardinal+" que lleva hacia", "ir hacia el "+cardinal+" me llevará a", "dirección "+cardinal+" llegaré a", "caminando hacia el "+cardinal+" iré a"];
+    intros2 = ["el camino del " + cardinal + " que lleva hacia", "ir hacia el " + cardinal + " me llevará a", "dirección " + cardinal + " llegaré a", "caminando hacia el " + cardinal + " iré a"];
     res += intros2[Math.floor(Math.random() * intros.length)] + " " + locQuote;
-    
+
     // add conjuncion before last element
     if (i === keys.length - 2 && 1 < keys.length) {
       res += " y ";
