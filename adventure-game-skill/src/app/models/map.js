@@ -38,7 +38,9 @@ module.exports = class Map {
                 storyQuote: "No hay mucho que decir sobre este sitio.",
                 main: false,
                 elements: function (choices) {
-                    return {}
+                    return {
+                        door_metalFence_1_closed: false,
+                    }
                 },
                 npcs: function (choices) {
                     return {};
