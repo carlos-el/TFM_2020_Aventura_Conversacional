@@ -45,19 +45,28 @@ exports.sandraVoice = function (voxaEvent) {
 exports.describeInspectElementOrObject = function (voxaEvent) {
   const objectOrElement = voxaEvent.model.control.elementOrObjectToDescribe;
   const currentLocation = voxaEvent.model.game.map.locations[voxaEvent.model.game.map.currentLocation];
-
+ 
+  // If it is an element 
   if (objectOrElement in currentLocation.elements) {
+    // Print the quote based in if it was already inspected
     if (voxaEvent.model.control.elementOrObjectToDescribeAlreadyInspected) {
       return ec.elements[voxaEvent.model.control.elementOrObjectToDescribe].alreadyInspectedQuote;
     } else {
       return ec.elements[voxaEvent.model.control.elementOrObjectToDescribe].inspectQuote;
     }
-  } else if (objectOrElement in currentLocation.objects) {
+  } // If it is an object in the Location 
+  else if (objectOrElement in currentLocation.objects) {
+    // Print the quote based in if it was dropped by the player
     if (currentLocation.objects[objectOrElement]) {
       return oc.objects[voxaEvent.model.control.elementOrObjectToDescribe].inspectQuote + ". Yo lo dejé en este lugar";
     } else {
       return oc.objects[voxaEvent.model.control.elementOrObjectToDescribe].inspectQuote;
     }
+  } 
+  // If it is an object in the player inventory
+  else if (objectOrElement in voxaEvent.model.game.inventory.objects) {
+    // Print the quote telling it is in the inventory.
+    return "El objeto de mi mochila. "+oc.objects[voxaEvent.model.control.elementOrObjectToDescribe].inspectQuote;
   }
 
 };
@@ -72,7 +81,7 @@ exports.describeLocationFullQuoteWithStory = function (voxaEvent) {
 
 exports.describePath = function (voxaEvent) {
   const symbolToCardinal = { N: "norte", S: "sur", E: "este", O: "oeste" }
-  const intros = ["Cogeré el camino del", "Iré hacia el", "Viajaré hacia el", "Tomaŕe el camino del"];
+  const intros = ["Cogeré el camino del", "Iré hacia el", "Viajaré hacia el", "Tomaré el camino del"];
 
   return intros[Math.floor(Math.random() * intros.length)] + " " + symbolToCardinal[voxaEvent.model.control.pathToDescribe.path];
 };
@@ -115,7 +124,16 @@ exports.describeDropObject = function (voxaEvent) {
 
   return res;
 };
-
+exports.describeUseObject = function (voxaEvent) {
+  console.log(ec.elements[voxaEvent.model.control.elementOrObjectToDescribe])
+  console.log(voxaEvent.model.control.elementOrObjectToDescribe)
+  return ec.elements[voxaEvent.model.control.elementOrObjectToDescribe].useObjectQuote;
+};
+exports.describeUseObjectCantUse = function (voxaEvent) {
+  const intros = ["No puedo usar ese objeto así.", "No puedo usar ese objeto de esa manera.", "No creo que pueda usar así este objeto."]
+  // ec.elements[voxaEvent.model.control.elementOrObjectToDescribe].names[0]
+  return intros[Math.floor(Math.random() * intros.length)];
+};
 
 
 
