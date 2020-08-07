@@ -61,6 +61,12 @@
       "DescribeDropObjectView": {
         "say": "<voice name='{playerVoice}'>{describeDropObject}</voice>"
       },
+      "DescribeUseObjectView": {
+        "say": "<voice name='{playerVoice}'>{describeUseObject}</voice>"
+      },
+      "DescribeUseObjectCantUseView": {
+        "say": "<voice name='{playerVoice}'>{describeUseObjectCantUse}</voice>"
+      },
 
 
       "scene1_intro_NarrativeView": {
