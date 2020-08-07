@@ -55,6 +55,12 @@
       "DescribeInspectElementOrObjectView": {
         "say": "<voice name='{playerVoice}'>{describeInspectElementOrObject}</voice>"
       },
+      "DescribePickUpObjectView": {
+        "say": "<voice name='{playerVoice}'>{describePickUpObject}</voice>"
+      },
+      "DescribeDropObjectView": {
+        "say": "<voice name='{playerVoice}'>{describeDropObject}</voice>"
+      },
 
 
       "scene1_intro_NarrativeView": {
