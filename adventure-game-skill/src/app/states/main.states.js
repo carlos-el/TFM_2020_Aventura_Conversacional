@@ -177,7 +177,7 @@ function register(voxaApp) {
       // If the inventory is available
       if (voxaEvent.model.game.inventory.obtained) {
         // If there is size in the inventory
-        if (voxaEvent.model.game.inventory.size > Object.keys(voxaEvent.model.game.inventory.objects)) {
+        if (voxaEvent.model.game.inventory.size > Object.keys(voxaEvent.model.game.inventory.objects).length) {
           // If the object requested is in the current location, 
           if (object = voxaEvent.model.getCurrentLocationObjectIdByName(objectName)) {
             // add it to the inventory
@@ -237,7 +237,7 @@ function register(voxaApp) {
           // get the element properties
           const elementProperties = voxaEvent.model.getElementProperties(element)
           // if the object can be used in the element
-          if (elementProperties.useObjectActionTaken(voxaEvent.model, object)){
+          if (elementProperties.useObjectActionTaken(voxaEvent.model, object)) {
             // return describe use action
             voxaEvent.model.control.elementOrObjectToDescribe = element;
             return {
@@ -245,12 +245,59 @@ function register(voxaApp) {
               reply: "DescribeUseObjectView",
               to: "freeRoamState",
             };
-          } else{
+          } else {
             // return describe cant use that object on the element
             voxaEvent.model.control.elementOrObjectToDescribe = element;
             return {
               flow: "yield",
               reply: "DescribeUseObjectCantUseView",
+              to: "freeRoamState",
+            };
+          }
+        }
+      }
+
+      return {
+        flow: "terminate",
+        reply: "notDesiredIntentView",
+      };
+    } else if (voxaEvent.intent.name === "ActionCombineObject") {
+      const objectOneName = voxaEvent.intent.params.object_one;
+      const objectTwoName = voxaEvent.intent.params.object_two;
+      let objectOne = "";
+      let objectTwo = "";
+      let objectResult = "";
+
+      // If both object names have been caught
+      if (objectOneName && objectTwoName) {
+        // If both objects are in the player inventory
+        if ((objectOne = voxaEvent.model.getInventoryObjectIdByName(objectOneName)) && (objectTwo = voxaEvent.model.getInventoryObjectIdByName(objectTwoName))) {
+          // Get object 1 combination result
+          let objectOnePoperties = voxaEvent.model.getObjectProperties(objectOne)
+          objectResult = objectOnePoperties.combineActionTaken(voxaEvent.model, objectTwo)
+
+          // If object 1 did not give a combination result try with object 2
+          if (!objectResult) {
+            let objectTwoPoperties = voxaEvent.model.getObjectProperties(objectTwo)
+            objectResult = objectTwoPoperties.combineActionTaken(voxaEvent.model, objectOne)
+          }
+
+          // If one of them gave combination result then remove the other elements, add the new one and return
+          if (objectResult) {
+            delete voxaEvent.model.game.inventory.objects[objectOne]
+            delete voxaEvent.model.game.inventory.objects[objectTwo]
+            voxaEvent.model.game.inventory.objects[objectResult] = 1;
+
+            voxaEvent.model.control.elementOrObjectToDescribe = objectResult;
+            return {
+              flow: "yield",
+              reply: "DescribeCombineObjectView",
+              to: "freeRoamState",
+            };
+          } else { // If none of them gave combination result then return unavailable combination
+            return {
+              flow: "yield",
+              reply: "DescribeCombineObjectFailView",
               to: "freeRoamState",
             };
           }
@@ -267,15 +314,18 @@ function register(voxaApp) {
       const cardinal = voxaEvent.intent.params.cardinal;
       const symbol = cardinalToSymbol[cardinal];
       const to = voxaEvent.model.game.map.locations[voxaEvent.model.game.map.currentLocation].to
+      const path = voxaEvent.model.getPathProperties(voxaEvent.model.game.map.currentLocation, symbol)
 
       // If there is a path in that direction
-      if (symbol in to) {
-        if (to[symbol].canGo) {
+      if (path) {
+        // Get the problem number (or true if there is no problem)
+        const problemNumber = path.canGo(voxaEvent.model)
+        if (problemNumber === true) {
           // We first select the path to describe
-          voxaEvent.model.control.pathToDescribe = { location: voxaEvent.model.game.map.currentLocation, path: symbol }
+          voxaEvent.model.control.pathToDescribe = { location: voxaEvent.model.game.map.currentLocation, path: symbol, problem: problemNumber}
 
           // Go to the new location
-          voxaEvent.model.game.map.currentLocation = to[symbol].goesTo;
+          voxaEvent.model.game.map.currentLocation = path.goesTo;
 
           // Describe the path and then the new location in the next state
           return {
@@ -285,7 +335,7 @@ function register(voxaApp) {
           };
         } else {
           // Prompt the problem that is not letting the player go to this location and dont change location
-          voxaEvent.model.control.pathToDescribe = { location: voxaEvent.model.game.map.currentLocation, path: symbol }
+          voxaEvent.model.control.pathToDescribe = { location: voxaEvent.model.game.map.currentLocation, path: symbol, problem: problemNumber }
           return {
             flow: "yield",
             reply: "DescribePathProblemView",
