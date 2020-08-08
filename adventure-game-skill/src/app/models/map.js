@@ -26,8 +26,9 @@ module.exports = class Map {
                 to: { // Contains the paths connected with this location
                     N: new Path({
                         goesTo: "hydroelectricPowerPlantOutskirts",
-                        canGo: true,
-                        problem: 0,
+                        canGo: function (model) {
+                            return true;
+                        },
                         problemMentionQuotes: [],
                     }),
                 }
@@ -46,19 +47,28 @@ module.exports = class Map {
                     return {};
                 },
                 objects: function (choices) {
-                    return {};
+                    return {
+                        lanternEmpty: false,
+                    };
                 },
                 to: {
                     S: new Path({
                         goesTo: "southForest1",
-                        canGo: true,
-                        problem: 0,
+                        canGo: function (model) {
+                            return true;
+                        },
                         problemMentionQuotes: [],
                     }),
                     O: new Path({
                         goesTo: "hydroelectricPowerPlant",
-                        canGo: false,
-                        problem: 0,
+                        canGo: function (model) {
+                            // If the door is close still
+                            if("door_metalFence_1_closed" in model.game.map.locations[model.game.map.currentLocation].elements){
+                                // return problem 0
+                                return 0;
+                            }
+                            return true;
+                        },
                         problemMentionQuotes: ["Hay una verja metálica con un candado que me impide el paso. Tal vez pueda encontrar algo con lo que desacerme del candado."],
                     }),
                 }
@@ -75,13 +85,16 @@ module.exports = class Map {
                     return {};
                 },
                 objects: function (choices) {
-                    return {};
+                    return {
+                        battery_small: false,
+                    };
                 },
                 to: {
                     E: new Path({
                         goesTo: "hydroelectricPowerPlantOutskirts",
-                        canGo: true,
-                        problem: 0,
+                        canGo: function (model) {
+                            return true;
+                        },
                         problemMentionQuotes: [],
                     }),
                 }
@@ -96,8 +109,6 @@ module.exports = class Map {
         for (key in (this.locations[location].to)) {
 
             paths[key] = {
-                canGo: this.locations[location].to[key].canGo,
-                problem: this.locations[location].to[key].problem,
                 goesTo: this.locations[location].to[key].goesTo,
             }
         }
