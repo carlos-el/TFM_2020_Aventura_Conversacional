@@ -86,7 +86,7 @@ exports.describePath = function (voxaEvent) {
   return intros[Math.floor(Math.random() * intros.length)] + " " + symbolToCardinal[voxaEvent.model.control.pathToDescribe.path];
 };
 exports.describePathProblem = function (voxaEvent) {
-  const problem = voxaEvent.model.game.map.locations[voxaEvent.model.game.map.currentLocation].to[voxaEvent.model.control.pathToDescribe.path].problem;
+  const problem = voxaEvent.model.control.pathToDescribe.problem;
   const problemsArray = m.locations[voxaEvent.model.game.map.currentLocation].to[voxaEvent.model.control.pathToDescribe.path].problemMentionQuotes;
   return problemsArray[problem];
 };
@@ -129,12 +129,22 @@ exports.describeUseObject = function (voxaEvent) {
   console.log(voxaEvent.model.control.elementOrObjectToDescribe)
   return ec.elements[voxaEvent.model.control.elementOrObjectToDescribe].useObjectQuote;
 };
-exports.describeUseObjectCantUse = function (voxaEvent) {
+exports.describeUseObjectFail = function (voxaEvent) {
   const intros = ["No puedo usar ese objeto así.", "No puedo usar ese objeto de esa manera.", "No creo que pueda usar así este objeto."]
   // ec.elements[voxaEvent.model.control.elementOrObjectToDescribe].names[0]
   return intros[Math.floor(Math.random() * intros.length)];
 };
+exports.describeCombineObject = function (voxaEvent) {
+  const intros = ["Combinando estos objetos he podido crear", "Uniendo estos objetos", "Juntando estos objetos", "Con estos objetos"];
+  const intros2 = ["he podido crear", "he creado", "he hecho", "he construido"];
+  const mention = oc.objects[voxaEvent.model.control.elementOrObjectToDescribe].mentionQuote;
 
+  return intros[Math.floor(Math.random() * intros.length)] + " " + intros2[Math.floor(Math.random() * intros2.length)] + " " + mention;
+};
+exports.describeCombineObjectFail = function (voxaEvent) {
+  const intros = ["No creo que pueda hacer nada con estos dos objetos.", "No se me ocurre como juntar esos objetos.", "No creo que pueda construir algo con estos objetos."];
+  return intros[Math.floor(Math.random() * intros.length)]
+};
 
 
 
