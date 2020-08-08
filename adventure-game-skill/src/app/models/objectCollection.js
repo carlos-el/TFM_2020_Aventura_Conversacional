@@ -13,10 +13,10 @@ module.exports = class objectCollection {
                 },
             }),
             lanternEmpty: new Object({
-                names: ["linterna"],
+                names: ["linterna sin batería", "linterna"],
                 isMale: false,
-                mentionQuote: "una linterna",
-                inspectQuote: "Una linterna sin bateria. Debería de encontrarle algunas antes de poder usarla.",
+                mentionQuote: "una linterna sin batería",
+                inspectQuote: "Una linterna sin bateria. Debería de encontrarle alguna antes de poder usarla.",
                 combineActionTaken: function (model, object) {
                     if (object === "battery_small") {
                         model.game.inventory.objects["lanternFull"] = 1;
@@ -39,7 +39,7 @@ module.exports = class objectCollection {
                 },
             }),
             battery_small: new Object({
-                names: ["pilas"],
+                names: ["batería","batería pequeña", "bateria", "bateria pequeña"],
                 isMale: false,
                 mentionQuote: "Una batería pequeña",
                 inspectQuote: "Una batería pequeña. Tal vez pueda ponersela a algún aparato",
