@@ -4,5 +4,6 @@ module.exports = class Object {
         this.isMale = data.isMale // Boolena, gender of the object for the suffic or articles
         this.mentionQuote = data.mentionQuote; // String, tells the description of the object 
         this.inspectQuote = data.inspectQuote; // String, tells what is done when the element is inspected
+        this.combineActionTaken = data.combineActionTaken; // Function, return new element name if the element was combined successfully, false in other case.
     }
 }
