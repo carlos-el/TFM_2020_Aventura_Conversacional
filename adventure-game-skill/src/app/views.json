@@ -65,7 +65,13 @@
         "say": "<voice name='{playerVoice}'>{describeUseObject}</voice>"
       },
       "DescribeUseObjectCantUseView": {
-        "say": "<voice name='{playerVoice}'>{describeUseObjectCantUse}</voice>"
+        "say": "<voice name='{playerVoice}'>{describeUseObjectFail}</voice>"
+      },
+      "DescribeCombineObjectView": {
+        "say": "<voice name='{playerVoice}'>{describeCombineObject}</voice>"
+      },
+      "DescribeCombineObjectFailView": {
+        "say": "<voice name='{playerVoice}'>{describeCombineObjectFail}</voice>"
       },
 
 
