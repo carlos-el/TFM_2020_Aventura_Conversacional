@@ -38,7 +38,7 @@ class Model {
       },
       elementOrObjectToDescribe: "",
       elementOrObjectToDescribeAlreadyInspected: false,
-      pathToDescribe: { location: "", path: "" }
+      pathToDescribe: { location: "", path: "", problem: ""}
     };
 
     _.assign(this, data);
@@ -78,6 +78,9 @@ class Model {
   }
   getObjectProperties(objectName) {
     return oc.objects[objectName];
+  }
+  getPathProperties(location, symbol) {
+    return m.locations[location].to[symbol];
   }
 
   // Gets elements or object identifier corresponding to the name passed as argument.
