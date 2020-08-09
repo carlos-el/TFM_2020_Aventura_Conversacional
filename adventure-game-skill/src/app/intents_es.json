@@ -89,6 +89,8 @@
                         }
                     ],
                     "samples": [
+                        "por la {color} de la {position}",
+                        "la {color} de la {position}",
                         "puerta {color} de la {position}",
                         "{color} de la {position}",
                         "puerta {position}",
@@ -148,27 +150,129 @@
                         {
                             "name": "element",
                             "type": "element"
+                        },
+                        {
+                            "name": "article",
+                            "type": "article"
                         }
                     ],
                     "samples": [
-                        "investigo {element}",
-                        "investiga {element}",
-                        "investigar {element}",
-                        "investigo el {element}",
-                        "investiga el {element}",
-                        "investigar el {element}",
-                        "investigo la {element}",
-                        "investiga la {element}",
-                        "investigar la {element}",
-                        "investigo {object}",
-                        "investiga {object}",
+                        "inspeccionar {object}",
+                        "inspecciona {object}",
+                        "inspecciono {object}",
+                        "inspeccionar {element}",
+                        "inspecciona {element}",
+                        "inspecciono {element}",
                         "investigar {object}",
-                        "investigo el {object}",
-                        "investiga el {object}",
-                        "investigar el {object}",
-                        "investigo la {object}",
-                        "investiga la {object}",
-                        "investigar la {object}"
+                        "investiga {object}",
+                        "investigo {object}",
+                        "investigar {element}",
+                        "investiga {element}",
+                        "investigo {element}",
+                        "inspeccionar {article} {object}",
+                        "inspecciona {article} {object}",
+                        "inspecciono {article} {object}",
+                        "inspeccionar {article} {element}",
+                        "inspecciona {article} {element}",
+                        "inspecciono {article} {element}",
+                        "investigar {article} {object}",
+                        "investiga {article} {object}",
+                        "investigo {article} {object}",
+                        "investigar {article} {element}",
+                        "investiga {article} {element}",
+                        "investigo {article} {element}"
+                    ]
+                },
+                {
+                    "name": "ActionSaveGame",
+                    "slots": [],
+                    "samples": [
+                        "guardar partida"
+                    ]
+                },
+                {
+                    "name": "ActionGoTo",
+                    "slots": [
+                        {
+                            "name": "cardinal",
+                            "type": "cardinal"
+                        }
+                    ],
+                    "samples": [
+                        "viajar hacia el {cardinal}",
+                        "viajar al {cardinal}",
+                        "ir hacia el {cardinal}",
+                        "ir al {cardinal}"
+                    ]
+                },
+                {
+                    "name": "ActionPickUp",
+                    "slots": [
+                        {
+                            "name": "object",
+                            "type": "object"
+                        }
+                    ],
+                    "samples": [
+                        "guardar {object}",
+                        "recoger {object}",
+                        "coger {object}"
+                    ]
+                },
+                {
+                    "name": "ActionDrop",
+                    "slots": [
+                        {
+                            "name": "object",
+                            "type": "object"
+                        }
+                    ],
+                    "samples": [
+                        "soltar {object}",
+                        "dejar caer {object}",
+                        "tirar {object}"
+                    ]
+                },
+                {
+                    "name": "ActionUseObject",
+                    "slots": [
+                        {
+                            "name": "element",
+                            "type": "element"
+                        },
+                        {
+                            "name": "object",
+                            "type": "object"
+                        },
+                        {
+                            "name": "article",
+                            "type": "article"
+                        }
+                    ],
+                    "samples": [
+                        "usa {article} {object} en {article} {element}",
+                        "usar {object} en {element}"
+                    ]
+                },
+                {
+                    "name": "ActionCombineObject",
+                    "slots": [
+                        {
+                            "name": "object_one",
+                            "type": "object"
+                        },
+                        {
+                            "name": "object_two",
+                            "type": "object"
+                        }
+                    ],
+                    "samples": [
+                        "juntar {object_one} con {object_two}",
+                        "juntar {object_one} y {object_two}",
+                        "unir {object_one} con {object_two}",
+                        "unir {object_one} y {object_two}",
+                        "combinar {object_one} y {object_two}",
+                        "combinar {object_one} con {object_two}"
                     ]
                 }
             ],
@@ -208,7 +312,17 @@
                     "values": [
                         {
                             "name": {
+                                "value": "bateria"
+                            }
+                        },
+                        {
+                            "name": {
                                 "value": "linterna"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "cizalla"
                             }
                         }
                     ]
@@ -218,12 +332,77 @@
                     "values": [
                         {
                             "name": {
-                                "value": "bolsa"
+                                "value": "verja de metal"
                             }
                         },
                         {
                             "name": {
-                                "value": "cofre"
+                                "value": "verja metálica"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "verja"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "bolsa de tela"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "bolsa"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "cardinal",
+                    "values": [
+                        {
+                            "name": {
+                                "value": "oeste"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "este"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "sur"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "norte"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "article",
+                    "values": [
+                        {
+                            "name": {
+                                "value": "las"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "los"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "la"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "el"
                             }
                         }
                     ]
