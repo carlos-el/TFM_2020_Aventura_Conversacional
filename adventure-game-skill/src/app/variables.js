@@ -23,13 +23,6 @@ exports.sexSuffix = function (voxaEvent) {
     return "a";
 };
 
-exports.playerVoice = function (voxaEvent) {
-  if (voxaEvent.model.game.choices.sex === "male")
-    return "Miguel";
-  else if (voxaEvent.model.game.choices.sex === "female")
-    return "Lucia";
-};
-
 exports.playerDoorColor = function (voxaEvent) {
   if (voxaEvent.model.game.choices.sex === "male")
     return "azul";
@@ -37,6 +30,13 @@ exports.playerDoorColor = function (voxaEvent) {
     return "rosa";
 };
 
+///// VOICES /////
+exports.playerVoice = function (voxaEvent) {
+  if (voxaEvent.model.game.choices.sex === "male")
+    return "Miguel";
+  else if (voxaEvent.model.game.choices.sex === "female")
+    return "Lucia";
+};
 exports.sandraVoice = function (voxaEvent) {
   return "Conchita";
 };
@@ -45,7 +45,7 @@ exports.sandraVoice = function (voxaEvent) {
 exports.describeInspectElementOrObject = function (voxaEvent) {
   const objectOrElement = voxaEvent.model.control.elementOrObjectToDescribe;
   const currentLocation = voxaEvent.model.game.map.locations[voxaEvent.model.game.map.currentLocation];
- 
+
   // If it is an element 
   if (objectOrElement in currentLocation.elements) {
     // Print the quote based in if it was already inspected
@@ -62,11 +62,11 @@ exports.describeInspectElementOrObject = function (voxaEvent) {
     } else {
       return oc.objects[voxaEvent.model.control.elementOrObjectToDescribe].inspectQuote;
     }
-  } 
+  }
   // If it is an object in the player inventory
   else if (objectOrElement in voxaEvent.model.game.inventory.objects) {
     // Print the quote telling it is in the inventory.
-    return "El objeto de mi mochila. "+oc.objects[voxaEvent.model.control.elementOrObjectToDescribe].inspectQuote;
+    return "El objeto de mi mochila. " + oc.objects[voxaEvent.model.control.elementOrObjectToDescribe].inspectQuote;
   }
 
 };
@@ -114,13 +114,13 @@ exports.describeDropObject = function (voxaEvent) {
 
   if (object.isMale) {
     intros2 = ["el", "este"];
-    intros4 = ["", "", "Volveré más tarde a por él", "Ya volveré más tarde a por él", "Lo recogeré en otro momento", "Lo recogeré cuando lo necesite" , "Ya lo recogeré más tarde"];
+    intros4 = ["", "", "Volveré más tarde a por él", "Ya volveré más tarde a por él", "Lo recogeré en otro momento", "Lo recogeré cuando lo necesite", "Ya lo recogeré más tarde"];
   } else {
     intros2 = ["la", "esta"];
-    intros4 = ["", "", "Volveré más tarde a por ella", "Ya volveré más tarde a por ella", "La recogeré en otro momento", "La recogeré cuando la necesite" , "Ya la recogeré más tarde"];
+    intros4 = ["", "", "Volveré más tarde a por ella", "Ya volveré más tarde a por ella", "La recogeré en otro momento", "La recogeré cuando la necesite", "Ya la recogeré más tarde"];
   }
 
-  const res = intros[Math.floor(Math.random() * intros.length)] + " " + intros2[Math.floor(Math.random() * intros2.length)] + " " + object.names[0] + " " + intros3[Math.floor(Math.random() * intros3.length)] + " " + intros4[Math.floor(Math.random() * intros4.length)]+".";
+  const res = intros[Math.floor(Math.random() * intros.length)] + " " + intros2[Math.floor(Math.random() * intros2.length)] + " " + object.names[0] + " " + intros3[Math.floor(Math.random() * intros3.length)] + " " + intros4[Math.floor(Math.random() * intros4.length)] + ".";
 
   return res;
 };
