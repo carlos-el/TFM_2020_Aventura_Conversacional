@@ -38,12 +38,14 @@ function register(voxaApp) {
         flow: "terminate",
         reply: "startTutorialView",
       };
-    } else {
-      return {
-        flow: "terminate",
-        reply: "notDesiredIntentView",
-      };
-    }
+    } 
+    
+    // Fallback: if the intents are not matched tell and go to main menu
+    return {
+      flow: "continue",
+      reply: "NotUnderstoodFallbackView",
+      to: "tellMainMenu",
+    };
   });
 
   voxaApp.onState("loadGame", async voxaEvent => {
@@ -95,9 +97,11 @@ function register(voxaApp) {
       };
     }
 
+    // Fallback: if the "yes" and "no" intents are not matched (returns to last question)
     return {
-      flow: "terminate",
-      reply: "notDesiredIntentView",
+      flow: "continue",
+      reply: "empty",
+      to: voxaEvent.model.control.confirmation.previousState,
     };
   });
 
@@ -154,7 +158,7 @@ function register(voxaApp) {
               voxaEvent.model.game.map.locations[voxaEvent.model.game.map.currentLocation].elements[elementOrObject] = true;
             }
           } else {
-            // If it is OBJECT do NOTHING cause object have no actions when are inspected and dont need alreadyInspected state.
+            // If it is OBJECT do NOTHING cause object have no actions when they are inspected and dont need alreadyInspected state.
           }
 
           // Set the element or object to describe and the alreadyInspected variable (nedded in variable.js for choosing quote)
@@ -166,8 +170,22 @@ function register(voxaApp) {
             reply: "DescribeInspectElementOrObjectView",
             to: "freeRoamState",
           };
+        } else {
+          // Fallback: if the element or object can not be found in the location or inventory
+          return {
+            flow: "yield",
+            reply: "DescribeFallbackNotFoundView",
+            to: "freeRoamState",
+          };
         }
 
+      } else {
+        // Fallback: if the intent does not carry element or object
+        return {
+          flow: "yield",
+          reply: "DescribeFallbackNotFoundView",
+          to: "freeRoamState",
+        };
       }
     } else if (voxaEvent.intent.name === "ActionPickUp") {
       let object = "";
@@ -191,76 +209,123 @@ function register(voxaApp) {
               reply: "DescribePickUpObjectView",
               to: "freeRoamState",
             };
+          } else {
+            // Fallback: if the object is not in the current location
+            return {
+              flow: "yield",
+              reply: "DescribeFallbackNotFoundView",
+              to: "freeRoamState",
+            };
           }
+        } else {
+          // Fallback: if the inventory is full
+          return {
+            flow: "yield",
+            reply: "DescribePickUpObjectFailFullInventoryView",
+            to: "freeRoamState",
+          };
         }
+      } else {
+        // Fallback: if the inventory is not available
+        return {
+          flow: "yield",
+          reply: "DescribePickUpObjectFailNoInventoryView",
+          to: "freeRoamState",
+        };
       }
-
-      return {
-        flow: "terminate",
-        reply: "notDesiredIntentView",
-      };
     } else if (voxaEvent.intent.name === "ActionDrop") {
       const objectName = voxaEvent.intent.params.object;
       let object = "";
 
-      // If the object is in the inventory
-      if (object = voxaEvent.model.getInventoryObjectIdByName(objectName)) {
-        // delete it from the inventory if it is the last
-        delete voxaEvent.model.game.inventory.objects[object]
+      // If the inventory is available
+      if (voxaEvent.model.game.inventory.obtained) {
+        // If the object is in the inventory
+        if (object = voxaEvent.model.getInventoryObjectIdByName(objectName)) {
+          // delete it from the inventory if it is the last
+          delete voxaEvent.model.game.inventory.objects[object]
 
-        // add it to the location objects with a value of true (because it was dropped) 
-        voxaEvent.model.game.map.locations[voxaEvent.model.game.map.currentLocation].objects[object] = true
+          // add it to the location objects with a value of true (because it was dropped) 
+          voxaEvent.model.game.map.locations[voxaEvent.model.game.map.currentLocation].objects[object] = true
 
-        // return the description of the dropping action
-        voxaEvent.model.control.elementOrObjectToDescribe = object;
+          // return the description of the dropping action
+          voxaEvent.model.control.elementOrObjectToDescribe = object;
+          return {
+            flow: "yield",
+            reply: "DescribeDropObjectView",
+            to: "freeRoamState",
+          };
+        } else {
+          // Fallback: if the object is not in the inventory
+          return {
+            flow: "yield",
+            reply: "DescribeFallbackNotFoundInInventoryView",
+            to: "freeRoamState",
+          };
+        }
+      } else {
+        // Fallback: if the inventory is not available
         return {
           flow: "yield",
-          reply: "DescribeDropObjectView",
+          reply: "DescribeDropObjectFailNoInventoryView",
           to: "freeRoamState",
         };
       }
-
-      return {
-        flow: "terminate",
-        reply: "notDesiredIntentView",
-      };
     } else if (voxaEvent.intent.name === "ActionUseObject") {
       const objectName = voxaEvent.intent.params.object;
       const elementName = voxaEvent.intent.params.element;
 
       // If params arre correctly set
       if (objectName && elementName) {
-        // If the object is in the inventory and the element is in the location
+        // If the object is in the inventory
         let object = "";
         let element = "";
-        if ((object = voxaEvent.model.getInventoryObjectIdByName(objectName)) && (element = voxaEvent.model.getCurrentLocationElementIdByName(elementName))) {
-          // get the element properties
-          const elementProperties = voxaEvent.model.getElementProperties(element)
-          // if the object can be used in the element
-          if (elementProperties.useObjectActionTaken(voxaEvent.model, object)) {
-            // return describe use action
-            voxaEvent.model.control.elementOrObjectToDescribe = element;
-            return {
-              flow: "yield",
-              reply: "DescribeUseObjectView",
-              to: "freeRoamState",
-            };
+        if ((object = voxaEvent.model.getInventoryObjectIdByName(objectName))) {
+          // If the element is not in the location
+          if ((element = voxaEvent.model.getCurrentLocationElementIdByName(elementName))) {
+            // get the element properties
+            const elementProperties = voxaEvent.model.getElementProperties(element)
+            // if the object can be used in the element
+            if (elementProperties.useObjectActionTaken(voxaEvent.model, object)) {
+              // return describe use action
+              voxaEvent.model.control.elementOrObjectToDescribe = element;
+              return {
+                flow: "yield",
+                reply: "DescribeUseObjectView",
+                to: "freeRoamState",
+              };
+            } else {
+              // return describe cant use that object on the element
+              voxaEvent.model.control.elementOrObjectToDescribe = element;
+              return {
+                flow: "yield",
+                reply: "DescribeUseObjectCantUseView",
+                to: "freeRoamState",
+              };
+            }
           } else {
-            // return describe cant use that object on the element
-            voxaEvent.model.control.elementOrObjectToDescribe = element;
+            // Fallback: if the element is not in the location
             return {
               flow: "yield",
-              reply: "DescribeUseObjectCantUseView",
+              reply: "DescribeUseObjectFailNotFoundView",
               to: "freeRoamState",
             };
           }
+        } else {
+          // Fallback: if the object is not in the inventory 
+          return {
+            flow: "yield",
+            reply: "DescribeUseObjectFailNotFoundInInventoryView",
+            to: "freeRoamState",
+          };
         }
+      } else {
+        // Fallback: if the params are not correctly
+        return {
+          flow: "yield",
+          reply: "FreeRoamFallbackView",
+          to: "freeRoamState",
+        };
       }
-
-      return {
-        flow: "terminate",
-        reply: "notDesiredIntentView",
-      };
     } else if (voxaEvent.intent.name === "ActionCombineObject") {
       const objectOneName = voxaEvent.intent.params.object_one;
       const objectTwoName = voxaEvent.intent.params.object_two;
@@ -301,19 +366,27 @@ function register(voxaApp) {
               to: "freeRoamState",
             };
           }
+        } else {
+          // Fallback: if one or more objects are not in the player inventory
+          return {
+            flow: "yield",
+            reply: "DescribeCombineObjectFailNoObjectFoundView",
+            to: "freeRoamState",
+          };
         }
+      } else {
+        // Fallback: if the params are not correctly set
+        return {
+          flow: "yield",
+          reply: "FreeRoamFallbackView",
+          to: "freeRoamState",
+        };
       }
-
-      return {
-        flow: "terminate",
-        reply: "notDesiredIntentView",
-      };
     } else if (voxaEvent.intent.name === "ActionGoTo") {
       // Get the symbol of the cardinal point the player wants to go
       const cardinalToSymbol = { norte: "N", sur: "S", este: "E", oeste: "O" }
       const cardinal = voxaEvent.intent.params.cardinal;
       const symbol = cardinalToSymbol[cardinal];
-      const to = voxaEvent.model.game.map.locations[voxaEvent.model.game.map.currentLocation].to
       const path = voxaEvent.model.getPathProperties(voxaEvent.model.game.map.currentLocation, symbol)
 
       // If there is a path in that direction
@@ -322,7 +395,7 @@ function register(voxaApp) {
         const problemNumber = path.canGo(voxaEvent.model)
         if (problemNumber === true) {
           // We first select the path to describe
-          voxaEvent.model.control.pathToDescribe = { location: voxaEvent.model.game.map.currentLocation, path: symbol, problem: problemNumber}
+          voxaEvent.model.control.pathToDescribe = { location: voxaEvent.model.game.map.currentLocation, path: symbol, problem: problemNumber }
 
           // Go to the new location
           voxaEvent.model.game.map.currentLocation = path.goesTo;
@@ -342,12 +415,14 @@ function register(voxaApp) {
             to: "freeRoamState"
           };
         }
+      } else {
+        // Fallback: if there is not path in the direction specified
+        return {
+          flow: "yield",
+          reply: "DescribePathFailNoPathView",
+          to: "freeRoamState",
+        };
       }
-
-      return {
-        flow: "terminate",
-        reply: "notDesiredIntentView",
-      };
     } else if (voxaEvent.intent.name === "ActionSaveGame") {
       voxaEvent.userDator.saveUserGame(voxaEvent.user.id, voxaEvent.model.game);
       return {
@@ -357,9 +432,11 @@ function register(voxaApp) {
       };
     }
 
+    // Fallback: if the intents are not matched or the params are wrong
     return {
-      flow: "terminate",
-      reply: "notDesiredIntentView",
+      flow: "yield",
+      reply: "FreeRoamFallbackView",
+      to: "freeRoamState",
     };
   });
 
@@ -418,9 +495,11 @@ function register(voxaApp) {
       };
     }
 
+    // Fallback: if the intents are not matched tell and repeat question
     return {
-      flow: "terminate",
-      reply: "notDesiredIntentView",
+      flow: "continue",
+      reply: "scene1_nameNotUnderstoodView",
+      to: "scene1_askPlayerName",
     };
   });
 
@@ -462,9 +541,11 @@ function register(voxaApp) {
       };
     }
 
+    // Fallback: if the intents are not matched tell and repeat question
     return {
-      flow: "terminate",
-      reply: "notDesiredIntentView",
+      flow: "continue",
+      reply: "scene1_doorNotUnderstoodView",
+      to: "scene1_askPlayerSex",
     };
   });
 
