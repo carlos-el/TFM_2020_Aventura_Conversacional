@@ -39,7 +39,12 @@
         "say": "De acuerdo, comenzemos."
       },
 
-
+      "DescribeInspectElementOrObjectView": {
+        "say": "<voice name='{playerVoice}'>{describeInspectElementOrObject}</voice>"
+      },
+      "DescribePickUpObjectView": {
+        "say": "<voice name='{playerVoice}'>{describePickUpObject}</voice>"
+      },
       "DescribePathView": {
         "say": "<voice name='{playerVoice}'>{describePath}</voice>"
       },
@@ -51,12 +56,6 @@
       },
       "DescribeLocationWithStoryView": {
         "say": "<voice name='{playerVoice}'>{describeLocationFullQuoteWithStory}</voice>"
-      },
-      "DescribeInspectElementOrObjectView": {
-        "say": "<voice name='{playerVoice}'>{describeInspectElementOrObject}</voice>"
-      },
-      "DescribePickUpObjectView": {
-        "say": "<voice name='{playerVoice}'>{describePickUpObject}</voice>"
       },
       "DescribeDropObjectView": {
         "say": "<voice name='{playerVoice}'>{describeDropObject}</voice>"
@@ -75,6 +74,43 @@
       },
 
 
+      "NotUnderstoodFallbackView": {
+        "say": "Lo siento, no he entendido lo que querías decir."
+      },
+      "FreeRoamFallbackView": {
+        "say": "<voice name='{playerVoice}'>Creo que no entiendo muy bien que tengo que hacer.</voice>"
+      },
+      "DescribeFallbackNotFoundView": {
+        "say": "<voice name='{playerVoice}'>No puedo encontrar ese objeto por aquí.</voice>"
+      },
+      "DescribeFallbackNotFoundInInventoryView": {
+        "say": "<voice name='{playerVoice}'>Ese objeto no esta en mi mochila</voice>"
+      },
+      "DescribePickUpObjectFailFullInventoryView": {
+        "say": "<voice name='{playerVoice}'>Vaya, tengo la mochila llena. Tendré que hacer hueco antes de coger cualquier objeto.</voice>"
+      },
+      "DescribePickUpObjectFailNoInventoryView": {
+        "say": "<voice name='{playerVoice}'>No tengo una mochila donde guardar esto. Debo enconttrar algo para levar mis cosas.</voice>"
+      },
+      "DescribeDropObjectFailNoInventoryView": {
+        "say": "<voice name='{playerVoice}'>No tengo nada, debería buscar algo para guardar mis cosas.</voice>"
+      },
+      "DescribeUseObjectFailNotFoundView": {
+        "say": "<voice name='{playerVoice}'>No veo por ninguna parte donde tengo que usar el objeto.</voice>"
+      },
+      "DescribeUseObjectFailNotFoundInInventoryView": {
+        "say": "<voice name='{playerVoice}'>No tengo el objeto que tengo que usar en mi mochila. Debo conseguirlo antes.</voice>"
+      },
+      "DescribeCombineObjectFailNoObjectFoundView": {
+        "say": "<voice name='{playerVoice}'>No llevo en la mochila todos los objetos que tengo que combinar.</voice>"
+      },
+      "DescribePathFailNoPathView": {
+        "say": "<voice name='{playerVoice}'>No parece haber un camino en esa dirección. Tendré que ir en otra dirección.</voice>"
+      },
+
+
+
+
       "scene1_intro_NarrativeView": {
         "say": "(Sonidos) Ir en un coche. El coche se para y nos bajamos. Andamos unos cuantos metros. Tu padre dice: Como los abuelos no están tienes que venir conmigo al trabajo. Te quedarás en la guardería del laboratorio hasta que salga, ¿vale?. Hola Sandra, mis padres están de viaje, se quedará contigo hasta que acabe mi turno. Sandra dice: <voice name='{sandraVoice}'>Buenos dias joven</voice>"
       },
@@ -83,6 +119,9 @@
       },
       "scene1_getPlayerNameConfirm_NarrativeView": {
         "say": "<voice name='{sandraVoice}'>¿Entonces tu nombre es {playerName}, cierto?</voice>"
+      },
+      "scene1_nameNotUnderstoodView": {
+        "say": "<voice name='{sandraVoice}'>Lo siento, no he entendido tu nombre.</voice>"
       },
 
       "scene1_sendToBath_NarrativeView": {
@@ -93,6 +132,9 @@
       },
       "scene1_getPlayerSexConfirm_NarrativeView": {
         "say": "Entonces ¿escoges la puerta {playerDoorColor}?"
+      },
+      "scene1_doorNotUnderstoodView": {
+        "say": "Lo siento, no he entendido que puerta has escogido."
       },
 
       "scene1_describePlayground_NarrativeView": {
