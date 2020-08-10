@@ -136,7 +136,10 @@
       "scene1_doorNotUnderstoodView": {
         "say": "Lo siento, no he entendido que puerta has escogido."
       },
-
+      "scene1_playgroundSideNotUnderstoodView": {
+        "say": "Lo siento, no he entendido con quien quieres jugar."
+      },
+      
       "scene1_describePlayground_NarrativeView": {
         "say": "Despues de desperezarte y refrescarte sales del baño. Te encuentras en el parque de juegos de la guardería. A la derecha, entorno a un pequeño tobogán está Sandra junto a unos cuantos niños. A la izquierda, en un rincón, hay una pila de juguetes. Mientras los miras Sandra te dice:<voice name='{sandraVoice}'> Anda, ven a jugar con nosotros.</voice>"
       },
