@@ -2,16 +2,19 @@ const _ = require("lodash");
 const Map = require("./models/map.js");
 const ElementCollection = require("./models/elementCollection.js");
 const ObjectCollection = require("./models/objectCollection.js");
+const NpcState = require("./models/npcCollection.js");
 
 const m = new Map();
 const ec = new ElementCollection();
 const oc = new ObjectCollection();
+const ns = new NpcState();
 
 class Model {
   constructor(data = {}) {
     this.game = {
       // Stores the players important choices in the game
       choices: {},
+      npcs: {},
       // Stores the players discovered places and some infor about them.
       map: {
         obtained: false,
@@ -124,7 +127,7 @@ class Model {
   // Adds a newly discovered location to the model
   discoverLocation(location) {
     // Add the location data to the model
-    this.game.map.locations[location] = m.getLocationDiscoverData(location, this.game.choices)
+    this.game.map.locations[location] = m.getLocationDiscoverData(location, this.game)
     // If the location is main add it too
     if (m.isMainLocation(location)) {
       this.game.map.mainLocations.push(location);
