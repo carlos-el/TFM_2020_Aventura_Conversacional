@@ -38,8 +38,8 @@ function register(voxaApp) {
         flow: "terminate",
         reply: "startTutorialView",
       };
-    } 
-    
+    }
+
     // Fallback: if the intents are not matched tell and go to main menu
     return {
       flow: "continue",
@@ -153,23 +153,32 @@ function register(voxaApp) {
           if (!isObject) {
             // If it is element, check that has not been already inspected and execute action and set the inspected value to true if that is the case
             alreadyInspected = voxaEvent.model.game.map.locations[voxaEvent.model.game.map.currentLocation].elements[elementOrObject];
+            let nextScene = elementOrObjectProperties.inspectActionTaken(voxaEvent.model, alreadyInspected);
             if (!alreadyInspected) {
-              elementOrObjectProperties.inspectActionTaken(voxaEvent.model);
               voxaEvent.model.game.map.locations[voxaEvent.model.game.map.currentLocation].elements[elementOrObject] = true;
             }
+            // If nextScene is a valid string then do describe and go to that scene
+            // Set the element or object to describe and the alreadyInspected variable (nedded in variable.js for choosing quote)
+            voxaEvent.model.control.elementOrObjectToDescribe = elementOrObject;
+            voxaEvent.model.control.elementOrObjectToDescribeAlreadyInspected = alreadyInspected;
+
+            return {
+              flow: "continue",
+              reply: "DescribeInspectElementOrObjectView",
+              to: nextScene,
+            };
           } else {
-            // If it is OBJECT do NOTHING cause object have no actions when they are inspected and dont need alreadyInspected state.
+            // If it is OBJECT just set object to describe and return cause object have no actions when they are inspected and dont need alreadyInspected state.
+            // Set the element or object to describe and the alreadyInspected variable (nedded in variable.js for choosing quote)
+            voxaEvent.model.control.elementOrObjectToDescribe = elementOrObject;
+
+            return {
+              flow: "yield",
+              reply: "DescribeInspectElementOrObjectView",
+              to: "freeRoamState",
+            };
           }
 
-          // Set the element or object to describe and the alreadyInspected variable (nedded in variable.js for choosing quote)
-          voxaEvent.model.control.elementOrObjectToDescribe = elementOrObject;
-          voxaEvent.model.control.elementOrObjectToDescribeAlreadyInspected = alreadyInspected;
-
-          return {
-            flow: "yield",
-            reply: "DescribeInspectElementOrObjectView",
-            to: "freeRoamState",
-          };
         } else {
           // Fallback: if the element or object can not be found in the location or inventory
           return {
@@ -285,14 +294,24 @@ function register(voxaApp) {
             // get the element properties
             const elementProperties = voxaEvent.model.getElementProperties(element)
             // if the object can be used in the element
-            if (elementProperties.useObjectActionTaken(voxaEvent.model, object)) {
-              // return describe use action
-              voxaEvent.model.control.elementOrObjectToDescribe = element;
-              return {
-                flow: "yield",
-                reply: "DescribeUseObjectView",
-                to: "freeRoamState",
-              };
+            let canBeUsedOrNextScene = elementProperties.useObjectActionTaken(voxaEvent.model, object);
+            if (canBeUsedOrNextScene) {
+              // If the return is the name of a scene go to that scene.
+              if (typeof canBeUsedOrNextScene === "string") {
+                return {
+                  flow: "continue",
+                  reply: "empty",
+                  to: canBeUsedOrNextScene,
+                };
+              } else {
+                // return describe use action
+                voxaEvent.model.control.elementOrObjectToDescribe = element;
+                return {
+                  flow: "yield",
+                  reply: "DescribeUseObjectView",
+                  to: "freeRoamState",
+                };
+              }
             } else {
               // return describe cant use that object on the element
               voxaEvent.model.control.elementOrObjectToDescribe = element;
@@ -393,19 +412,30 @@ function register(voxaApp) {
       if (path) {
         // Get the problem number (or true if there is no problem)
         const problemNumber = path.canGo(voxaEvent.model)
-        if (problemNumber === true) {
-          // We first select the path to describe
-          voxaEvent.model.control.pathToDescribe = { location: voxaEvent.model.game.map.currentLocation, path: symbol, problem: problemNumber }
+        if (problemNumber === true) { // If problem number is true then there is no problem and the player can go to the new location
+          // Execute the "go" function with the consecuences of going to the new location.
+          let nextScene = path.go(voxaEvent.model)
+          // If nextScene is not empty then the player should go to the scene proposed, else the player should go to the goesTo location
+          if (nextScene) {
+            return {
+              flow: "continue",
+              reply: "empty",
+              to: nextScene,
+            };
+          } else {
+            // We first select the path to describe
+            voxaEvent.model.control.pathToDescribe = { location: voxaEvent.model.game.map.currentLocation, path: symbol, problem: problemNumber }
 
-          // Go to the new location
-          voxaEvent.model.game.map.currentLocation = path.goesTo;
+            // Go to the new location
+            voxaEvent.model.game.map.currentLocation = path.goesTo;
 
-          // Describe the path and then the new location in the next state
-          return {
-            flow: "continue",
-            reply: "DescribePathView",
-            to: "describeLocationState"
-          };
+            // Describe the path and then the new location in the next state
+            return {
+              flow: "continue",
+              reply: "DescribePathView",
+              to: "describeLocationState"
+            };
+          }
         } else {
           // Prompt the problem that is not letting the player go to this location and dont change location
           voxaEvent.model.control.pathToDescribe = { location: voxaEvent.model.game.map.currentLocation, path: symbol, problem: problemNumber }
@@ -567,7 +597,7 @@ function register(voxaApp) {
   voxaApp.onState("scene1_getPlaygroundSide", voxaEvent => {
     if (voxaEvent.intent.name === "GetPlaygroundSide") {
       if (voxaEvent.intent.params.playgroundObject === "niños") {
-        // if play with Sandra (right) go to one different scene branch
+        // Ff play with Sandra (right) go to one different scene branch
         return {
           flow: "continue",
           reply: "empty",
@@ -583,9 +613,11 @@ function register(voxaApp) {
       }
     }
 
+    // Fallback: if the intents are not matched tell and repeat question
     return {
-      flow: "terminate",
-      reply: "notDesiredIntentView",
+      flow: "continue",
+      reply: "scene1_playgroundSideNotUnderstoodView",
+      to: "scene1_askPlaygroundSide",
     };
   });
 
