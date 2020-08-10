@@ -10,8 +10,11 @@ module.exports = class ElementCollection {
                 inspectQuote: "Parece que dentro de la bolsa hay algo de chatarra. La cogeré, me vendrá bien.",
                 alreadyInspectedQuote: "Ya he revisado esta bolsa, no hay nada más de interés.",
                 useObjectQuote: "",
-                inspectActionTaken: function (model) {
-                    model.game.resources.junk += 10;
+                inspectActionTaken: function (model, alreadyInspected) {
+                    if (!alreadyInspected){
+                        model.game.resources.junk += 10;
+                    }
+                    return "";
                 },
                 useObjectActionTaken: function (model, object) { return false; },
             }),
@@ -22,7 +25,7 @@ module.exports = class ElementCollection {
                 inspectQuote: "Es una verja metálica con un candado que me impide el paso hacia el camino del oeste que lleva a la central hidroeléctrica. Quizás pueda encontrar algo para abrir el candado.",
                 alreadyInspectedQuote: "Es una verja metálica con un candado que me impide el paso hacia el camino del oeste que lleva a la central hidroeléctrica. Quizás pueda encontrar algo para abrir el candado.",
                 useObjectQuote: "Romperé el candado de la verja con esto. Perfecto, ya puedo pasar.",
-                inspectActionTaken: function (model) {},
+                inspectActionTaken: function (model, alreadyInspected) {return "";},
                 useObjectActionTaken: function (model, object) {
                     // if the object is the one intended
                     if (object === "metalShears") {
@@ -44,7 +47,7 @@ module.exports = class ElementCollection {
                 inspectQuote: "Es una verja metálica que impedía el paso hacia el camino del oeste que lleva a la central hidroeléctrica. Ya está abierta.",
                 alreadyInspectedQuote: "Es una verja metálica que impedía el paso hacia el camino del oeste que lleva a la central hidroeléctrica. Ya está abierta.",
                 useObjectQuote: "",
-                inspectActionTaken: function (model) {},
+                inspectActionTaken: function (model, alreadyInspected) {return "";},
                 useObjectActionTaken: function (model, object) {
                     return false;
                 },
