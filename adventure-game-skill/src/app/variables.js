@@ -1,10 +1,12 @@
 const Map = require("./models/map.js");
 const ElementCollection = require("./models/elementCollection.js");
 const ObjectCollection = require("./models/objectCollection.js");
+const NpcCollection = require("./models/npcCollection.js");
 
 const m = new Map()
 const ec = new ElementCollection()
 const oc = new ObjectCollection()
+const nc = new NpcCollection();
 
 
 
@@ -125,8 +127,6 @@ exports.describeDropObject = function (voxaEvent) {
   return res;
 };
 exports.describeUseObject = function (voxaEvent) {
-  console.log(ec.elements[voxaEvent.model.control.elementOrObjectToDescribe])
-  console.log(voxaEvent.model.control.elementOrObjectToDescribe)
   return ec.elements[voxaEvent.model.control.elementOrObjectToDescribe].useObjectQuote;
 };
 exports.describeUseObjectFail = function (voxaEvent) {
@@ -145,6 +145,14 @@ exports.describeCombineObjectFail = function (voxaEvent) {
   const intros = ["No creo que pueda hacer nada con estos dos objetos.", "No se me ocurre como juntar esos objetos.", "No creo que pueda construir algo con estos objetos."];
   return intros[Math.floor(Math.random() * intros.length)]
 };
+exports.describeTalkTo = function (voxaEvent) {
+  const state = voxaEvent.model.control.npcStateToDescribe;
+  const voice = nc.npcs[voxaEvent.model.control.elementOrObjectToDescribe].voice;
+  const speech = nc.npcs[voxaEvent.model.control.elementOrObjectToDescribe].states[state].speech;
+
+  return "<voice name='" + voice + "'>" + speech + "</voice>";
+};
+
 
 
 
@@ -174,10 +182,9 @@ describeStuff = function (voxaEvent) {
     instrosInter = ". También " + intros2[Math.floor(Math.random() * intros2.length)] + " ";
   }
 
-  return instrosElementsObjects + " " + elements + instrosInter + objects + " " + describeNpcs(voxaEvent) + " " + describeExistingPaths(voxaEvent);
+  return instrosElementsObjects + " " + elements + "." + instrosInter + objects + ". " + describeNpcs(voxaEvent) + ". " + describeExistingPaths(voxaEvent)+".";
 };
 
-// Based on session model of the player and elements and objects Collections
 describeElements = function (voxaEvent) {
   let res = "";
 
@@ -228,7 +235,68 @@ describeObjects = function (voxaEvent) {
 };
 
 describeNpcs = function (voxaEvent) {
-  return "Mencion personajes";
+  const npcs = voxaEvent.model.game.map.locations[voxaEvent.model.game.map.currentLocation].npcs;
+  const keys = Object.keys(npcs);
+  let alreadyTalkedNpcs = []
+  let notTalkedNpcs = []
+
+  // for each npc, put it into an array depending if the player has already talked to him
+  for (let i = 0; i < keys.length; i++) {
+    if (npcs[keys[i]]){
+      alreadyTalkedNpcs.push(keys[i]);
+    } else {
+      notTalkedNpcs.push(keys[i]);
+    }
+  }
+
+  let alreadyTalkedNpcRes = "";
+  let notTalkedNpcRes = "";
+
+  // For each npc in alreadyTalkedNpcs array, concat their names in a string
+  for(let i = 0; i < alreadyTalkedNpcs.length; i++){
+    alreadyTalkedNpcRes += alreadyTalkedNpcs[i];
+    // add conjuncion before last element
+    if (i === alreadyTalkedNpcs.length - 2) {
+      alreadyTalkedNpcRes += " y ";
+    }
+    // add coma
+    if (i < alreadyTalkedNpcs.length - 2) {
+      alreadyTalkedNpcRes += ", ";
+    };
+  }
+
+  // For each npc in notTalkedNpcs array, concat their names in a string with a different setup
+  for(let i = 0; i < notTalkedNpcs.length; i++){
+    // add conjuncion before last element
+    if (i === notTalkedNpcs.length - 2) {
+      notTalkedNpcRes += " y ";
+    }
+    notTalkedNpcRes += " a "
+    notTalkedNpcRes += notTalkedNpcs[i];
+    notTalkedNpcRes += voxaEvent.model.getNpcProperties(notTalkedNpcs[i]).states[voxaEvent.model.game.npcs[notTalkedNpcs[i]]].mentionQuote;
+    // add coma
+    if (i < notTalkedNpcs.length - 2) {
+      notTalkedNpcRes += ", ";
+    };
+  }
+
+  // Set the intros depending on the quantity of npcs in each array
+  let intros = [""];
+  let intro2 = "";
+  if (alreadyTalkedNpcs.length == 1){
+    intros = [" está aquí.", " anda por aquí."];
+    intro2 = "También ";
+  } else if (alreadyTalkedNpcs.length > 1) {
+    intros = [" están aquí.", " andan por aquí."];
+    intro2 = "También ";
+  }
+
+  let intro3 = "";
+  if (notTalkedNpcs.length > 0){
+    intro3 = "he visto por aquí";
+  }
+
+  return alreadyTalkedNpcRes + intros[Math.floor(Math.random() * intros.length)] + intro2 + intro3 + notTalkedNpcRes;
 };
 
 describeExistingPaths = function (voxaEvent) {
@@ -254,7 +322,7 @@ describeExistingPaths = function (voxaEvent) {
     key = keys[i];
     locQuote = m.locations[to[key].goesTo].locationQuote;
     cardinal = symbolToCardinal[key];
-    intros2 = ["el camino del " + cardinal + " que lleva hacia", "ir hacia el " + cardinal + " me llevará a", "dirección " + cardinal + " llegaré a", "caminando hacia el " + cardinal + " iré a"];
+    intros2 = ["el camino del " + cardinal + " lleva hacia", "ir hacia el " + cardinal + " me llevará a", "dirección " + cardinal + " llegaré a", "caminando hacia el " + cardinal + " iré a"];
     res += intros2[Math.floor(Math.random() * intros.length)] + " " + locQuote;
 
     // add conjuncion before last element

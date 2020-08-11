@@ -63,14 +63,11 @@
       "DescribeUseObjectView": {
         "say": "<voice name='{playerVoice}'>{describeUseObject}</voice>"
       },
-      "DescribeUseObjectCantUseView": {
-        "say": "<voice name='{playerVoice}'>{describeUseObjectFail}</voice>"
-      },
       "DescribeCombineObjectView": {
         "say": "<voice name='{playerVoice}'>{describeCombineObject}</voice>"
       },
-      "DescribeCombineObjectFailView": {
-        "say": "<voice name='{playerVoice}'>{describeCombineObjectFail}</voice>"
+      "DescribeTalkToView": {
+        "say": "{describeTalkTo}"
       },
 
 
@@ -95,6 +92,9 @@
       "DescribeDropObjectFailNoInventoryView": {
         "say": "<voice name='{playerVoice}'>No tengo nada, debería buscar algo para guardar mis cosas.</voice>"
       },
+      "DescribeUseObjectCantUseView": {
+        "say": "<voice name='{playerVoice}'>{describeUseObjectFail}</voice>"
+      },
       "DescribeUseObjectFailNotFoundView": {
         "say": "<voice name='{playerVoice}'>No veo por ninguna parte donde tengo que usar el objeto.</voice>"
       },
@@ -104,8 +104,14 @@
       "DescribeCombineObjectFailNoObjectFoundView": {
         "say": "<voice name='{playerVoice}'>No llevo en la mochila todos los objetos que tengo que combinar.</voice>"
       },
+      "DescribeCombineObjectFailView": {
+        "say": "<voice name='{playerVoice}'>{describeCombineObjectFail}</voice>"
+      },
       "DescribePathFailNoPathView": {
         "say": "<voice name='{playerVoice}'>No parece haber un camino en esa dirección. Tendré que ir en otra dirección.</voice>"
+      },
+      "DescribeTalkToFailPersonNotFoundView": {
+        "say": "<voice name='{playerVoice}'>Esa persona no esta aquí, no puedo hablar con ella.</voice>"
       },
 
 
