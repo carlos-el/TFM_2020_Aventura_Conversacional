@@ -10,13 +10,13 @@ module.exports = class ElementCollection {
                 inspectQuote: "Parece que dentro de la bolsa hay algo de chatarra. La cogeré, me vendrá bien.",
                 alreadyInspectedQuote: "Ya he revisado esta bolsa, no hay nada más de interés.",
                 useObjectQuote: "",
-                inspectActionTaken: function (model, alreadyInspected) {
+                inspectActionTaken: function (game, alreadyInspected) {
                     if (!alreadyInspected){
-                        model.game.resources.junk += 10;
+                        game.resources.junk += 10;
                     }
                     return "";
                 },
-                useObjectActionTaken: function (model, object) { return false; },
+                useObjectActionTaken: function (game, object) { return false; },
             }),
             door_metalFence_1_closed: new Element({
                 names: ["verja", "verja metálica", "verja de metal"],
@@ -25,14 +25,14 @@ module.exports = class ElementCollection {
                 inspectQuote: "Es una verja metálica con un candado que me impide el paso hacia el camino del oeste que lleva a la central hidroeléctrica. Quizás pueda encontrar algo para abrir el candado.",
                 alreadyInspectedQuote: "Es una verja metálica con un candado que me impide el paso hacia el camino del oeste que lleva a la central hidroeléctrica. Quizás pueda encontrar algo para abrir el candado.",
                 useObjectQuote: "Romperé el candado de la verja con esto. Perfecto, ya puedo pasar.",
-                inspectActionTaken: function (model, alreadyInspected) {return "";},
-                useObjectActionTaken: function (model, object) {
+                inspectActionTaken: function (game, alreadyInspected) {return "";},
+                useObjectActionTaken: function (game, object) {
                     // if the object is the one intended
                     if (object === "metalShears") {
                         // open the path we want, delete the closed element and add the open element (cause it is a door)
-                        model.game.map.locations[model.game.map.currentLocation].to.O.canGo = true;
-                        model.game.map.locations[model.game.map.currentLocation].elements["door_metalFence_1_open"] = false;
-                        delete model.game.map.locations[model.game.map.currentLocation].elements["door_metalFence_1_closed"];
+                        game.map.locations[game.map.currentLocation].to.O.canGo = true;
+                        game.map.locations[game.map.currentLocation].elements["door_metalFence_1_open"] = false;
+                        delete game.map.locations[game.map.currentLocation].elements["door_metalFence_1_closed"];
                         // return true cause the object can be used
                         return true;
                     }
@@ -47,8 +47,8 @@ module.exports = class ElementCollection {
                 inspectQuote: "Es una verja metálica que impedía el paso hacia el camino del oeste que lleva a la central hidroeléctrica. Ya está abierta.",
                 alreadyInspectedQuote: "Es una verja metálica que impedía el paso hacia el camino del oeste que lleva a la central hidroeléctrica. Ya está abierta.",
                 useObjectQuote: "",
-                inspectActionTaken: function (model, alreadyInspected) {return "";},
-                useObjectActionTaken: function (model, object) {
+                inspectActionTaken: function (game, alreadyInspected) {return "";},
+                useObjectActionTaken: function (game, object) {
                     return false;
                 },
             }),
