@@ -2,12 +2,12 @@ const _ = require("lodash");
 const Map = require("./models/map.js");
 const ElementCollection = require("./models/elementCollection.js");
 const ObjectCollection = require("./models/objectCollection.js");
-const NpcState = require("./models/npcCollection.js");
+const NpcCollection = require("./models/npcCollection.js");
 
 const m = new Map();
 const ec = new ElementCollection();
 const oc = new ObjectCollection();
-const ns = new NpcState();
+const nc = new NpcCollection();
 
 class Model {
   constructor(data = {}) {
@@ -41,6 +41,7 @@ class Model {
       },
       elementOrObjectToDescribe: "",
       elementOrObjectToDescribeAlreadyInspected: false,
+      npcStateToDescribe: "",
       pathToDescribe: { location: "", path: "", problem: ""}
     };
 
@@ -76,15 +77,19 @@ class Model {
 
   // Functions
   // Gets element and its properties by name of the element
-  getElementProperties(elementName) {
-    return ec.elements[elementName];
+  getElementProperties(elementId) {
+    return ec.elements[elementId];
   }
-  getObjectProperties(objectName) {
-    return oc.objects[objectName];
+  getObjectProperties(objectId) {
+    return oc.objects[objectId];
   }
   getPathProperties(location, symbol) {
     return m.locations[location].to[symbol];
   }
+  getNpcProperties(npcId) {
+    return nc.npcs[npcId];
+  }
+
 
   // Gets elements or object identifier corresponding to the name passed as argument.
   // The element or object must be in the currentLocation.
