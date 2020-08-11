@@ -153,7 +153,7 @@ function register(voxaApp) {
           if (!isObject) {
             // If it is element, check that has not been already inspected and execute action and set the inspected value to true if that is the case
             alreadyInspected = voxaEvent.model.game.map.locations[voxaEvent.model.game.map.currentLocation].elements[elementOrObject];
-            let nextScene = elementOrObjectProperties.inspectActionTaken(voxaEvent.model, alreadyInspected);
+            let nextScene = elementOrObjectProperties.inspectActionTaken(voxaEvent.model.game, alreadyInspected);
             if (!alreadyInspected) {
               voxaEvent.model.game.map.locations[voxaEvent.model.game.map.currentLocation].elements[elementOrObject] = true;
             }
@@ -294,7 +294,7 @@ function register(voxaApp) {
             // get the element properties
             const elementProperties = voxaEvent.model.getElementProperties(element)
             // if the object can be used in the element
-            let canBeUsedOrNextScene = elementProperties.useObjectActionTaken(voxaEvent.model, object);
+            let canBeUsedOrNextScene = elementProperties.useObjectActionTaken(voxaEvent.model.game, object);
             if (canBeUsedOrNextScene) {
               // If the return is the name of a scene go to that scene.
               if (typeof canBeUsedOrNextScene === "string") {
@@ -358,12 +358,12 @@ function register(voxaApp) {
         if ((objectOne = voxaEvent.model.getInventoryObjectIdByName(objectOneName)) && (objectTwo = voxaEvent.model.getInventoryObjectIdByName(objectTwoName))) {
           // Get object 1 combination result
           let objectOnePoperties = voxaEvent.model.getObjectProperties(objectOne)
-          objectResult = objectOnePoperties.combineActionTaken(voxaEvent.model, objectTwo)
+          objectResult = objectOnePoperties.combineActionTaken(voxaEvent.model.game, objectTwo)
 
           // If object 1 did not give a combination result try with object 2
           if (!objectResult) {
             let objectTwoPoperties = voxaEvent.model.getObjectProperties(objectTwo)
-            objectResult = objectTwoPoperties.combineActionTaken(voxaEvent.model, objectOne)
+            objectResult = objectTwoPoperties.combineActionTaken(voxaEvent.model.game, objectOne)
           }
 
           // If one of them gave combination result then remove the other elements, add the new one and return
@@ -401,6 +401,39 @@ function register(voxaApp) {
           to: "freeRoamState",
         };
       }
+    } else if (voxaEvent.intent.name === "ActionTalkTo") {
+      const npc = voxaEvent.intent.params.npc;
+
+      // If the npc is in the location
+      if (npc in voxaEvent.model.game.map.locations[voxaEvent.model.game.map.currentLocation].npcs) {
+        const alreadyTalked = voxaEvent.model.game.map.locations[voxaEvent.model.game.map.currentLocation].npcs[npc];
+        const npcProperties = voxaEvent.model.getNpcProperties(npc);
+        let npcState = voxaEvent.model.game.npcs[npc]; // TODO?? the state may not be set, in that case set it to "1"
+        const nextScene = npcProperties.states[npcState].talkActionTaken(voxaEvent.model.game, alreadyTalked);
+        // If the action lead to a scene then go to it
+        if (nextScene){
+          return {
+            flow: "continue",
+            reply: "empty",
+            to: nextScene,
+          };
+        }
+        // In other case describe the conversation with the npc.
+        voxaEvent.model.control.elementOrObjectToDescribe = npc;
+        voxaEvent.model.control.npcStateToDescribe = npcState;
+        return {
+          flow: "yield",
+          reply: "DescribeTalkToView",
+          to: "freeRoamState",
+        };
+      } else {
+        // Fallback: if the npc is not in the location then say it
+        return {
+          flow: "yield",
+          reply: "DescribeTalkToFailPersonNotFoundView",
+          to: "freeRoamState",
+        };
+      }
     } else if (voxaEvent.intent.name === "ActionGoTo") {
       // Get the symbol of the cardinal point the player wants to go
       const cardinalToSymbol = { norte: "N", sur: "S", este: "E", oeste: "O" }
@@ -411,10 +444,10 @@ function register(voxaApp) {
       // If there is a path in that direction
       if (path) {
         // Get the problem number (or true if there is no problem)
-        const problemNumber = path.canGo(voxaEvent.model)
+        const problemNumber = path.canGo(voxaEvent.model.game)
         if (problemNumber === true) { // If problem number is true then there is no problem and the player can go to the new location
           // Execute the "go" function with the consecuences of going to the new location.
-          let nextScene = path.go(voxaEvent.model)
+          let nextScene = path.go(voxaEvent.model.game)
           // If nextScene is not empty then the player should go to the scene proposed, else the player should go to the goesTo location
           if (nextScene) {
             return {
