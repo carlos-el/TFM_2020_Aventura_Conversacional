@@ -402,16 +402,17 @@ function register(voxaApp) {
         };
       }
     } else if (voxaEvent.intent.name === "ActionTalkTo") {
-      const npc = voxaEvent.intent.params.npc;
+      const npcName = voxaEvent.intent.params.npc;
+      let npc = "";
 
       // If the npc is in the location
-      if (npc in voxaEvent.model.game.map.locations[voxaEvent.model.game.map.currentLocation].npcs) {
+      if (npc = voxaEvent.model.getCurrentLocationNpcIdByName(npcName)) {
         const alreadyTalked = voxaEvent.model.game.map.locations[voxaEvent.model.game.map.currentLocation].npcs[npc];
         const npcProperties = voxaEvent.model.getNpcProperties(npc);
-        let npcState = voxaEvent.model.game.npcs[npc]; // TODO?? the state may not be set, in that case set it to "1"
+        let npcState = voxaEvent.model.game.npcs[npc];
         const nextScene = npcProperties.states[npcState].talkActionTaken(voxaEvent.model.game, alreadyTalked);
         // If the action lead to a scene then go to it
-        if (nextScene){
+        if (nextScene) {
           return {
             flow: "continue",
             reply: "empty",
@@ -431,6 +432,143 @@ function register(voxaApp) {
         return {
           flow: "yield",
           reply: "DescribeTalkToFailPersonNotFoundView",
+          to: "freeRoamState",
+        };
+      }
+    } else if (voxaEvent.intent.name === "ActionBuy") {
+      const objectName = voxaEvent.intent.params.object;
+      const resourceName = voxaEvent.intent.params.resource;
+      const resourceNameToId = { agua: "water", alimento: "food", comida: "food", chatarra: "junk" }
+      let objectOrResourceName = "";
+      let objectOrResource = "";
+      let isObject = true;
+
+      // Get the object or resource to buy
+      if (objectName) {
+        objectOrResourceName = objectName;
+      } else if (resourceName) {
+        objectOrResourceName = resourceName;
+      }
+
+      // If the param is set
+      if (objectOrResourceName) {
+        // if it is resource tranform it to resourceId and if it is object to objectId
+        if (objectOrResourceName in resourceNameToId) {
+          objectOrResource = resourceNameToId[objectOrResourceName]
+          isObject = false;
+        } else {
+          objectOrResource = voxaEvent.model.getObjectIdByName(objectOrResourceName);
+          isObject = true;
+        }
+
+        // if the object exists
+        if (objectOrResource) {
+          let myMerchantId = "";
+          let objectOrResourcePrice = "";
+          let goodsUnits = "";
+          // Loop throught npcs in the location to check if merchants sell the object
+          for (let npcId of Object.keys(voxaEvent.model.game.map.locations[voxaEvent.model.game.map.currentLocation].npcs)) {
+            let npcProperties = voxaEvent.model.getNpcProperties(npcId);
+            // if the npc is merchant
+            if (npcProperties.merchant) {
+              // if the merchant sells in the current location
+              if (npcProperties.merchant.locations.includes(voxaEvent.model.game.map.currentLocation)) {
+                // If we have already talked to the merchant and set the merchant state in the model
+                if (voxaEvent.model.game.merchants[npcId]) {
+                  // if the merchant sells the object
+                  if (objectOrResource in npcProperties.merchant.states[voxaEvent.model.game.merchants[npcId].state].goods) {
+                    // if the object is available (the player has not bought the max number of items)
+                    const bought = (voxaEvent.model.game.merchants[npcId].bought[objectOrResource]) ? voxaEvent.model.game.merchants[npcId].bought[objectOrResource] : 0;
+                    if (bought < npcProperties.merchant.states[voxaEvent.model.game.merchants[npcId].state].goods[objectOrResource].maxBought) {
+                      myMerchantId = npcId;
+                      objectOrResourcePrice = npcProperties.merchant.states[voxaEvent.model.game.merchants[npcId].state].goods[objectOrResource].price;
+                      // get good units only in case the object to buy is a resource
+                      goodsUnits = npcProperties.merchant.states[voxaEvent.model.game.merchants[npcId].state].goods[objectOrResource].units;
+                      break;
+                    }
+                  }
+                }
+              }
+            }
+          }
+
+          // if a merchant sells the item
+          if (myMerchantId) {
+            // check that the player can pay
+            let canPay = true;
+            for (p of Object.keys(objectOrResourcePrice)) {
+              // if it is resource
+              if (["water", "food", "junk"].includes(p)) {
+                // if the player does not have enough resources
+                if (voxaEvent.model.game.resources[p] < objectOrResourcePrice[p]) {
+                  canPay = false;
+                  break;
+                }
+              } else {
+                // if the player does not have the object
+                if (!(p in voxaEvent.model.game.inventory.objects)) {
+                  canPay = false;
+                  break;
+                }
+              }
+            }
+
+            // if the player can pay 
+            if (canPay) {
+              // retrieve the price from the player
+              for (p of Object.keys(objectOrResourcePrice)) {
+                // if it is resource
+                if (["water", "food", "junk"].includes(p)) {
+                  voxaEvent.model.game.resources[p] -= objectOrResourcePrice[p]
+                } else {
+                  delete voxaEvent.model.game.inventory.objects[p]
+                }
+              }
+
+              // add the object or resource
+              if (isObject) {
+                voxaEvent.model.game.inventory[objectOrResource] = 1;
+              } else {
+                voxaEvent.model.game.resources[objectOrResource] += goodsUnits;
+              }
+
+              // add to the bought variable for this merchant in the model
+              if (voxaEvent.model.game.merchants[myMerchantId].bought[objectOrResource]) {
+                voxaEvent.model.game.merchants[myMerchantId].bought[objectOrResource] += 1;
+              } else {
+                voxaEvent.model.game.merchants[myMerchantId].bought[objectOrResource] = 1;
+              }
+
+              // return to describe buy
+              voxaEvent.model.control.elementOrObjectToDescribe = objectOrResourceName;
+              return {
+                flow: "yield",
+                reply: "DrescribeBuyObjectView",
+                to: "freeRoamState",
+              };
+            } else {
+              // Fallback: the player cant pay
+              return {
+                flow: "yield",
+                reply: "DrescribeBuyObjectFailCantPayView",
+                to: "freeRoamState",
+              };
+            }
+          }
+
+        }
+
+        // Fallback: if the object is not sell by any merchant or the object does not exist
+        return {
+          flow: "yield",
+          reply: "DrescribeBuyObjectFailNoObjectView",
+          to: "freeRoamState",
+        };
+      } else {
+        // Fallback: if the params are not correctly set
+        return {
+          flow: "yield",
+          reply: "FreeRoamFallbackView",
           to: "freeRoamState",
         };
       }
