@@ -69,6 +69,9 @@
       "DescribeTalkToView": {
         "say": "{describeTalkTo}"
       },
+      "DrescribeBuyObjectView": {
+        "say": "<voice name='{playerVoice}'>{describeObjectBuy}</voice>"
+      },
 
 
       "NotUnderstoodFallbackView": {
@@ -112,6 +115,12 @@
       },
       "DescribeTalkToFailPersonNotFoundView": {
         "say": "<voice name='{playerVoice}'>Esa persona no esta aquí, no puedo hablar con ella.</voice>"
+      },
+      "DrescribeBuyObjectFailNoObjectView": {
+        "say": "<voice name='{playerVoice}'>No veo que nadie venda ese objeto por aquí.</voice>"
+      },
+      "DrescribeBuyObjectFailCantPayView": {
+        "say": "<voice name='{playerVoice}'>No tengo lo necesario para comprar ese objeto. Volveré cuando lo tenga.</voice>"
       },
 
 

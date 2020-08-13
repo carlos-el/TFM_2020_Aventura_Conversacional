@@ -149,10 +149,83 @@ exports.describeTalkTo = function (voxaEvent) {
   const state = voxaEvent.model.control.npcStateToDescribe;
   const voice = nc.npcs[voxaEvent.model.control.elementOrObjectToDescribe].voice;
   const speech = nc.npcs[voxaEvent.model.control.elementOrObjectToDescribe].states[state].speech;
+  const merchant = nc.npcs[voxaEvent.model.control.elementOrObjectToDescribe].merchant;
+  const resourceToText = { junk: "chatarra", water: "agua", food: "comida" };
+  let speechBuy = "";
+  let speechGoods = "";
 
-  return "<voice name='" + voice + "'>" + speech + "</voice>";
+  // If is merchant add the buy speech and the goods description
+  if (merchant) {
+    speechBuy = " " + merchant.states[voxaEvent.model.game.merchants[voxaEvent.model.control.elementOrObjectToDescribe].state].speech;
+    let goods = merchant.states[voxaEvent.model.game.merchants[voxaEvent.model.control.elementOrObjectToDescribe].state].goods;
+    let keys = Object.keys(goods);
+    let availableObjects = [];
+
+    // check that there are available goods
+    for (let i = 0; i < keys.length; i++) {
+      let unitsBoughts = voxaEvent.model.game.merchants[voxaEvent.model.control.elementOrObjectToDescribe].bought[keys[i]];
+      if (unitsBoughts === undefined) {
+        unitsBoughts = 0;
+      }
+      if (unitsBoughts < goods[keys[i]].maxBought) {
+        availableObjects.push(keys[i])
+      }
+    }
+    // if there are
+    if (availableObjects) {
+      speechGoods += " Ahora mismo te puedo vender ";
+      for (let i = 0; i < availableObjects.length; i++) {
+        let good = goods[availableObjects[i]];
+        // If they are resources
+        if (["junk", "food", "water"].includes(availableObjects[i])) {
+          // print units
+          speechGoods += good.units + " " + "unidades de " + resourceToText[availableObjects[i]] + " a cambio de ";
+        } else {
+          // if they are objects
+          speechGoods += oc.objects[availableObjects[i]].mentionQuote + " a cambio de ";
+        }
+
+        // print prices
+        for (let j = 0; j < Object.keys(good.price).length; j++) {
+          let priceName = Object.keys(good.price)[j];
+          // If they are resources
+          if (["junk", "food", "water"].includes(priceName)) {
+            // print units
+            speechGoods += good.price[priceName] + " " + "unidades de " + resourceToText[priceName];
+          } else {
+            // if they are objects
+            speechGoods += oc.objects[priceName].mentionQuote;
+          }
+
+          // add conjuncion before last element
+          if (j === Object.keys(good.price).length - 2) {
+            speechGoods += " y ";
+          }
+          // add coma
+          if (j < Object.keys(good.price).length - 2) {
+            speechGoods += ", ";
+          };
+        }
+
+        // add conjuncion before last element
+        if (i === availableObjects.length - 2) {
+          speechGoods += " y ";
+        }
+        // add coma
+        if (i < availableObjects.length - 2) {
+          speechGoods += ", ";
+        };
+      }
+    } else {
+      speechGoods += " Lo siento, pero ahora mismo no tengo ningún artículo disponible."
+    }
+
+
+  } return "<voice name='" + voice + "'>" + speech + speechBuy + speechGoods + "</voice>";
 };
-
+exports.describeObjectBuy  = function (voxaEvent) {
+ return "Creo que compraré esto.";
+};
 
 
 
@@ -182,7 +255,7 @@ describeStuff = function (voxaEvent) {
     instrosInter = ". También " + intros2[Math.floor(Math.random() * intros2.length)] + " ";
   }
 
-  return instrosElementsObjects + " " + elements + "." + instrosInter + objects + ". " + describeNpcs(voxaEvent) + ". " + describeExistingPaths(voxaEvent)+".";
+  return instrosElementsObjects + " " + elements + "." + instrosInter + objects + ". " + describeNpcs(voxaEvent) + ". " + describeExistingPaths(voxaEvent) + ".";
 };
 
 describeElements = function (voxaEvent) {
@@ -242,7 +315,7 @@ describeNpcs = function (voxaEvent) {
 
   // for each npc, put it into an array depending if the player has already talked to him
   for (let i = 0; i < keys.length; i++) {
-    if (npcs[keys[i]]){
+    if (npcs[keys[i]]) {
       alreadyTalkedNpcs.push(keys[i]);
     } else {
       notTalkedNpcs.push(keys[i]);
@@ -253,8 +326,8 @@ describeNpcs = function (voxaEvent) {
   let notTalkedNpcRes = "";
 
   // For each npc in alreadyTalkedNpcs array, concat their names in a string
-  for(let i = 0; i < alreadyTalkedNpcs.length; i++){
-    alreadyTalkedNpcRes += alreadyTalkedNpcs[i];
+  for (let i = 0; i < alreadyTalkedNpcs.length; i++) {
+    alreadyTalkedNpcRes += voxaEvent.model.getNpcProperties(alreadyTalkedNpcs[i]).names[0];
     // add conjuncion before last element
     if (i === alreadyTalkedNpcs.length - 2) {
       alreadyTalkedNpcRes += " y ";
@@ -266,14 +339,15 @@ describeNpcs = function (voxaEvent) {
   }
 
   // For each npc in notTalkedNpcs array, concat their names in a string with a different setup
-  for(let i = 0; i < notTalkedNpcs.length; i++){
+  for (let i = 0; i < notTalkedNpcs.length; i++) {
+    notTalkedNpcRes += " a "
+    notTalkedNpcRes += voxaEvent.model.getNpcProperties(notTalkedNpcs[i]).names[0];
+    notTalkedNpcRes += voxaEvent.model.getNpcProperties(notTalkedNpcs[i]).states[voxaEvent.model.game.npcs[notTalkedNpcs[i]]].mentionQuote;
+
     // add conjuncion before last element
     if (i === notTalkedNpcs.length - 2) {
       notTalkedNpcRes += " y ";
     }
-    notTalkedNpcRes += " a "
-    notTalkedNpcRes += notTalkedNpcs[i];
-    notTalkedNpcRes += voxaEvent.model.getNpcProperties(notTalkedNpcs[i]).states[voxaEvent.model.game.npcs[notTalkedNpcs[i]]].mentionQuote;
     // add coma
     if (i < notTalkedNpcs.length - 2) {
       notTalkedNpcRes += ", ";
@@ -283,7 +357,7 @@ describeNpcs = function (voxaEvent) {
   // Set the intros depending on the quantity of npcs in each array
   let intros = [""];
   let intro2 = "";
-  if (alreadyTalkedNpcs.length == 1){
+  if (alreadyTalkedNpcs.length == 1) {
     intros = [" está aquí.", " anda por aquí."];
     intro2 = "También ";
   } else if (alreadyTalkedNpcs.length > 1) {
@@ -292,7 +366,7 @@ describeNpcs = function (voxaEvent) {
   }
 
   let intro3 = "";
-  if (notTalkedNpcs.length > 0){
+  if (notTalkedNpcs.length > 0) {
     intro3 = "he visto por aquí";
   }
 
