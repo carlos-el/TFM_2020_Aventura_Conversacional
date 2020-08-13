@@ -12,9 +12,6 @@ const nc = new NpcCollection();
 class Model {
   constructor(data = {}) {
     this.game = {
-      // Stores the players important choices in the game
-      choices: {},
-      npcs: {},
       // Stores the players discovered places and some infor about them.
       map: {
         obtained: false,
@@ -32,6 +29,10 @@ class Model {
         food: 0,
         water: 0,
       },
+      // Stores the players important choices in the game
+      choices: {},
+      npcs: {},
+      merchants: {},
     };
 
     this.control = {
@@ -58,8 +59,6 @@ class Model {
 
   getDefultGameModel() {
     return {
-      // Stores the players important choices in the game
-      choices: {},
       // Stores the players discovered places and some infor about them.
       map: {
         obtained: false,
@@ -67,11 +66,20 @@ class Model {
         mainLocations: [], //Name of the locations where the player can travel to
         locations: {},
       },
+      inventory: {
+        obtained: true,
+        size: 3,
+        objects: {}
+      },
       resources: {
         junk: 0,
         food: 0,
         water: 0,
       },
+      // Stores the players important choices in the game
+      choices: {},
+      npcs: {},
+      merchants: {},
     }
   }
 
@@ -104,11 +112,31 @@ class Model {
 
     return null;
   }
+  getObjectIdByName(objectName){
+    for(let o of Object.keys(oc.objects)){
+      let op = this.getObjectProperties(o);
+      if (op.names.includes(objectName)){
+        return o
+      }
+    }
+
+    return null;
+  }
   getCurrentLocationObjectIdByName(objectName) {
     for(let o in this.game.map.locations[this.game.map.currentLocation].objects){
       let op = this.getObjectProperties(o);
       if (op.names.includes(objectName)){
         return o
+      }
+    }
+
+    return null;
+  }
+  getCurrentLocationNpcIdByName(npcName) {
+    for(let n in this.game.map.locations[this.game.map.currentLocation].npcs){
+      let np = this.getNpcProperties(n);
+      if (np.names.includes(npcName)){
+        return n
       }
     }
 
