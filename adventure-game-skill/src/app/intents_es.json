@@ -274,6 +274,47 @@
                         "combinar {object_one} y {object_two}",
                         "combinar {object_one} con {object_two}"
                     ]
+                },
+                {
+                    "name": "ActionTalkTo",
+                    "slots": [
+                        {
+                            "name": "npc",
+                            "type": "npc"
+                        },
+                        {
+                            "name": "article",
+                            "type": "article"
+                        }
+                    ],
+                    "samples": [
+                        "hablar con {article} {npc}",
+                        "hablar {npc}",
+                        "hablar con {npc}"
+                    ]
+                },
+                {
+                    "name": "ActionBuy",
+                    "slots": [
+                        {
+                            "name": "article",
+                            "type": "article"
+                        },
+                        {
+                            "name": "object",
+                            "type": "object"
+                        },
+                        {
+                            "name": "resource",
+                            "type": "resource"
+                        }
+                    ],
+                    "samples": [
+                        "comprar {article} {resource}",
+                        "comprar {resource}",
+                        "comprar {object}",
+                        "comprar {article} {object}"
+                    ]
                 }
             ],
             "types": [
@@ -403,6 +444,51 @@
                         {
                             "name": {
                                 "value": "el"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "npc",
+                    "values": [
+                        {
+                            "name": {
+                                "value": "mercader"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "takumi"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "sandra"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "resource",
+                    "values": [
+                        {
+                            "name": {
+                                "value": "chatarra"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "alimentos"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "alimento"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "agua"
                             }
                         }
                     ]
