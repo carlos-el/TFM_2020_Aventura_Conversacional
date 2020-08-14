@@ -154,8 +154,8 @@ exports.describeTalkTo = function (voxaEvent) {
   let speechBuy = "";
   let speechGoods = "";
 
-  // If is merchant add the buy speech and the goods description
-  if (merchant) {
+  // If is merchant and is in the right location add the buy speech and the goods description
+  if (merchant && merchant.locations.includes(voxaEvent.model.game.map.currentLocation)) {
     speechBuy = " " + merchant.states[voxaEvent.model.game.merchants[voxaEvent.model.control.elementOrObjectToDescribe].state].speech;
     let goods = merchant.states[voxaEvent.model.game.merchants[voxaEvent.model.control.elementOrObjectToDescribe].state].goods;
     let keys = Object.keys(goods);
