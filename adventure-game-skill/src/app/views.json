@@ -16,6 +16,10 @@
         "say": ""
       },
 
+      "GoodBye": {
+        "say": "¡Hasta pronto!"
+      },
+
       "tellMainMenuOptionView": {
         "say": "¿Qué quieres hacer? ¿Empezar una nueva partida, continuar tu última partida o jugar el tutorial?"
       },
@@ -127,7 +131,7 @@
 
 
       "scene1_intro_NarrativeView": {
-        "say": "(Sonidos) Ir en un coche. El coche se para y nos bajamos. Andamos unos cuantos metros. Tu padre dice: Como los abuelos no están tienes que venir conmigo al trabajo. Te quedarás en la guardería del laboratorio hasta que salga, ¿vale?. Hola Sandra, mis padres están de viaje, se quedará contigo hasta que acabe mi turno. Sandra dice: <voice name='{sandraVoice}'>Buenos dias joven</voice>"
+        "say": "<audio src='soundbank://soundlibrary/transportation/amzn_sfx_car_into_driveway_01'/> <audio src='soundbank://soundlibrary/transportation/amzn_sfx_car_close_door_1x_01'/> <audio src='soundbank://soundlibrary/transportation/amzn_sfx_car_close_door_1x_02'/> <audio src='soundbank://soundlibrary/human/amzn_sfx_human_walking_03'/> <voice name='{fatherVoice}'> Como los abuelos no están tienes que venir conmigo al trabajo. Te quedarás en la guardería del laboratorio hasta que salga, ¿vale?. Hola Sandra, mis padres están de viaje, se quedará contigo hasta que acabe mi turno.</voice> <voice name='{sandraVoice}'>Claro, no hay problema. Buenos dias joven</voice>"
       },
       "scene1_askPlayerName_NarrativeView": {
         "say": "<voice name='{sandraVoice}'>Bueno, ¿cómo te llamas?</voice>"
@@ -162,16 +166,16 @@
         "say": "¿Qué haces? ¿Jugar con los juguetes o jugar con los niños?"
       },
       "scene1_1_explosionAlone_NarrativeView": {
-        "say": "Miras a Sandra durante un segundo. Después bajas la cabeza y te diriges lentamente hacia la pila de juguetes. Pasas un rato jugando con algunos cochecitos y peluches hasta que, de repente, escuchas un sonido atronador. La habitación comienza a temblar y se desprenden enormes bloques de escombros del techo mientras corres hacia la puerta junto con el resto de niños."
+        "say": "Miras a Sandra durante un segundo. Después bajas la cabeza y te diriges lentamente hacia la pila de juguetes. Pasas un rato jugando con algunos cochecitos y peluches hasta que, de repente, <audio src='soundbank://soundlibrary/explosions/explosions/explosions_01'/> escuchas un sonido atronador. La habitación comienza a temblar y se desprenden enormes bloques de escombros del techo mientras corres hacia la puerta junto con el resto de niños."
       },
       "scene1_1_wakeUpAlone_NarrativeView": {
-        "say": "Sonido de salir del sueño. <voice name='{playerVoice}'>aggggh, mi cabeza. Solo era un sueño. Estaba recogiendo materiales y ... ¿Cómo he llegado aquí? No me acuerdo de nada. En cualquier caso, debería coger lo que he venido a buscar y volver al campamento.</voice>"
+        "say": "<audio src='soundbank://soundlibrary/aircrafts/futuristic/futuristic_15'/> <voice name='{playerVoice}'>aggggh, mi cabeza. Solo era un sueño. Estaba recogiendo materiales y ... ¿Cómo he llegado aquí? No me acuerdo de nada. En cualquier caso, debería coger lo que he venido a buscar y volver al campamento.</voice>"
       },
       "scene1_2_explosionWithSandra_NarrativeView": {
         "say": "El resto de niños montan alboroto mientras caminas hacia el tobogán. Subes las escaleras lentamente mientras Sandra te mira sonriente desde un lado. De repente se oye un sonido atronador. La habitación comienza a temblar y caen enormes bloques de escombros del techo. Sandra se avalanza rapidamente sobre ti y te coge entre sus brazos."
       },
       "scene1_2_wakeUpWithSandra_NarrativeView": {
-        "say": "Sonido de salir del sueño. <voice name='{playerVoice}'>aggggh, mi cabeza. Solo era un sueño</voice>. <voice name='{sandraVoice}'>Vaya, ya era hora de que despertaras. Pareces aturdid{sexSuffix}. Toma algo de agua.</voice> <voice name='{playerVoice}'>Hola Sandra, ¿que me ha pasado?</voice> <voice name='{sandraVoice}'>¿No te acuerdas? Ibas corriendo detrás de un conejo y te has dado un golpe en la cabeza con una rama. Ha sido lo más penoso que he visto en mucho tiempo. Deberias ir pensando en levantarte. Tenemos que recoger lo que hemos encontrado y volver al campamento. Te estaré esperando más adelante.</voice> <voice name='{playerVoice}'>De acuerdo. Dame un segundo y me pongo en marcha. Vale, creo que ya empiezo a recordar.</voice>"
+        "say": "<audio src='soundbank://soundlibrary/aircrafts/futuristic/futuristic_15'/> <voice name='{playerVoice}'>Aggggh, mi cabeza. Solo era un sueño</voice>. <voice name='{sandraVoice}'>Vaya, ya era hora de que despertaras. Pareces aturdid{sexSuffix}. Toma algo de agua.</voice> <voice name='{playerVoice}'>Hola Sandra, ¿que me ha pasado?</voice> <voice name='{sandraVoice}'>¿No te acuerdas? Ibas corriendo detrás de un conejo y te has dado un golpe en la cabeza con una rama. Ha sido lo más penoso que he visto en mucho tiempo. Deberias ir pensando en levantarte. Tenemos que recoger lo que hemos encontrado y volver al campamento. Te estaré esperando más adelante.</voice> <voice name='{playerVoice}'>De acuerdo. Dame un segundo y me pongo en marcha. Vale, creo que ya empiezo a recordar.</voice>"
       }
 
     }
