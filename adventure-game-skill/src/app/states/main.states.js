@@ -158,14 +158,22 @@ function register(voxaApp) {
               voxaEvent.model.game.map.locations[voxaEvent.model.game.map.currentLocation].elements[elementOrObject] = true;
             }
             // If nextScene is a valid string then do describe and go to that scene
+            if (nextScene){
+              return {
+                flow: "continue",
+                reply: "DescribeInspectElementOrObjectView",
+                to: nextScene,
+              };
+            }
+
             // Set the element or object to describe and the alreadyInspected variable (nedded in variable.js for choosing quote)
             voxaEvent.model.control.elementOrObjectToDescribe = elementOrObject;
             voxaEvent.model.control.elementOrObjectToDescribeAlreadyInspected = alreadyInspected;
 
             return {
-              flow: "continue",
+              flow: "yield",
               reply: "DescribeInspectElementOrObjectView",
-              to: nextScene,
+              to: "freeRoamState",
             };
           } else {
             // If it is OBJECT just set object to describe and return cause object have no actions when they are inspected and dont need alreadyInspected state.
