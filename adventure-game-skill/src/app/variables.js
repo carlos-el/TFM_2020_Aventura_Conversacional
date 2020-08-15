@@ -42,6 +42,9 @@ exports.playerVoice = function (voxaEvent) {
 exports.sandraVoice = function (voxaEvent) {
   return "Conchita";
 };
+exports.fatherVoice = function (voxaEvent) {
+  return "Hans";
+};
 
 ///// INSPECT VARIABLES /////
 exports.describeInspectElementOrObject = function (voxaEvent) {
