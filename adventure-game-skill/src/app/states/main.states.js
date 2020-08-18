@@ -158,7 +158,7 @@ function register(voxaApp) {
               voxaEvent.model.game.map.locations[voxaEvent.model.game.map.currentLocation].elements[elementOrObject] = true;
             }
             // If nextScene is a valid string then do describe and go to that scene
-            if (nextScene){
+            if (nextScene) {
               return {
                 flow: "continue",
                 reply: "DescribeInspectElementOrObjectView",
@@ -586,45 +586,48 @@ function register(voxaApp) {
       const cardinal = voxaEvent.intent.params.cardinal;
       const symbol = cardinalToSymbol[cardinal];
       const path = voxaEvent.model.getPathProperties(voxaEvent.model.game.map.currentLocation, symbol)
+      const locationName = voxaEvent.intent.params.location;
 
-      // If there is a path in that direction
-      if (path) {
-        // Get the problem number (or true if there is no problem)
-        const problemNumber = path.canGo(voxaEvent.model.game)
-        if (problemNumber === true) { // If problem number is true then there is no problem and the player can go to the new location
-          // Execute the "go" function with the consecuences of going to the new location.
-          let nextScene = path.go(voxaEvent.model.game)
-          // If nextScene is not empty then the player should go to the scene proposed, else the player should go to the goesTo location
-          if (nextScene) {
-            return {
-              flow: "continue",
-              reply: "empty",
-              to: nextScene,
-            };
+      if (cardinal) {
+        // If there is a path in that direction
+        if (path) {
+          // Get the problem number (or true if there is no problem)
+          const problemNumber = path.canGo(voxaEvent.model.game)
+          if (problemNumber === true) { // If problem number is true then there is no problem and the player can go to the new location
+            // Execute the "go" function with the consecuences of going to the new location.
+            let nextScene = path.go(voxaEvent.model.game)
+            // If nextScene is not empty then the player should go to the scene proposed, else the player should go to the goesTo location
+            if (nextScene) {
+              return {
+                flow: "continue",
+                reply: "empty",
+                to: nextScene,
+              };
+            } else {
+              // We first select the path to describe
+              voxaEvent.model.control.pathToDescribe = { location: voxaEvent.model.game.map.currentLocation, path: symbol, problem: problemNumber }
+
+              // Go to the new location
+              voxaEvent.model.game.map.currentLocation = path.goesTo;
+
+              // Describe the path and then the new location in the next state
+              return {
+                flow: "continue",
+                reply: "DescribePathView",
+                to: "describeLocationState"
+              };
+            }
           } else {
-            // We first select the path to describe
+            // Prompt the problem that is not letting the player go to this location and dont change location
             voxaEvent.model.control.pathToDescribe = { location: voxaEvent.model.game.map.currentLocation, path: symbol, problem: problemNumber }
-
-            // Go to the new location
-            voxaEvent.model.game.map.currentLocation = path.goesTo;
-
-            // Describe the path and then the new location in the next state
             return {
-              flow: "continue",
-              reply: "DescribePathView",
-              to: "describeLocationState"
+              flow: "yield",
+              reply: "DescribePathProblemView",
+              to: "freeRoamState"
             };
           }
-        } else {
-          // Prompt the problem that is not letting the player go to this location and dont change location
-          voxaEvent.model.control.pathToDescribe = { location: voxaEvent.model.game.map.currentLocation, path: symbol, problem: problemNumber }
-          return {
-            flow: "yield",
-            reply: "DescribePathProblemView",
-            to: "freeRoamState"
-          };
         }
-      } else {
+
         // Fallback: if there is not path in the direction specified
         return {
           flow: "yield",
@@ -632,6 +635,123 @@ function register(voxaApp) {
           to: "freeRoamState",
         };
       }
+
+      // If the location param is set
+      if (locationName) {
+        const locationId = voxaEvent.model.getLocationIdByName(locationName)
+
+        // if the location is in main location (we have already traveled an it is a main location)
+        if (voxaEvent.model.game.map.mainLocations.includes(locationId)) {
+          // if we are not already in the location
+          if (locationId !== voxaEvent.model.game.map.currentLocation) {
+            voxaEvent.model.control.elementOrObjectToDescribe = locationId;
+            voxaEvent.model.game.map.currentLocation = locationId;
+            // Say the location we are going to and go to describe location
+            return {
+              flow: "continue",
+              reply: "DescribeToDirectLocationView",
+              to: "describeLocationState"
+            };
+          }
+
+          // Fallback: the location to travel is the location the player is already in
+          return {
+            flow: "yield",
+            reply: "DescribeToDirectLocationFailAlreadyThereView",
+            to: "freeRoamState",
+          };
+        }
+
+        // Fallback: the location is not a location or is not in mainLocation
+        return {
+          flow: "yield",
+          reply: "DescribeToDirectLocationFailNotFoundView",
+          to: "freeRoamState",
+        };
+      }
+    } else if (voxaEvent.intent.name === "ActionCheckResources") {
+      return {
+        flow: "yield",
+        reply: "DescribeCheckResourcesView",
+        to: "freeRoamState",
+      };
+    } else if (voxaEvent.intent.name === "ActionCheckLocation") {
+      return {
+        flow: "continue",
+        reply: "empty",
+        to: "describeLocationState",
+      };
+    } else if (voxaEvent.intent.name === "ActionCheckInventory") {
+      // if the player has a bag
+      if (voxaEvent.model.game.inventory.obtained) {
+        return {
+          flow: "yield",
+          reply: "DescribeCheckInventoryView",
+          to: "freeRoamState",
+        };
+      }
+
+      // Fallback: if the player does not have a bag
+      return {
+        flow: "yield",
+        reply: "DescribeCheckInventoryFailNoBagView",
+        to: "freeRoamState",
+      };
+
+    } else if (voxaEvent.intent.name === "ActionCheckMap") {
+      // if the player has obtained a map
+      if (voxaEvent.model.game.map.obtained) {
+        return {
+          flow: "yield",
+          reply: "DescribeCheckMapView",
+          to: "freeRoamState",
+        };
+      }
+
+      // Fallback: else return that you dont have a map
+      return {
+        flow: "yield",
+        reply: "DescribeCheckMapFailNoMapView",
+        to: "freeRoamState",
+      };
+
+    } else if (voxaEvent.intent.name === "ActionCheckWhoIsHere") {
+      // if there are npcs return their description
+      if (Object.keys(voxaEvent.model.game.map.locations[voxaEvent.model.game.map.currentLocation].npcs).length) {
+        return {
+          flow: "yield",
+          reply: "DescribeCheckWhoIsHereView",
+          to: "freeRoamState",
+        };
+      }
+
+      // Fallback: else return that there are not any
+      return {
+        flow: "yield",
+        reply: "DescribeCheckWhoIsHereFailNoOneView",
+        to: "freeRoamState",
+      };
+
+    } else if (voxaEvent.intent.name === "ActionCheckWhatCanIDo") {
+
+
+    } else if (voxaEvent.intent.name === "ActionCheckWhereCanIGo") {
+      // if there are paths return their description
+      if (Object.keys(voxaEvent.model.game.map.locations[voxaEvent.model.game.map.currentLocation].to).length) {
+        return {
+          flow: "yield",
+          reply: "DescribeCheckWhereCanIGoView",
+          to: "freeRoamState",
+        };
+      }
+
+      // Fallback: else return that there are not any
+      return {
+        flow: "yield",
+        reply: "DescribeCheckWhereCanIGoFailNoWhereView",
+        to: "freeRoamState",
+      };
+
     } else if (voxaEvent.intent.name === "ActionSaveGame") {
       voxaEvent.userDator.saveUserGame(voxaEvent.user.id, voxaEvent.model.game);
       return {
