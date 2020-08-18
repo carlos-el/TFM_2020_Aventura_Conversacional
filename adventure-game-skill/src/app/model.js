@@ -14,7 +14,7 @@ class Model {
     this.game = {
       // Stores the players discovered places and some infor about them.
       map: {
-        obtained: false,
+        obtained: true,
         currentLocation: null,
         mainLocations: [], //Name of the locations where the player can travel to
         locations: {},
@@ -61,7 +61,7 @@ class Model {
     return {
       // Stores the players discovered places and some infor about them.
       map: {
-        obtained: false,
+        obtained: true,
         currentLocation: null,
         mainLocations: [], //Name of the locations where the player can travel to
         locations: {},
@@ -136,6 +136,16 @@ class Model {
     for(let n in this.game.map.locations[this.game.map.currentLocation].npcs){
       let np = this.getNpcProperties(n);
       if (np.names.includes(npcName)){
+        return n
+      }
+    }
+
+    return null;
+  }
+  getLocationIdByName(locationName) {
+    for(let n in m.locations){
+      let np = m.locations[n];
+      if (np.names.includes(locationName)){
         return n
       }
     }
