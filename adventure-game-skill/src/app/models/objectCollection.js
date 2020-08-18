@@ -42,7 +42,7 @@ module.exports = class objectCollection {
                 names: ["batería","batería pequeña", "bateria", "bateria pequeña"],
                 isMale: false,
                 mentionQuote: "Una batería pequeña",
-                inspectQuote: "Una batería pequeña. Tal vez pueda ponersela a algún aparato",
+                inspectQuote: "Una batería pequeña. Tal vez pueda ponérsela a algún aparato",
                 combineActionTaken: function (game, object) {
                     return null;
                 },
