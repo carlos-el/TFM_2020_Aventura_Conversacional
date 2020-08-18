@@ -34,7 +34,7 @@ module.exports = class NpcCollection {
                             game.map.locations[game.map.currentLocation].npcs["sandra"] = true
                             return "";
                         },
-                        speech: "Bien, ya estamos aquí. Sigamos con nuestras tareas",
+                        speech: "Bien, ya estamos aquí. Deberías hablar con Takumi de vez en cuando. Es el mercader del campamento. Últimamente ha estado buscando una linterna cargada. Si encuentras una linterna sin bateria y una batería podrias combinarlas para conseguir lo que necesita e intercambiarselo por algo.",
                     }),
                 },
                 merchant: null,
@@ -81,7 +81,7 @@ module.exports = class NpcCollection {
                                     maxBought: 2,
                                     price: {
                                         water: 2,
-                                        battery_small: 1,
+                                        lanternFull: 1,
                                     }
                                 }
                             }
