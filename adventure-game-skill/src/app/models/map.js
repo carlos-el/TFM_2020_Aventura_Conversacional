@@ -36,7 +36,7 @@ module.exports = class Map {
             }),
             hydroelectricPowerPlantOutskirts: new Location({
                 names: [],
-                locationQuote: "las afueras de la central hidroeléctrica.",
+                locationQuote: "las afueras de la central hidroeléctrica",
                 storyQuote: "No hay mucho que decir sobre este sitio.",
                 main: false,
                 elements: function (game) {
@@ -85,7 +85,7 @@ module.exports = class Map {
                 }
             }),
             hydroelectricPowerPlant: new Location({
-                names: ["la central", "central", "central hidroeléctrica", "lacentral hidroeléctrica"],
+                names: ["central", "central hidroeléctrica", "central hidroelectrica"], // names with and without accents
                 locationQuote: "la central hidroeléctrica",
                 storyQuote: "No hay mucho que decir sobre este sitio.",
                 main: true,
