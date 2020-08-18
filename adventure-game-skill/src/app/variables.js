@@ -95,6 +95,9 @@ exports.describePathProblem = function (voxaEvent) {
   const problemsArray = m.locations[voxaEvent.model.game.map.currentLocation].to[voxaEvent.model.control.pathToDescribe.path].problemMentionQuotes;
   return problemsArray[problem];
 };
+exports.describeToDirectLocation = function (voxaEvent) {
+  return "Iré directamente a " + m.locations[voxaEvent.model.control.elementOrObjectToDescribe].locationQuote + ".";
+};
 
 exports.describePickUpObject = function (voxaEvent) {
   let intros2 = null
@@ -230,6 +233,79 @@ exports.describeObjectBuy  = function (voxaEvent) {
  return "Creo que compraré esto.";
 };
 
+exports.describeCheckResources = function (voxaEvent) {
+  const intros = ["Ahora mismo tengo", "En este momento tengo", "Tengo", "Tengo guardadas"];
+
+  const uJunk = voxaEvent.model.game.resources.junk;
+  const uFood = voxaEvent.model.game.resources.food;
+  const uWater = voxaEvent.model.game.resources.water;
+
+  return intros[Math.floor(Math.random() * intros.length)] + " " + uJunk + " unidades de chatarra, " + uFood + " unidades de alimento y " + uWater + " unidades de agua."
+};
+exports.describeCheckInventory  = function (voxaEvent) {
+  const intros = ["Dentro de la mochila", "En mi mochila", "Ahora mismo en la mochila", "En la mochila"];
+  let keys = Object.keys(voxaEvent.model.game.inventory.objects);
+  const sizeLeft = voxaEvent.model.game.inventory.size - keys.length;
+  let res = "";
+  let res2 = "No hay espacio para ningún objeto más";
+
+  for(let i = 0; i < keys.length; i++){
+    res += oc.objects[keys[i]].mentionQuote;
+    // add conjuncion before last element
+    if (i === keys.length - 2) {
+      res += " y ";
+    }
+    // add coma
+    if (i < keys.length - 2) {
+      res += ", ";
+    };
+  }
+
+  // if the bag has something
+  if(res){
+    res = " tengo " + res;
+  } else {
+    res = "no hay nada"
+  }
+
+  // if there is room for more objects
+  if(sizeLeft == 1){
+    res2 = " Aún queda espacio para un objeto";
+  } else if (sizeLeft) {
+    res2 = " Aún queda espacio para " + sizeLeft + " objetos";
+  }
+
+  return intros[Math.floor(Math.random() * intros.length)] + res + "." + res2 + "."
+};
+exports.describeCheckMap = function (voxaEvent) {
+  const currentPlace = m.locations[voxaEvent.model.game.map.currentLocation].locationQuote;
+  const mainLocations = voxaEvent.model.game.map.mainLocations;
+  let res = "";
+
+  // Iterate main locations, get and add their location quotes.
+  for (let i = 0; i < mainLocations.length; i++){
+    res += "a " + m.locations[mainLocations[i]].locationQuote;
+
+    // add conjuncion before last element
+    if (i === mainLocations.length - 2) {
+      res += " y ";
+    }
+    // add coma
+    if (i < mainLocations.length - 2) {
+      res += ", ";
+    };
+  }
+
+  if (res) {
+    res = "con el mapa puedo ir directamente " + res;
+  } else {
+    res = "no puedo ir a ningún otro sitio";
+  }
+
+  return "Ahora estoy en "+currentPlace+". A parte de los caminos que puedo tomar, " + res + "."
+};
+
+
 
 
 describeLocation = function (voxaEvent) {
@@ -310,7 +386,7 @@ describeObjects = function (voxaEvent) {
   return res;
 };
 
-describeNpcs = function (voxaEvent) {
+exports.describeNpcs = describeNpcs = function (voxaEvent) {
   const npcs = voxaEvent.model.game.map.locations[voxaEvent.model.game.map.currentLocation].npcs;
   const keys = Object.keys(npcs);
   let alreadyTalkedNpcs = []
@@ -376,7 +452,7 @@ describeNpcs = function (voxaEvent) {
   return alreadyTalkedNpcRes + intros[Math.floor(Math.random() * intros.length)] + intro2 + intro3 + notTalkedNpcRes;
 };
 
-describeExistingPaths = function (voxaEvent) {
+exports.describeExistingPaths = describeExistingPaths = function (voxaEvent) {
   let res = "";
   let locQuote = "";
   let cardinal = ""
