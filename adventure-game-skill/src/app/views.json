@@ -33,8 +33,11 @@
       "saveGameView": {
         "say": "Partida guardada con éxito. Puede continuar jugando."
       },
+      "gameSavedView": {
+        "say": "Partida guardada."
+      },
       "gameLoadSuccessView": {
-        "say": "Su partida ha sido cargada con éxito, puede continuar con su aventura, disfrute."
+        "say": "Partida ha sido cargada con éxito."
       },
       "gameLoadErrorView": {
         "say": "No hemos podido encontrar una partida guardada para su cuenta."
@@ -162,6 +165,12 @@
       },
       "DescribeCheckMapFailNoMapView": {
         "say": "<voice name='{playerVoice}'>No tengo ningún mapa. Debería conseguir uno pasa saber donde puedo ir.</voice>"
+      },
+      "DescribeHelp": {
+        "say": "<voice name='{playerVoice}'>Veamos. Cuando esté explorando puedo comprobar ¿cuántos recursos tengo? También puedo preguntarme, dónde estoy para saber quíen o que hay en este lugar. Si quiero saber lo que tengo solo tengo que, abrir mi mochila. Puedo viajar directamente a los lugares que reconozca al, abrir mi mapa. Por último también puedo pararme a pensar y preguntarme ¿qué tengo que hacer?.</voice><break time='1s'/> Si necesitas algo más de ayuda para avanzar puedes guardar tu partida y completar el tutorial disponible en el menú de inicio."
+      },
+      "DescribeCloseGame": {
+        "say": "¿Quieres guardar la partida antes de salir?" 
       },
 
 
