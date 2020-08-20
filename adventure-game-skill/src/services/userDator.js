@@ -33,5 +33,25 @@ module.exports = class UserDator {
         }
     }
 
+    async saveUserAlternativeGame(userId, game, lastState) {
+        // If the user is already in the database, update it.
+        if (await this.db.collection('users').findOne({ userId: userId })) {
+            console.log("Saving alternative game")
+            await this.db.collection('users').updateOne({ userId: userId }, { $set: { alternativeGame: {game: game, lastState: lastState} } })
+        } else { // If it is not then insert it.
+            await this.db.collection('users').insertOne({ userId: userId, game: game })
+        }
+    }
+    async getUserAlternativeGame(userId) {
+        // returns null if the object with the specified id does not exists
+        const user = await this.db.collection("users").findOne({ userId: userId });
+        if (user) {
+            console.log("getUserAlternativeGame: found")
+            return user.alternativeGame;
+        } else {
+            console.log("getUserAlternativeGame: null")
+            return null;
+        }
+    }
 }
 
