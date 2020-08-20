@@ -7,7 +7,7 @@ module.exports = class objectCollection {
                 names: ["cizalla"],
                 isMale: false,
                 mentionQuote: "una cizalla",
-                inspectQuote: "Una cizalla. Puede servirme para cortar cables u objectos metálicos.",
+                inspectQuote: "Una cizalla. Puedo usarla en algún elemento de metal para cortalo o abrirlo.",
                 combineActionTaken: function (game, object) {
                     return null;
                 },
@@ -42,7 +42,7 @@ module.exports = class objectCollection {
                 names: ["batería","batería pequeña", "bateria", "bateria pequeña"],
                 isMale: false,
                 mentionQuote: "Una batería pequeña",
-                inspectQuote: "Una batería pequeña. Tal vez pueda ponérsela a algún aparato",
+                inspectQuote: "Una batería pequeña. Tal vez pueda ponérsela a algún aparato.",
                 combineActionTaken: function (game, object) {
                     return null;
                 },

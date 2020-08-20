@@ -113,7 +113,7 @@ module.exports = class Map {
             }),
             road_Camp_hydroelectricPowerPlantOutskirts: new Location({
                 names: [],
-                locationQuote: "el camino que comunica el campamento con la central hidroeléctrica",
+                locationQuote: "el sendero que comunica el campamento con la central hidroeléctrica",
                 storyQuote: "No hay mucho que decir sobre este sitio.",
                 main: false,
                 elements: function (game) {
@@ -151,7 +151,7 @@ module.exports = class Map {
             camp: new Location({
                 names: ["el campamento", "campamento"],
                 locationQuote: "el campamento",
-                storyQuote: ". Este es el asentamiento al que vinimos a vivir unos cuantos supervivientes y yo poco despues de la explosión. Ojalá todavía fueramos tantos como antes.",
+                storyQuote: "Este es el asentamiento al que vinimos a vivir unos cuantos supervivientes y yo poco despues de la explosión. Ojalá todavía fueramos tantos como antes.",
                 main: true,
                 elements: function (game) {
                     return {}

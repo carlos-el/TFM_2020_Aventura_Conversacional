@@ -21,11 +21,11 @@ module.exports = class ElementCollection {
             }),
             door_metalFence_1_closed: new Element({
                 names: ["verja", "verja metálica", "verja de metal"],
-                mentionQuote: "una verja metálica cerrada con un candado",
-                mentionAlreadyInspectedQuote: "una verja metálica cerrada con un candado",
-                inspectQuote: "Es una verja metálica con un candado que me impide el paso hacia el camino del oeste que lleva a la central hidroeléctrica. Quizás pueda encontrar algo para abrir el candado.",
-                alreadyInspectedQuote: "Es una verja metálica con un candado que me impide el paso hacia el camino del oeste que lleva a la central hidroeléctrica. Quizás pueda encontrar algo para abrir el candado.",
-                useObjectQuote: "Romperé el candado de la verja con esto. Perfecto, ya puedo pasar.",
+                mentionQuote: "una verja metálica cerrada",
+                mentionAlreadyInspectedQuote: "una verja metálica cerrada",
+                inspectQuote: "Es una verja metálica. está cerrada y me impide el paso hacia el camino del oeste que lleva a la central hidroeléctrica. Quizás pueda encontrar algo para abrirla.",
+                alreadyInspectedQuote: "Es una verja metálica. está cerrada y me impide el paso hacia el camino del oeste que lleva a la central hidroeléctrica. Quizás pueda encontrar algo para abrirla.",
+                useObjectQuote: "Abriré una agujero en la verja con esto. Perfecto, ya puedo pasar.",
                 inspectActionTaken: function (game, alreadyInspected) {return "";},
                 useObjectActionTaken: function (game, object) {
                     // if the object is the one intended
