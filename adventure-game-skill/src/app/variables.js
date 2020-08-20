@@ -88,7 +88,7 @@ exports.describePath = function (voxaEvent) {
   const symbolToCardinal = { N: "norte", S: "sur", E: "este", O: "oeste" }
   const intros = ["Cogeré el camino del", "Iré hacia el", "Viajaré hacia el", "Tomaré el camino del"];
 
-  return intros[Math.floor(Math.random() * intros.length)] + " " + symbolToCardinal[voxaEvent.model.control.pathToDescribe.path];
+  return intros[Math.floor(Math.random() * intros.length)] + " " + symbolToCardinal[voxaEvent.model.control.pathToDescribe.path] + ".";
 };
 exports.describePathProblem = function (voxaEvent) {
   const problem = voxaEvent.model.control.pathToDescribe.problem;
@@ -229,8 +229,8 @@ exports.describeTalkTo = function (voxaEvent) {
 
   } return "<voice name='" + voice + "'>" + speech + speechBuy + speechGoods + "</voice>";
 };
-exports.describeObjectBuy  = function (voxaEvent) {
- return "Creo que compraré esto.";
+exports.describeObjectBuy = function (voxaEvent) {
+  return "Creo que compraré esto.";
 };
 
 exports.describeCheckResources = function (voxaEvent) {
@@ -242,14 +242,14 @@ exports.describeCheckResources = function (voxaEvent) {
 
   return intros[Math.floor(Math.random() * intros.length)] + " " + uJunk + " unidades de chatarra, " + uFood + " unidades de alimento y " + uWater + " unidades de agua."
 };
-exports.describeCheckInventory  = function (voxaEvent) {
+exports.describeCheckInventory = function (voxaEvent) {
   const intros = ["Dentro de la mochila", "En mi mochila", "Ahora mismo en la mochila", "En la mochila"];
   let keys = Object.keys(voxaEvent.model.game.inventory.objects);
   const sizeLeft = voxaEvent.model.game.inventory.size - keys.length;
   let res = "";
   let res2 = "No hay espacio para ningún objeto más";
 
-  for(let i = 0; i < keys.length; i++){
+  for (let i = 0; i < keys.length; i++) {
     res += oc.objects[keys[i]].mentionQuote;
     // add conjuncion before last element
     if (i === keys.length - 2) {
@@ -262,14 +262,14 @@ exports.describeCheckInventory  = function (voxaEvent) {
   }
 
   // if the bag has something
-  if(res){
+  if (res) {
     res = " tengo " + res;
   } else {
     res = "no hay nada"
   }
 
   // if there is room for more objects
-  if(sizeLeft == 1){
+  if (sizeLeft == 1) {
     res2 = " Aún queda espacio para un objeto";
   } else if (sizeLeft) {
     res2 = " Aún queda espacio para " + sizeLeft + " objetos";
@@ -283,7 +283,7 @@ exports.describeCheckMap = function (voxaEvent) {
   let res = "";
 
   // Iterate main locations, get and add their location quotes.
-  for (let i = 0; i < mainLocations.length; i++){
+  for (let i = 0; i < mainLocations.length; i++) {
     res += "a " + m.locations[mainLocations[i]].locationQuote;
 
     // add conjuncion before last element
@@ -302,7 +302,7 @@ exports.describeCheckMap = function (voxaEvent) {
     res = "no puedo ir a ningún otro sitio";
   }
 
-  return "Ahora estoy en "+currentPlace+". A parte de los caminos que puedo tomar, " + res + "."
+  return "Ahora estoy en " + currentPlace + ". A parte de los caminos que puedo tomar, " + res + "."
 };
 
 
@@ -310,7 +310,7 @@ exports.describeCheckMap = function (voxaEvent) {
 
 describeLocation = function (voxaEvent) {
   const intros = ["Parece que estoy en", "Estoy en", "Este lugar es", "Este sitio es", "Ahora me encuentro en"]
-  return intros[Math.floor(Math.random() * intros.length)] + " " + m.locations[voxaEvent.model.game.map.currentLocation].locationQuote;
+  return intros[Math.floor(Math.random() * intros.length)] + " " + m.locations[voxaEvent.model.game.map.currentLocation].locationQuote + ".";
 };
 
 describeStory = function (voxaEvent) {
@@ -325,16 +325,20 @@ describeStuff = function (voxaEvent) {
   const objects = describeObjects(voxaEvent);
   let instrosElementsObjects = "";
   let instrosInter = " "
+  let dot1 = "";
+  let dot2 = "";
 
   if (elements || objects) {
     instrosElementsObjects = intros[Math.floor(Math.random() * intros.length)] + " " + intros2[Math.floor(Math.random() * intros2.length)]
+    let dot2 = ". ";
   }
 
   if (elements && objects) {
-    instrosInter = ". También " + intros2[Math.floor(Math.random() * intros2.length)] + " ";
+    instrosInter = " También " + intros2[Math.floor(Math.random() * intros2.length)] + " ";
+    dot1 = ". ";
   }
 
-  return instrosElementsObjects + " " + elements + "." + instrosInter + objects + ". " + describeNpcs(voxaEvent) + ". " + describeExistingPaths(voxaEvent) + ".";
+  return instrosElementsObjects + " " + elements + dot1 + instrosInter + objects + dot2 + describeNpcs(voxaEvent) + " " + describeExistingPaths(voxaEvent);
 };
 
 describeElements = function (voxaEvent) {
@@ -431,22 +435,33 @@ exports.describeNpcs = describeNpcs = function (voxaEvent) {
     if (i < notTalkedNpcs.length - 2) {
       notTalkedNpcRes += ", ";
     };
+
+    // add dot
+    if (i === notTalkedNpcs.length - 1) {
+      notTalkedNpcRes += ".";
+    };
   }
 
   // Set the intros depending on the quantity of npcs in each array
   let intros = [""];
   let intro2 = "";
   if (alreadyTalkedNpcs.length == 1) {
-    intros = [" está aquí.", " anda por aquí."];
-    intro2 = "También ";
+    intros = [" está aquí. ", " anda por aquí. "];
   } else if (alreadyTalkedNpcs.length > 1) {
-    intros = [" están aquí.", " andan por aquí."];
+    intros = [" están aquí. ", " andan por aquí. "];
+  }
+
+  if (alreadyTalkedNpcs.length > 0 && notTalkedNpcs.length > 0){
     intro2 = "También ";
   }
 
   let intro3 = "";
   if (notTalkedNpcs.length > 0) {
-    intro3 = "he visto por aquí";
+    if (intro2 === "") {
+      intro3 = "He visto por aquí";
+    } else {
+      intro3 = "he visto por aquí";
+    }
   }
 
   return alreadyTalkedNpcRes + intros[Math.floor(Math.random() * intros.length)] + intro2 + intro3 + notTalkedNpcRes;
@@ -485,6 +500,10 @@ exports.describeExistingPaths = describeExistingPaths = function (voxaEvent) {
     // add coma
     if (i < keys.length - 2) {
       res += ", ";
+    };
+    // add dot
+    if (i === keys.length - 1) {
+      res += ".";
     };
   }
 
