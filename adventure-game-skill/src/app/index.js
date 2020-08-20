@@ -23,10 +23,28 @@ plugins.replaceIntent(voxaApp);
  */
 
 voxaApp.onRequestStarted(async (voxaEvent) => {
-  console.log("Now onRequestStarted")
   const userDator = await UserDator.getDator();
 
   voxaEvent.userDator = userDator;
+});
+
+
+// Try to catch Stop and Cancel Intents as the onIntent function does not work
+voxaApp.onBeforeReplySent(async (voxaEvent, reply, transition) => {
+  if(voxaEvent.intent.name === "StopIntent" || voxaEvent.intent.name === "CancelIntent"){
+    console.log("Stop or Cancel Intent")
+    // Save game in the alternative save slot
+    voxaEvent.userDator.saveUserAlternativeGame(voxaEvent.user.id, voxaEvent.model.game, voxaEvent.session.attributes.state);
+
+    // End session and return a proper response
+    reply.response.shouldEndSession = true
+    reply.response.outputSpeech = {
+      ssml: '<speak>La próxima vez asegúrate de guardar la partida si lo deseas. ¡Hasta pronto!</speak>',
+      type: 'SSML'
+    }
+  }
+
+  return reply;
 });
 
 exports.voxaApp = voxaApp;
