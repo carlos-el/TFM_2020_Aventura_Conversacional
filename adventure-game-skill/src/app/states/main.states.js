@@ -7,6 +7,14 @@ function register(voxaApp) {
     };
   });
 
+  ////// CLOSE STATE ///////
+  voxaApp.onState("close", voxaEvent => {
+    return {
+      flow: "terminate",
+      reply: "GoodBye",
+    };
+  });
+
   ////// MENU OPTIONS ///////
   // Lists main menu options before starting the game
   voxaApp.onState("tellMainMenu", voxaEvent => {
@@ -102,6 +110,17 @@ function register(voxaApp) {
       flow: "continue",
       reply: "empty",
       to: voxaEvent.model.control.confirmation.previousState,
+    };
+  });
+
+  ////// SAVE GAME AND CLOSE STATE ///////
+  voxaApp.onState("saveGameAndClose", voxaEvent => {
+    voxaEvent.userDator.saveUserGame(voxaEvent.user.id, voxaEvent.model.game);
+    console.log("Saving game")
+    return {
+      flow: "continue",
+      reply: "gameSavedView",
+      to: "close",
     };
   });
 
@@ -715,6 +734,9 @@ function register(voxaApp) {
         to: "freeRoamState",
       };
 
+    } else if (voxaEvent.intent.name === "ActionCheckWhatToDo") {
+      // Missions help here
+
     } else if (voxaEvent.intent.name === "ActionCheckWhoIsHere") {
       // if there are npcs return their description
       if (Object.keys(voxaEvent.model.game.map.locations[voxaEvent.model.game.map.currentLocation].npcs).length) {
@@ -731,9 +753,6 @@ function register(voxaApp) {
         reply: "DescribeCheckWhoIsHereFailNoOneView",
         to: "freeRoamState",
       };
-
-    } else if (voxaEvent.intent.name === "ActionCheckWhatCanIDo") {
-
 
     } else if (voxaEvent.intent.name === "ActionCheckWhereCanIGo") {
       // if there are paths return their description
@@ -752,12 +771,27 @@ function register(voxaApp) {
         to: "freeRoamState",
       };
 
+    } else if (voxaEvent.intent.name === "HelpIntent" || voxaEvent.intent.name === "ActionCheckWhatCanIDo") {
+      return {
+        flow: "yield",
+        reply: "DescribeHelp",
+        to: "freeRoamState",
+      };
     } else if (voxaEvent.intent.name === "ActionSaveGame") {
       voxaEvent.userDator.saveUserGame(voxaEvent.user.id, voxaEvent.model.game);
+      console.log("Saving game")
       return {
         flow: "yield",
         reply: "saveGameView",
         to: "freeRoamState",
+      };
+    } else if (voxaEvent.intent.name === "CloseGame") {
+      voxaEvent.model.control.confirmation.nextState = "saveGameAndClose"; // if confirmation is positive
+      voxaEvent.model.control.confirmation.previousState = "close" // if confirmation is negative
+      return {
+        flow: "yield",
+        reply: "DescribeCloseGame",
+        to: "confirmationState",
       };
     }
 
@@ -768,7 +802,6 @@ function register(voxaApp) {
       to: "freeRoamState",
     };
   });
-
 
   ////// Describe Location State ///////
   voxaApp.onState("describeLocationState", voxaEvent => {
@@ -860,7 +893,7 @@ function register(voxaApp) {
         voxaEvent.model.game.choices.sex = "male";
       }
 
-      // set next state after confirmation and the state to return if confirmantion y negative
+      // set next state after confirmation and the state to return if confirmation is negative
       voxaEvent.model.control.confirmation.nextState = "scene1_describePlayground";
       voxaEvent.model.control.confirmation.previousState = "scene1_askPlayerSex"
       return {
