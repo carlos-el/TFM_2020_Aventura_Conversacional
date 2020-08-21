@@ -159,16 +159,19 @@ module.exports = class Map {
                 npcs: function (game) {
                     // set merchant takumi npc initial state
                     game.npcs["takumi"] = "1";
+                    game.npcs["tom"] = "1";
 
                     if (game.npcs["sandra"] == 2 ){
                         return {
                             sandra: false, // npc with false (the player did not talk to him)
                             takumi: false, 
+                            tom: false, 
                         };
                     }
 
                     return {
                         takumi: false, 
+                        tom: false, 
                     };
                 },
                 objects: function (game) {

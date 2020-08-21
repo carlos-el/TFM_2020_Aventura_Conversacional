@@ -52,8 +52,10 @@ module.exports = class NpcCollection {
                             //Set the merchant state to 1
                             game.merchants["takumi"] = { state: 1, bought: {} };
 
-                            // Set next state and if talking for the first time upgrade players bag
+                            // Set next state and 
                             game.npcs["takumi"] = 2;
+
+                            // if talking for the first time upgrade players bag
                             if (!alreadyTalked) {
                                 game.inventory.size += 1;
                             }
@@ -88,6 +90,57 @@ module.exports = class NpcCollection {
                         })
                     }
                 }),
+            }),
+
+            // This character is special. He is a merchant but we cant 'buy' him goods we have to 'give' him packs of resources
+            // and he gives nothing back. But each time we give him things he upgrades the campment and gives us things back.
+            tom: new Npc({
+                names: ["tom", "administrador"],
+                voice: "Mathieu",
+                states: {
+                    1: new NpcState({
+                        mentionQuote: ", el administrador del campamento",
+                        talkActionTaken: function (game, alreadyTalked) {
+                            // Set already talked to true in this location
+                            game.map.locations[game.map.currentLocation].npcs["tom"] = true
+                            // set next state for Tom.
+                            game.npcs["tom"] = 2;
+                            //Set the merchant state to 1
+                            game.merchants["tom"] = { state: 1, bought: {} };
+
+                            return "";
+                        },
+                        speech: "¡Bien! ya has vuelto de la expedición. ¡Espero que hayas encontrado muchos recursos! Con todos los problemas que hemos tenido últimamente nunca sobra chatarra, agua y alimento para mantener el campamento. Bueno, tu ya sabes como va esto. Dame la cantidad de recursos que puedas y yo iré intentado mantener este sitio. Habla conmigo después de traerme recursos, tal vez pueda hacer algo por tí a cambio.",
+                    }),
+                    2: new NpcState({
+                        mentionQuote: ", debería hablar con él para mejorar las condiciones del campamento",
+                        talkActionTaken: function (game, alreadyTalked) {
+                            // Set already talked to true in this location
+                            game.map.locations[game.map.currentLocation].npcs["tom"] = true
+                            return "";
+                        },
+                        speech: "Hola, ¿qué tal?",
+                    }),
+                },
+                merchant: new Merchant({ // Description of the goods for the administrator is hardcoded, take this into account
+                    locations: ["camp"],
+                    states: {
+                        1: new MerchantState({
+                            speech: "",
+                            goods: {
+                                pack: {
+                                    units:1,
+                                    maxBought: Infinity,
+                                    price: {
+                                        water: 1,
+                                        food: 1,
+                                        junk: 1,
+                                    }
+                                }
+                            }
+                        })
+                    }
+                }), 
             }),
         }
     }
