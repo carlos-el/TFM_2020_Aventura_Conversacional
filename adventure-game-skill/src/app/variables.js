@@ -40,10 +40,13 @@ exports.playerVoice = function (voxaEvent) {
     return "Lucia";
 };
 exports.sandraVoice = function (voxaEvent) {
-  return "Conchita";
+  return nc.npcs["sandra"].voice;
 };
 exports.fatherVoice = function (voxaEvent) {
   return "Hans";
+};
+exports.administratorVoice = function (voxaEvent) {
+  return nc.npcs["tom"].voice;
 };
 
 ///// INSPECT VARIABLES /////
@@ -155,82 +158,26 @@ exports.describeTalkTo = function (voxaEvent) {
   const state = voxaEvent.model.control.npcStateToDescribe;
   const voice = nc.npcs[voxaEvent.model.control.elementOrObjectToDescribe].voice;
   const speech = nc.npcs[voxaEvent.model.control.elementOrObjectToDescribe].states[state].speech;
+  
   const merchant = nc.npcs[voxaEvent.model.control.elementOrObjectToDescribe].merchant;
-  const resourceToText = { junk: "chatarra", water: "agua", food: "comida" };
-  let speechBuy = "";
-  let speechGoods = "";
+  let speechMerchant = "";
 
-  // If is merchant and is in the right location add the buy speech and the goods description
-  if (merchant && merchant.locations.includes(voxaEvent.model.game.map.currentLocation)) {
-    speechBuy = " " + merchant.states[voxaEvent.model.game.merchants[voxaEvent.model.control.elementOrObjectToDescribe].state].speech;
-    let goods = merchant.states[voxaEvent.model.game.merchants[voxaEvent.model.control.elementOrObjectToDescribe].state].goods;
-    let keys = Object.keys(goods);
-    let availableObjects = [];
-
-    // check that there are available goods
-    for (let i = 0; i < keys.length; i++) {
-      let unitsBoughts = voxaEvent.model.game.merchants[voxaEvent.model.control.elementOrObjectToDescribe].bought[keys[i]];
-      if (unitsBoughts === undefined) {
-        unitsBoughts = 0;
-      }
-      if (unitsBoughts < goods[keys[i]].maxBought) {
-        availableObjects.push(keys[i])
-      }
-    }
-    // if there are
-    if (availableObjects) {
-      speechGoods += " Ahora mismo te puedo vender ";
-      for (let i = 0; i < availableObjects.length; i++) {
-        let good = goods[availableObjects[i]];
-        // If they are resources
-        if (["junk", "food", "water"].includes(availableObjects[i])) {
-          // print units
-          speechGoods += good.units + " " + "unidades de " + resourceToText[availableObjects[i]] + " a cambio de ";
-        } else {
-          // if they are objects
-          speechGoods += oc.objects[availableObjects[i]].mentionQuote + " a cambio de ";
-        }
-
-        // print prices
-        for (let j = 0; j < Object.keys(good.price).length; j++) {
-          let priceName = Object.keys(good.price)[j];
-          // If they are resources
-          if (["junk", "food", "water"].includes(priceName)) {
-            // print units
-            speechGoods += good.price[priceName] + " " + "unidades de " + resourceToText[priceName];
-          } else {
-            // if they are objects
-            speechGoods += oc.objects[priceName].mentionQuote;
-          }
-
-          // add conjuncion before last element
-          if (j === Object.keys(good.price).length - 2) {
-            speechGoods += " y ";
-          }
-          // add coma
-          if (j < Object.keys(good.price).length - 2) {
-            speechGoods += ", ";
-          };
-        }
-
-        // add conjuncion before last element
-        if (i === availableObjects.length - 2) {
-          speechGoods += " y ";
-        }
-        // add coma
-        if (i < availableObjects.length - 2) {
-          speechGoods += ", ";
-        };
-      }
-    } else {
-      speechGoods += " Lo siento, pero ahora mismo no tengo ningún artículo disponible."
-    }
-
-
-  } return "<voice name='" + voice + "'>" + speech + speechBuy + speechGoods + "</voice>";
+  // if the npc is the camp administrator then print his speech
+  if (voxaEvent.model.control.elementOrObjectToDescribe === "tom" && merchant.locations.includes(voxaEvent.model.game.map.currentLocation)) {
+    speechMerchant = describeCampAdministratorSpeech(voxaEvent);
+  }// if is merchant and is in the right location add the merchant speech 
+  else if (merchant && merchant.locations.includes(voxaEvent.model.game.map.currentLocation)) {
+    speechMerchant = describeMerchantSpeech(voxaEvent);
+  } 
+  
+  return "<voice name='" + voice + "'>" + speech + speechMerchant + "</voice>";
 };
 exports.describeObjectBuy = function (voxaEvent) {
   return "Creo que compraré esto.";
+};
+exports.describeGiveToAdministrator = function (voxaEvent) {
+  
+  //TODO
 };
 
 exports.describeCheckResources = function (voxaEvent) {
@@ -510,4 +457,84 @@ exports.describeExistingPaths = describeExistingPaths = function (voxaEvent) {
   return intros[Math.floor(Math.random() * intros.length)] + " " + intermediateIntro + " " + res;
 };
 
+describeMerchantSpeech = function (voxaEvent) {
+  const merchant = nc.npcs[voxaEvent.model.control.elementOrObjectToDescribe].merchant;
+  const resourceToText = { junk: "chatarra", water: "agua", food: "comida" };
+  let speechBuy = "";
+  let speechGoods = "";
+
+  // If is merchant and is in the right location add the buy speech and the goods description
+  if (merchant && merchant.locations.includes(voxaEvent.model.game.map.currentLocation)) {
+    speechBuy = " " + merchant.states[voxaEvent.model.game.merchants[voxaEvent.model.control.elementOrObjectToDescribe].state].speech;
+    let goods = merchant.states[voxaEvent.model.game.merchants[voxaEvent.model.control.elementOrObjectToDescribe].state].goods;
+    let keys = Object.keys(goods);
+    let availableObjects = [];
+
+    // check that there are available goods
+    for (let i = 0; i < keys.length; i++) {
+      let unitsBoughts = voxaEvent.model.game.merchants[voxaEvent.model.control.elementOrObjectToDescribe].bought[keys[i]];
+      if (unitsBoughts === undefined) {
+        unitsBoughts = 0;
+      }
+      if (unitsBoughts < goods[keys[i]].maxBought) {
+        availableObjects.push(keys[i])
+      }
+    }
+    // if there are
+    if (availableObjects) {
+      speechGoods += " Ahora mismo te puedo vender ";
+      for (let i = 0; i < availableObjects.length; i++) {
+        let good = goods[availableObjects[i]];
+        // If they are resources
+        if (["junk", "food", "water"].includes(availableObjects[i])) {
+          // print units
+          speechGoods += good.units + " " + "unidades de " + resourceToText[availableObjects[i]] + " a cambio de ";
+        } else {
+          // if they are objects
+          speechGoods += oc.objects[availableObjects[i]].mentionQuote + " a cambio de ";
+        }
+
+        // print prices
+        for (let j = 0; j < Object.keys(good.price).length; j++) {
+          let priceName = Object.keys(good.price)[j];
+          // If they are resources
+          if (["junk", "food", "water"].includes(priceName)) {
+            // print units
+            speechGoods += good.price[priceName] + " " + "unidades de " + resourceToText[priceName];
+          } else {
+            // if they are objects
+            speechGoods += oc.objects[priceName].mentionQuote;
+          }
+
+          // add conjuncion before last element
+          if (j === Object.keys(good.price).length - 2) {
+            speechGoods += " y ";
+          }
+          // add coma
+          if (j < Object.keys(good.price).length - 2) {
+            speechGoods += ", ";
+          };
+        }
+
+        // add conjuncion before last element
+        if (i === availableObjects.length - 2) {
+          speechGoods += " y ";
+        }
+        // add coma
+        if (i < availableObjects.length - 2) {
+          speechGoods += ", ";
+        };
+      }
+    } else {
+      speechGoods += " Lo siento, pero ahora mismo no tengo ningún artículo disponible."
+    }
+  } 
+
+  return speechBuy + speechGoods;
+};
+
+describeCampAdministratorSpeech = function (voxaEvent) {
+  const speechBuy = "Puedes darme packs de recursos de la cantidad que quieras, por ejemplo puedes darme un pack de 10."
+  return " El campamento esta al nivel TODO. Necesito TODO packs para llegar al siguiente nivel." + " " + speechBuy;
+};
 

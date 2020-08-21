@@ -37,10 +37,19 @@
         "say": "Partida guardada."
       },
       "gameLoadSuccessView": {
-        "say": "Partida ha sido cargada con éxito."
+        "say": "Partida cargada con éxito."
+      },
+      "alternativeGameLoadSuccessView": {
+        "say": "Partida de respaldo cargada con éxito. Guarde cuando pueda para sobreescribir su partida anterior."
+      },
+      "askLoadAlternativeGameView": {
+        "say": "La última vez el juego se cerró inesperadamente. ¿Quiere continuar por donde lo dejó en ese momento?"
       },
       "gameLoadErrorView": {
         "say": "No hemos podido encontrar una partida guardada para su cuenta."
+      },
+      "alternativeGameLoadErrorView": {
+        "say": "Su partida de respaldo no ha podido cargarse con éxito. Intentando cargar la última partida guardada."
       },
       "startNewGameView": {
         "say": "De acuerdo, comenzemos."
@@ -81,6 +90,9 @@
       },
       "DrescribeBuyObjectView": {
         "say": "<voice name='{playerVoice}'>{describeObjectBuy}</voice>"
+      },
+      "DescribeGiveToAdministratorView": {
+        "say": "<voice name='{playerVoice}'>{describeGiveToAdministrator}</voice>"
       },
 
       "DescribeCheckResourcesView": {
@@ -153,6 +165,15 @@
       },
       "DrescribeBuyObjectFailCantPayView": {
         "say": "<voice name='{playerVoice}'>No tengo lo necesario para comprar ese objeto. Volveré cuando lo tenga.</voice>"
+      },
+      "DescribeGiveToAdministratorFailZeroView": {
+        "say": "<voice name='{playerVoice}'>Si no le voy a dar nada mejor no hablar con el la verdad.</voice>"
+      },
+      "DescribeGiveToAdministratorFailNotAcceptingView": {
+        "say": "<voice name='{playerVoice}'>Este no es el lugar adecuado para darle los recursos al administrador.</voice>"
+      },
+      "DescribeGiveToAdministratorFailNoResourcesView": {
+        "say": "<voice name='{playerVoice}'>No tengo tanto. Debería revisar cuantos recursos tengo.</voice>"
       },
       "DescribeCheckInventoryFailNoBagView": {
         "say": "<voice name='{playerVoice}'>No tengo una mochila donde guardar mis cosas. Debería hacerme con una.</voice>"
