@@ -31,7 +31,7 @@ function register(voxaApp) {
       return {
         flow: "continue",
         reply: "empty",
-        to: "loadGame"
+        to: "askLoadAlternativeGame"
       };
     } else if (voxaEvent.intent.name === "StartNewGameIntent") {
       voxaEvent.model.control.confirmation.nextState = "startNewGame";
@@ -56,10 +56,35 @@ function register(voxaApp) {
     };
   });
 
+  voxaApp.onState("askLoadAlternativeGame", async voxaEvent => {
+    const alternativeGame = await voxaEvent.userDator.getUserAlternativeGame(voxaEvent.user.id)
+
+    // if there is and alternative game saved from an error or sudden exit ask if the user if he wants to load it
+    if (alternativeGame != null && alternativeGame.game) {
+      voxaEvent.model.control.confirmation.nextState = "loadAlternativeGame"; // if confirm is positive
+      voxaEvent.model.control.confirmation.previousState = "loadGame"  // if confirm is negative
+      return {
+        flow: "yield",
+        reply: "askLoadAlternativeGameView",
+        to: "confirmationState"
+      };
+    }
+
+    // if not go to load game directly
+    return {
+      flow: "continue",
+      reply: "empty",
+      to: "loadGame"
+    };
+  });
+
   voxaApp.onState("loadGame", async voxaEvent => {
     const game = await voxaEvent.userDator.getUserGame(voxaEvent.user.id)
+
     // If the player had a saved game then we load it and go to freeRoam 
     if (game) {
+      // remove alternative game in case some didnt wanted to load it
+      voxaEvent.userDator.removeUserAlternativeGame(voxaEvent.user.id)
       voxaEvent.model.game = game;
 
       // Go to describe location to let the player know where he is
@@ -75,6 +100,32 @@ function register(voxaApp) {
       flow: "continue",
       reply: "gameLoadErrorView",
       to: "tellMainMenu"
+    };
+  });
+
+  voxaApp.onState("loadAlternativeGame", async voxaEvent => {
+    const alternativeGame = await voxaEvent.userDator.getUserAlternativeGame(voxaEvent.user.id)
+
+    // If the player had a saved game then we load it and go to freeRoam 
+    if (alternativeGame) {
+      // remove alternative game and load it
+      voxaEvent.userDator.removeUserAlternativeGame(voxaEvent.user.id)
+      voxaEvent.model.game = alternativeGame.game;
+      const lastState = alternativeGame.lastState
+
+      // Go to describe location to let the player know where he is
+      return {
+        flow: "yield",
+        reply: "alternativeGameLoadSuccessView",
+        to: lastState,
+      };
+    }
+
+    // If no saved alternative game is found tell it an go load normal game TODO
+    return {
+      flow: "continue",
+      reply: "alternativeGameLoadErrorView",
+      to: "loadGame"
     };
   });
 
@@ -599,6 +650,70 @@ function register(voxaApp) {
           to: "freeRoamState",
         };
       }
+    } else if (voxaEvent.intent.name === "ActionGiveToAdministrator") {
+      const quantity = parseInt(voxaEvent.intent.params.quantity);
+
+      // if params set
+      if (quantity && quantity >= 0) {
+        // if the administrator is in the current location
+        if ("tom" in voxaEvent.model.game.map.locations[voxaEvent.model.game.map.currentLocation].npcs) {
+          // if the player is where the administrator is accepting resources
+          if (voxaEvent.model.game.map.currentLocation === "camp") {
+            // if quantity is a valid number
+            if (quantity != 0) {
+              // if the player can pay
+              if (voxaEvent.model.game.resources.junk >= quantity && voxaEvent.model.game.resources.water >= quantity && voxaEvent.model.game.resources.food >= quantity) {
+                // retrieve the resources
+                voxaEvent.model.game.resources.junk -= quantity;
+                voxaEvent.model.game.resources.water -= quantity;
+                voxaEvent.model.game.resources.food -= quantity;
+
+                // add to the bought variable for the administrator in the model
+                if (voxaEvent.model.game.merchants["tom"].bought["pack"]) {
+                  voxaEvent.model.game.merchants["tom"].bought["pack"] += quantity;
+                } else {
+                  voxaEvent.model.game.merchants["tom"].bought["pack"] = quantity;
+                }
+
+                // if camp levels up execute level up function and return the speech for this level up
+                // get level before, get level after, for the intermediate levels execute their functions if any 
+                // and save the levels up to dscribe them
+
+                // return the successful action
+                return {
+                  flow: "yield",
+                  reply: "DescribeGiveToAdministratorView",
+                  to: "freeRoamState",
+                };
+              }
+
+              // Fallback: not enough resources
+              return {
+                flow: "yield",
+                reply: "DescribeGiveToAdministratorFailNoResourcesView",
+                to: "freeRoamState",
+              };
+            }
+
+            // Fallback: if the quantity is zero say that you should not give anything
+            return {
+              flow: "yield",
+              reply: "DescribeGiveToAdministratorFailZeroView",
+              to: "freeRoamState",
+            };
+          }
+
+          // Fallback: The player is not where the administrator accepts resources
+          return {
+            flow: "yield",
+            reply: "DescribeGiveToAdministratorFailNotAcceptingView",
+            to: "freeRoamState",
+          };
+        }
+
+        // Fallback: if the administrator is not in the location go to default fallback
+      }
+
     } else if (voxaEvent.intent.name === "ActionGoTo") {
       // Get the symbol of the cardinal point the player wants to go
       const cardinalToSymbol = { norte: "N", sur: "S", este: "E", oeste: "O" }
