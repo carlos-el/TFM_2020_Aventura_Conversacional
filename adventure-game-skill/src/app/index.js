@@ -28,7 +28,6 @@ voxaApp.onRequestStarted(async (voxaEvent) => {
   voxaEvent.userDator = userDator;
 });
 
-
 // Try to catch Stop and Cancel Intents as the onIntent function does not work
 voxaApp.onBeforeReplySent(async (voxaEvent, reply, transition) => {
   if(voxaEvent.intent.name === "StopIntent" || voxaEvent.intent.name === "CancelIntent"){
@@ -45,6 +44,25 @@ voxaApp.onBeforeReplySent(async (voxaEvent, reply, transition) => {
   }
 
   return reply;
+});
+
+// Try to catch 
+voxaApp.onSessionEnded(async (voxaEvent) => {
+  console.log("Session ending");
+
+  // Save game in the alternative save slot only if not intent is found (taht means the user didnt used any input an this is a error)
+  if(!voxaEvent.intent) {
+    console.log("Saving session ending");
+    voxaEvent.userDator.saveUserAlternativeGame(voxaEvent.user.id, voxaEvent.model.game, voxaEvent.session.attributes.state);
+  }
+});
+
+// Save alternative game on error
+voxaApp.onError((voxaEvent, error) => {
+  console.log("On Error");
+
+  // Save game in the alternative save slot
+  voxaEvent.userDator.saveUserAlternativeGame(voxaEvent.user.id, voxaEvent.model.game, voxaEvent.session.attributes.state);
 });
 
 exports.voxaApp = voxaApp;
