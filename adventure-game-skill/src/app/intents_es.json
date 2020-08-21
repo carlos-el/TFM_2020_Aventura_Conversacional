@@ -315,6 +315,59 @@
                         "comprar {object}",
                         "comprar {article} {object}"
                     ]
+                },
+                {
+                    "name": "ActionCheckResources",
+                    "slots": [
+                        {
+                            "name": "resource",
+                            "type": "resource"
+                        }
+                    ],
+                    "samples": [
+                        "que recursos tengo",
+                        "cuantas unidades de {resource} tengo",
+                        "cuanto {resource} tengo",
+                        "cuanta {resource} tengo",
+                        "cuantos recursos tengo"
+                    ]
+                },
+                {
+                    "name": "ActionCheckLocation",
+                    "slots": [],
+                    "samples": [
+                        "que es este sitio",
+                        "que tengo a mi alrededor",
+                        "que hay en este sitio",
+                        "que hay aqui",
+                        "donde estoy"
+                    ]
+                },
+                {
+                    "name": "ActionCheckInventory",
+                    "slots": [],
+                    "samples": [
+                        "ver mochila",
+                        "abrir mochila",
+                        "que tengo en mi mochila",
+                        "que tengo en la mochila",
+                        "que hay en la mochila",
+                        "que hay en mi mochila"
+                    ]
+                },
+                {
+                    "name": "ActionGiveToAdministrator",
+                    "slots": [
+                        {
+                            "name": "quantity",
+                            "type": "AMAZON.NUMBER"
+                        }
+                    ],
+                    "samples": [
+                        "dar pack {quantity}",
+                        "dar {quantity}",
+                        "dar pack de {quantity}"
+                    ]
                 }
             ],
             "types": [
@@ -358,7 +411,10 @@
                         },
                         {
                             "name": {
-                                "value": "linterna"
+                                "value": "linterna",
+                                "synonyms": [
+                                    "linterna sin bateria"
+                                ]
                             }
                         },
                         {
