@@ -668,23 +668,45 @@ function register(voxaApp) {
                 voxaEvent.model.game.resources.water -= quantity;
                 voxaEvent.model.game.resources.food -= quantity;
 
+                // get the previous level
+                const preLevel = voxaEvent.model.getCampLevelByQuantity(voxaEvent.model.game.merchants["tom"].bought["pack"]);
                 // add to the bought variable for the administrator in the model
                 if (voxaEvent.model.game.merchants["tom"].bought["pack"]) {
                   voxaEvent.model.game.merchants["tom"].bought["pack"] += quantity;
                 } else {
                   voxaEvent.model.game.merchants["tom"].bought["pack"] = quantity;
                 }
+                // get the posterior level
+                const postLevel = voxaEvent.model.getCampLevelByQuantity(voxaEvent.model.game.merchants["tom"].bought["pack"]);
 
-                // if camp levels up execute level up function and return the speech for this level up
-                // get level before, get level after, for the intermediate levels execute their functions if any 
-                // and save the levels up to dscribe them
+                // if camp levels up execute level up function and save the levels so the describe function can return the speech.
+                let levelsUp = [];
+                for (let i = preLevel + 1; i <= postLevel; i++) {
+                  let rl = voxaEvent.model.getCampRelevantLevelProperties(i);
+                  levelsUp.push(i);
 
-                // return the successful action
-                return {
-                  flow: "yield",
-                  reply: "DescribeGiveToAdministratorView",
-                  to: "freeRoamState",
-                };
+                  // if it is a relevant level execute action
+                  if(rl){
+                    rl.levelActionTaken(voxaEvent.model.game)
+                  }
+                }
+
+                // if the camp leveled up then return the speeches of the level up, in other case just return a normal quote.
+                if (levelsUp.length > 0) {
+                  // return the successful action
+                  voxaEvent.model.control.elementOrObjectToDescribe = levelsUp;
+                  return {
+                    flow: "yield",
+                    reply: "DescribeGiveToAdministratorLevelsUpView",
+                    to: "freeRoamState",
+                  };
+                } else {
+                  return {
+                    flow: "yield",
+                    reply: "DescribeGiveToAdministratorView",
+                    to: "freeRoamState",
+                  };
+                }
               }
 
               // Fallback: not enough resources
