@@ -3,11 +3,13 @@ const Map = require("./models/map.js");
 const ElementCollection = require("./models/elementCollection.js");
 const ObjectCollection = require("./models/objectCollection.js");
 const NpcCollection = require("./models/npcCollection.js");
+const Camp = require("./models/camp.js");
 
 const m = new Map();
 const ec = new ElementCollection();
 const oc = new ObjectCollection();
 const nc = new NpcCollection();
+const c = new Camp();
 
 class Model {
   constructor(data = {}) {
@@ -96,6 +98,12 @@ class Model {
   }
   getNpcProperties(npcId) {
     return nc.npcs[npcId];
+  }
+  getCampRelevantLevelProperties(level){
+    return c.getRelevantLevel(level)
+  }
+  getCampLevelByQuantity(quantity){
+    return c.getLevelByQuantity(quantity);
   }
 
 
