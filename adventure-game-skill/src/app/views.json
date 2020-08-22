@@ -92,7 +92,10 @@
         "say": "<voice name='{playerVoice}'>{describeObjectBuy}</voice>"
       },
       "DescribeGiveToAdministratorView": {
-        "say": "<voice name='{playerVoice}'>{describeGiveToAdministrator}</voice>"
+        "say": "<voice name='{playerVoice}'>Toma, te he traido esto. <voice name='{administratorVoice}'>Vaya muchas gracias, con estó estamos un poco más cerca de subir el campamento al próximo nivel.</voice></voice>"
+      },
+      "DescribeGiveToAdministratorLevelsUpView": {
+        "say": "<voice name='{playerVoice}'>{describeGiveToAdministratorLevelsUp}</voice>"
       },
 
       "DescribeCheckResourcesView": {
@@ -109,6 +112,12 @@
       },
       "DescribeCheckWhereCanIGoView": {
         "say": "<voice name='{playerVoice}'>{describeExistingPaths}</voice>"
+      },
+      "DescribeHelp": {
+        "say": "<voice name='{playerVoice}'>Veamos. Cuando esté explorando puedo comprobar ¿cuántos recursos tengo? También puedo preguntarme, dónde estoy para saber quíen o que hay en este lugar. Si quiero saber lo que tengo solo tengo que, abrir mi mochila. Puedo viajar directamente a los lugares que reconozca al, abrir mi mapa. Por último también puedo pararme a pensar y preguntarme ¿qué tengo que hacer?.</voice><break time='1s'/> Si necesitas algo más de ayuda para avanzar puedes guardar tu partida y completar el tutorial disponible en el menú de inicio."
+      },
+      "DescribeCloseGame": {
+        "say": "¿Quieres guardar la partida antes de salir?" 
       },
 
 
@@ -173,7 +182,7 @@
         "say": "<voice name='{playerVoice}'>Este no es el lugar adecuado para darle los recursos al administrador.</voice>"
       },
       "DescribeGiveToAdministratorFailNoResourcesView": {
-        "say": "<voice name='{playerVoice}'>No tengo tanto. Debería revisar cuantos recursos tengo.</voice>"
+        "say": "<voice name='{playerVoice}'>¡No tengo tantos recursos!. Debería revisar cuantos tengo antes de hacer esto.</voice>"
       },
       "DescribeCheckInventoryFailNoBagView": {
         "say": "<voice name='{playerVoice}'>No tengo una mochila donde guardar mis cosas. Debería hacerme con una.</voice>"
@@ -187,13 +196,6 @@
       "DescribeCheckMapFailNoMapView": {
         "say": "<voice name='{playerVoice}'>No tengo ningún mapa. Debería conseguir uno pasa saber donde puedo ir.</voice>"
       },
-      "DescribeHelp": {
-        "say": "<voice name='{playerVoice}'>Veamos. Cuando esté explorando puedo comprobar ¿cuántos recursos tengo? También puedo preguntarme, dónde estoy para saber quíen o que hay en este lugar. Si quiero saber lo que tengo solo tengo que, abrir mi mochila. Puedo viajar directamente a los lugares que reconozca al, abrir mi mapa. Por último también puedo pararme a pensar y preguntarme ¿qué tengo que hacer?.</voice><break time='1s'/> Si necesitas algo más de ayuda para avanzar puedes guardar tu partida y completar el tutorial disponible en el menú de inicio."
-      },
-      "DescribeCloseGame": {
-        "say": "¿Quieres guardar la partida antes de salir?" 
-      },
-
 
 
 

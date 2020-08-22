@@ -2,11 +2,13 @@ const Map = require("./models/map.js");
 const ElementCollection = require("./models/elementCollection.js");
 const ObjectCollection = require("./models/objectCollection.js");
 const NpcCollection = require("./models/npcCollection.js");
+const Camp = require("./models/camp.js");
 
-const m = new Map()
-const ec = new ElementCollection()
-const oc = new ObjectCollection()
+const m = new Map();
+const ec = new ElementCollection();
+const oc = new ObjectCollection();
 const nc = new NpcCollection();
+const c = new Camp();
 
 
 
@@ -33,19 +35,19 @@ exports.playerDoorColor = function (voxaEvent) {
 };
 
 ///// VOICES /////
-exports.playerVoice = function (voxaEvent) {
+exports.playerVoice = playerVoice = function (voxaEvent) {
   if (voxaEvent.model.game.choices.sex === "male")
     return "Miguel";
   else if (voxaEvent.model.game.choices.sex === "female")
     return "Lucia";
 };
-exports.sandraVoice = function (voxaEvent) {
+exports.sandraVoice = sandraVoice = function (voxaEvent) {
   return nc.npcs["sandra"].voice;
 };
-exports.fatherVoice = function (voxaEvent) {
+exports.fatherVoice = fatherVoice = function (voxaEvent) {
   return "Hans";
 };
-exports.administratorVoice = function (voxaEvent) {
+exports.administratorVoice = administratorVoice = function (voxaEvent) {
   return nc.npcs["tom"].voice;
 };
 
@@ -175,9 +177,22 @@ exports.describeTalkTo = function (voxaEvent) {
 exports.describeObjectBuy = function (voxaEvent) {
   return "Creo que compraré esto.";
 };
-exports.describeGiveToAdministrator = function (voxaEvent) {
-  
-  //TODO
+exports.describeGiveToAdministratorLevelsUp = function (voxaEvent) {
+  const lvlArray = voxaEvent.model.control.elementOrObjectToDescribe;
+  let lvl = 0;
+  let rl = null
+  let speech = "";
+
+
+  for (lvl of lvlArray){
+    rl = c.getRelevantLevel(lvl);
+    if (rl != null){
+      speech += " " + rl.speech;
+    }
+  }
+
+
+  return "Toma, te he traido esto. <voice name='"+administratorVoice()+"'>¡Perfecto!, con estos recursos el campamento has subido hasta el nivel "+ lvlArray[lvlArray.length-1] + "." + speech + " Sigue trayéndome recursos cuando puedas.</voice>";
 };
 
 exports.describeCheckResources = function (voxaEvent) {
@@ -535,6 +550,16 @@ describeMerchantSpeech = function (voxaEvent) {
 
 describeCampAdministratorSpeech = function (voxaEvent) {
   const speechBuy = "Puedes darme packs de recursos de la cantidad que quieras, por ejemplo puedes darme un pack de 10."
-  return " El campamento esta al nivel TODO. Necesito TODO packs para llegar al siguiente nivel." + " " + speechBuy;
+  let packs = voxaEvent.model.game.merchants["tom"].bought["pack"]
+
+  // if the merchat property for pack has not been set yet then set packs to 0
+  if (!packs){
+    packs = 0; 
+  }
+  // Get current level
+  const currentLevel = c.getLevelByQuantity(packs)
+  const packsForNextLevel = c.getPacksNeededForNextLevel(packs)
+
+  return " El campamento está al nivel "+ currentLevel +". Necesito "+ packsForNextLevel +" packs para subir el campamento al siguiente nivel." + " " + speechBuy;
 };
 
