@@ -37,6 +37,8 @@
                     "name": "ContinueGameIntent",
                     "slots": [],
                     "samples": [
+                        "cargar última partida",
+                        "cargar partida",
                         "continuar partida",
                         "continuar última partida"
                     ]
@@ -364,9 +366,63 @@
                         }
                     ],
                     "samples": [
+                        "dar {quantity} packs",
                         "dar pack {quantity}",
                         "dar {quantity}",
                         "dar pack de {quantity}"
+                    ]
+                },
+                {
+                    "name": "CloseGame",
+                    "slots": [],
+                    "samples": [
+                        "cerrar el juego",
+                        "cerrar juego",
+                        "salir del juego"
+                    ]
+                },
+                {
+                    "name": "ActionCheckWhatCanIDo",
+                    "slots": [],
+                    "samples": [
+                        "que hacer",
+                        "que puedo hacer"
+                    ]
+                },
+                {
+                    "name": "ActionCheckWhereCanIGo",
+                    "slots": [],
+                    "samples": [
+                        "hacia donde ir",
+                        "donde puedo ir",
+                        "hacia donde puedo ir"
+                    ]
+                },
+                {
+                    "name": "ActionCheckWhoIsHere",
+                    "slots": [],
+                    "samples": [
+                        "quien hay en este lugar",
+                        "quien hay en este sitio",
+                        "quien hay",
+                        "quien hay aqui"
+                    ]
+                },
+                {
+                    "name": "ActionCheckWhatToDo",
+                    "slots": [],
+                    "samples": []
+                },
+                {
+                    "name": "ActionCheckMap",
+                    "slots": [],
+                    "samples": [
+                        "abrir mi mapa",
+                        "abrir el mapa",
+                        "ver mapa",
+                        "ver mi mapa",
+                        "ver el mapa",
+                        "abrir mapa"
                     ]
                 }
             ],
