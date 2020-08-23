@@ -131,6 +131,7 @@ function register(voxaApp) {
 
   voxaApp.onState("startNewGame", async voxaEvent => {
     voxaEvent.userDator.saveUserGame(voxaEvent.user.id, voxaEvent.model.getDefultGameModel())
+    voxaEvent.userDator.removeUserAlternativeGame(voxaEvent.user.id)
     return {
       flow: "continue",
       reply: "startNewGameView",
@@ -178,7 +179,7 @@ function register(voxaApp) {
   //////////////////////////////
   ////// FREE ROAM STATE ///////
   //////////////////////////////
-  voxaApp.onState("freeRoamState", voxaEvent => {
+  voxaApp.onState("freeRoamState", async voxaEvent => {
     if (voxaEvent.intent.name === "ActionInspect") {
       // Get instents element or object if present (we may get element or object but it can be both)
       let elementOrObjectName = "";
@@ -223,7 +224,8 @@ function register(voxaApp) {
           if (!isObject) {
             // If it is element, check that has not been already inspected and execute action and set the inspected value to true if that is the case
             alreadyInspected = voxaEvent.model.game.map.locations[voxaEvent.model.game.map.currentLocation].elements[elementOrObject];
-            let nextScene = elementOrObjectProperties.inspectActionTaken(voxaEvent.model.game, alreadyInspected);
+            let nextScene = await elementOrObjectProperties.inspectActionTaken(voxaEvent, alreadyInspected);
+
             if (!alreadyInspected) {
               voxaEvent.model.game.map.locations[voxaEvent.model.game.map.currentLocation].elements[elementOrObject] = true;
             }
@@ -372,7 +374,7 @@ function register(voxaApp) {
             // get the element properties
             const elementProperties = voxaEvent.model.getElementProperties(element)
             // if the object can be used in the element
-            let canBeUsedOrNextScene = elementProperties.useObjectActionTaken(voxaEvent.model.game, object);
+            let canBeUsedOrNextScene = elementProperties.useObjectActionTaken(voxaEvent, object);
             if (canBeUsedOrNextScene) {
               // If the return is the name of a scene go to that scene.
               if (typeof canBeUsedOrNextScene === "string") {
@@ -954,6 +956,43 @@ function register(voxaApp) {
     return {
       flow: "yield",
       reply: reply,
+      to: "freeRoamState",
+    };
+  });
+
+  ////// Describe trap catches states ///////
+  voxaApp.onState("cathBigFoundOnTrapScene", voxaEvent => {
+    return {
+      flow: "yield",
+      reply: "cathBigFoundOnTrapSceneView",
+      to: "freeRoamState",
+    };
+  });
+  voxaApp.onState("cathMediumFoundOnTrapScene", voxaEvent => {
+    return {
+      flow: "yield",
+      reply: "cathMediumFoundOnTrapSceneView",
+      to: "freeRoamState",
+    };
+  });
+  voxaApp.onState("cathSmallFoundOnTrapScene", voxaEvent => {
+    return {
+      flow: "yield",
+      reply: "cathSmallFoundOnTrapSceneView",
+      to: "freeRoamState",
+    };
+  });
+  voxaApp.onState("cathVerySmallFoundOnTrapScene", voxaEvent => {
+    return {
+      flow: "yield",
+      reply: "cathVerySmallFoundOnTrapSceneView",
+      to: "freeRoamState",
+    };
+  });
+  voxaApp.onState("nothingFoundOnTrapScene", voxaEvent => {
+    return {
+      flow: "yield",
+      reply: "nothingFoundOnTrapSceneView",
       to: "freeRoamState",
     };
   });
