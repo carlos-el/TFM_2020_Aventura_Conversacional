@@ -41,8 +41,17 @@ module.exports = class objectCollection {
             battery_small: new Object({
                 names: ["batería","batería pequeña", "bateria", "bateria pequeña"],
                 isMale: false,
-                mentionQuote: "Una batería pequeña",
+                mentionQuote: "una batería pequeña",
                 inspectQuote: "Una batería pequeña. Tal vez pueda ponérsela a algún aparato.",
+                combineActionTaken: function (game, object) {
+                    return null;
+                },
+            }),
+            trapSmall_1_06h: new Object({
+                names: ["cepo","cepo pequeño"],
+                isMale: true,
+                mentionQuote: "un cepo pequeño",
+                inspectQuote: "Un cepo pequeño. Es de hierro y está bastante oxidado. Es posible que atrape algún animal con él si encuentro el sitio adecuado para usarlo.",
                 combineActionTaken: function (game, object) {
                     return null;
                 },
