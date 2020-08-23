@@ -90,7 +90,9 @@ module.exports = class Map {
                 storyQuote: "No hay mucho que decir sobre este sitio.",
                 main: true,
                 elements: function (game) {
-                    return {}
+                    return {
+                        animalPath_1: false,
+                    }
                 },
                 npcs: function (game) {
                     return {};
@@ -127,7 +129,9 @@ module.exports = class Map {
                     };
                 },
                 objects: function (game) {
-                    return {};
+                    return {
+                        trapSmall_1_06h: false,
+                    };
                 },
                 to: {
                     S: new Path({
