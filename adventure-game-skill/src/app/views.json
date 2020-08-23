@@ -55,6 +55,22 @@
         "say": "De acuerdo, comenzemos."
       },
 
+      "cathBigFoundOnTrapSceneView": {
+        "say": "<voice name='{playerVoice}'>¡Vaya! Parece que ya ha caído un animal. Parece grande. Supondrá una gran cantidad de alimento. También he recogido la trampa que puse.</voice>"
+      },
+      "cathMediumFoundOnTrapSceneView": {
+        "say": "<voice name='{playerVoice}'>¡Vaya! Parece que ya ha caído un animal. Esto supondrá una buena cantidad de alimento. También he recogido la trampa que puse.</voice>"
+      },
+      "cathSmallFoundOnTrapSceneView": {
+        "say": "<voice name='{playerVoice}'>¡Vaya! Parece que ya ha caído un animal. Con esto conseguiré una cantidad de alimento aceptable. También he recogido la trampa que puse.</voice>"
+      },
+      "cathVerySmallFoundOnTrapSceneView": {
+        "say": "<voice name='{playerVoice}'>¡Vaya! Parece que ya ha caído un animal. Esto no supondrá mucho alimento, pero algo es algo. También he recogido la trampa que puse.</voice>"
+      },
+      "nothingFoundOnTrapSceneView": {
+        "say": "<voice name='{playerVoice}'>Todavía no ha caído nada. La revisaré más tarde, a ver si hay suerte.</voice>"
+      },
+
       "DescribeInspectElementOrObjectView": {
         "say": "<voice name='{playerVoice}'>{describeInspectElementOrObject}</voice>"
       },
