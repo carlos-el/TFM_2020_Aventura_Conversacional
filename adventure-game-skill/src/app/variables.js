@@ -286,18 +286,19 @@ describeStuff = function (voxaEvent) {
   const elements = describeElements(voxaEvent);
   const objects = describeObjects(voxaEvent);
   let instrosElementsObjects = "";
-  let instrosInter = " "
+  let instrosInter = ""
   let dot1 = "";
   let dot2 = "";
 
   if (elements || objects) {
     instrosElementsObjects = intros[Math.floor(Math.random() * intros.length)] + " " + intros2[Math.floor(Math.random() * intros2.length)]
-    let dot2 = ". ";
+    dot2 = ". ";
   }
 
   if (elements && objects) {
     instrosInter = " También " + intros2[Math.floor(Math.random() * intros2.length)] + " ";
     dot1 = ". ";
+    dot2 = ". ";
   }
 
   return instrosElementsObjects + " " + elements + dot1 + instrosInter + objects + dot2 + describeNpcs(voxaEvent) + " " + describeExistingPaths(voxaEvent);
