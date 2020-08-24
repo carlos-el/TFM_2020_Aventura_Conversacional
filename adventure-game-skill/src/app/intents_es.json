@@ -462,7 +462,18 @@
                     "values": [
                         {
                             "name": {
-                                "value": "bateria"
+                                "value": "cepo",
+                                "synonyms": [
+                                    "cepo pequeño"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "bateria",
+                                "synonyms": [
+                                    "bateria pequeña"
+                                ]
                             }
                         },
                         {
@@ -483,6 +494,30 @@
                 {
                     "name": "element",
                     "values": [
+                        {
+                            "name": {
+                                "value": "trampa",
+                                "synonyms": [
+                                    "sendero con trampa"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "camino",
+                                "synonyms": [
+                                    "camino de animales"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "sendero",
+                                "synonyms": [
+                                    "sendero de animales"
+                                ]
+                            }
+                        },
                         {
                             "name": {
                                 "value": "verja de metal"
@@ -563,6 +598,16 @@
                 {
                     "name": "npc",
                     "values": [
+                        {
+                            "name": {
+                                "value": "administrador"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "tom"
+                            }
+                        },
                         {
                             "name": {
                                 "value": "mercader"
