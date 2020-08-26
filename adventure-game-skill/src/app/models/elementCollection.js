@@ -104,7 +104,7 @@ module.exports = class ElementCollection {
                         // (the trap specifies the time to pass in the 2 penultimates letters of his name)
                         const hoursSinceTrapWasSet = (Date.now() - timeSet) / 3600000; // miliseconds to hours
                         const trapHours = parseInt(trapObjectUsed.substr(trapObjectUsed.length - 3, 2));
-                        if (hoursSinceTrapWasSet >= 0.008) { // trapHours
+                        if (hoursSinceTrapWasSet >= trapHours) { // 'trapHours' is real value, set 0.008 (30 secs) for testing 
                             // give the user the trap back
                             voxaEvent.model.game.inventory.objects[trapObjectUsed] = 1;
                             // replace the element
