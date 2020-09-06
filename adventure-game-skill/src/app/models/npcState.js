@@ -4,5 +4,6 @@ module.exports = class NpcState {
         // returns empty or the sceneName of the next scene to reproduce
         this.mentionQuote = data.mentionQuote // String, quote to describe when the player reachs a location with the npc and has not talked to him yet
         this.speech = data.speech; // String, resturns the string with the speech that the npc has to say depending on the model.
+        this.speechAlreadyTalked = data.speechAlreadyTalked // String, resturns the string with the speech that the npc has to say if already talked to him
     }
 }
