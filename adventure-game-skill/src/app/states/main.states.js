@@ -499,14 +499,23 @@ function register(voxaApp) {
             to: nextScene,
           };
         }
-        // In other case describe the conversation with the npc.
+        // In other case describe the conversation with the npc depending on alreadyTalked
         voxaEvent.model.control.elementOrObjectToDescribe = npc;
         voxaEvent.model.control.npcStateToDescribe = npcState;
-        return {
-          flow: "yield",
-          reply: "DescribeTalkToView",
-          to: "freeRoamState",
-        };
+
+        if (alreadyTalked){
+          return {
+            flow: "yield",
+            reply: "DescribeTalkToAlreadyTalkedView",
+            to: "freeRoamState",
+          };
+        } else {
+          return {
+            flow: "yield",
+            reply: "DescribeTalkToView",
+            to: "freeRoamState",
+          };
+        }
       } else {
         // Fallback: if the npc is not in the location then say it
         return {
@@ -873,9 +882,6 @@ function register(voxaApp) {
         to: "freeRoamState",
       };
 
-    } else if (voxaEvent.intent.name === "ActionCheckWhatToDo") {
-      // Missions help here
-
     } else if (voxaEvent.intent.name === "ActionCheckWhoIsHere") {
       // if there are npcs return their description
       if (Object.keys(voxaEvent.model.game.map.locations[voxaEvent.model.game.map.currentLocation].npcs).length) {
@@ -1130,7 +1136,7 @@ function register(voxaApp) {
   });
 
   voxaApp.onState("scene1_1_explosionAlone", voxaEvent => {
-    voxaEvent.model.game.choices.explosionWith = "alone";
+    voxaEvent.model.game.choices.explosionWithSandra = false;
 
     return {
       flow: "continue",
@@ -1152,7 +1158,7 @@ function register(voxaApp) {
   });
 
   voxaApp.onState("scene1_2_explosionWithSandra", voxaEvent => {
-    voxaEvent.model.game.choices.explosionWith = "sandra";
+    voxaEvent.model.game.choices.explosionWithSandra = true;
 
     return {
       flow: "continue",
@@ -1161,7 +1167,7 @@ function register(voxaApp) {
     };
   });
   voxaApp.onState("scene1_2_wakeUpWithSandra", voxaEvent => {
-    voxaEvent.model.game.resources.water += 5;
+    voxaEvent.model.game.resources.water += 10;
     // Set next state to describeLocationState which leads to freeRoamState 
     // Set the current location as well.
     voxaEvent.model.game.map.currentLocation = "southForest1";
