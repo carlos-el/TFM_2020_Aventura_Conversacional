@@ -137,7 +137,8 @@ module.exports = class Map {
                             return true;
                         },
                         go: function (game) {
-                            if (!("riverBankPowerPlant" in game.map.locations)) {
+                            if (!("riverBankPowerPlant" in game.map.locations) && 
+                            !("fishermanVillage" in game.map.locations)) {
                                 return "scene7_crossBridge2";
                             }
 
@@ -448,7 +449,12 @@ module.exports = class Map {
                         },
                         go: function (game) { 
                             if (!("road_fishermanVillage_highway" in game.map.locations)) {
-                                return "scene5_crossBridge1";
+                                if (game.choices.chadAlive){
+                                    return "scene5_crossBridge1";
+                                } else {
+                                    return "scene6_reachBridge1FromOtherSide";
+                                }
+                                
                             }
                             return ""; 
                         },
@@ -932,7 +938,12 @@ module.exports = class Map {
                         },
                         go: function (game) { 
                             if (!("road_fishermanVillage_highway" in game.map.locations)) {
-                                return "scene6_reachBridge1FromOtherSide";
+                                if (game.choices.chadAlive){
+                                    return "scene5_crossBridge1";
+                                } else {
+                                    return "scene6_reachBridge1FromOtherSide";
+                                }
+                                
                             }
                             return ""; 
                         },
