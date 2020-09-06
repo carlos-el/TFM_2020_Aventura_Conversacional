@@ -104,6 +104,9 @@
       "DescribeTalkToView": {
         "say": "{describeTalkTo}"
       },
+      "DescribeTalkToAlreadyTalkedView": {
+        "say": "{describeTalkToAlready}"
+      },
       "DrescribeBuyObjectView": {
         "say": "<voice name='{playerVoice}'>{describeObjectBuy}</voice>"
       },
@@ -260,7 +263,7 @@
         "say": "El resto de niños montan alboroto mientras caminas hacia el tobogán. Subes las escaleras lentamente mientras Sandra te mira sonriente desde un lado. De repente se oye un sonido atronador. <audio src='soundbank://soundlibrary/explosions/explosions/explosions_01'/> La habitación comienza a temblar y caen enormes bloques de escombros del techo. Sandra se avalanza rapidamente sobre ti y te coge entre sus brazos."
       },
       "scene1_2_wakeUpWithSandra_NarrativeView": {
-        "say": "<audio src='soundbank://soundlibrary/aircrafts/futuristic/futuristic_15'/> <voice name='{playerVoice}'>Aggggh, mi cabeza. Solo era un sueño</voice>. <voice name='{sandraVoice}'>Vaya, ya era hora de que despertaras. Pareces aturdid{sexSuffix}. Toma algo de agua.</voice> <voice name='{playerVoice}'>Hola Sandra, ¿que me ha pasado?</voice> <voice name='{sandraVoice}'>¿No te acuerdas? Ibas corriendo detrás de un conejo y te has dado un golpe en la cabeza con una rama. Ha sido lo más penoso que he visto en mucho tiempo. Deberias ir pensando en levantarte. Tenemos que recoger lo que hemos encontrado y volver al campamento. Te estaré esperando más adelante.</voice> <voice name='{playerVoice}'>De acuerdo. Dame un segundo y me pongo en marcha. Vale, creo que ya empiezo a recordar.</voice>"
+        "say": "<audio src='soundbank://soundlibrary/aircrafts/futuristic/futuristic_15'/> <voice name='{playerVoice}'>Aggggh, mi cabeza. Solo era un sueño</voice>. <voice name='{sandraVoice}'>Vaya, ya era hora de que despertaras. Pareces aturdid{sexSuffix}. Toma algo de agua.</voice> <voice name='{playerVoice}'>Hola Sandra, ¿que me ha pasado?</voice> <voice name='{sandraVoice}'>¿No te acuerdas? Ibas corriendo detrás de un conejo y te has dado un golpe en la cabeza con una rama. Ha sido lo más penoso que he visto en mucho tiempo. Deberias ir pensando en levantarte. Hemos ido bastante al sur. Tenemos que recoger lo que hemos encontrado y volver al campamento. Te estaré esperando más adelante.</voice> <voice name='{playerVoice}'>De acuerdo. Dame un segundo y me pongo en marcha. Vale, creo que ya empiezo a recordar.</voice>"
       }
 
     }

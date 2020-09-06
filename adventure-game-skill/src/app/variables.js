@@ -174,6 +174,24 @@ exports.describeTalkTo = function (voxaEvent) {
   
   return "<voice name='" + voice + "'>" + speech + speechMerchant + "</voice>";
 };
+exports.describeTalkToAlready = function (voxaEvent) {
+  const state = voxaEvent.model.control.npcStateToDescribe;
+  const voice = nc.npcs[voxaEvent.model.control.elementOrObjectToDescribe].voice;
+  const speech = nc.npcs[voxaEvent.model.control.elementOrObjectToDescribe].states[state].speechAlreadyTalked;
+  
+  const merchant = nc.npcs[voxaEvent.model.control.elementOrObjectToDescribe].merchant;
+  let speechMerchant = "";
+
+  // if the npc is the camp administrator then print his speech
+  if (voxaEvent.model.control.elementOrObjectToDescribe === "tom" && merchant.locations.includes(voxaEvent.model.game.map.currentLocation)) {
+    speechMerchant = describeCampAdministratorSpeech(voxaEvent);
+  }// if is merchant and is in the right location add the merchant speech 
+  else if (merchant && merchant.locations.includes(voxaEvent.model.game.map.currentLocation)) {
+    speechMerchant = describeMerchantSpeech(voxaEvent);
+  } 
+  
+  return "<voice name='" + voice + "'>" + speech + speechMerchant + "</voice>";
+};
 exports.describeObjectBuy = function (voxaEvent) {
   return "Creo que compraré esto.";
 };
