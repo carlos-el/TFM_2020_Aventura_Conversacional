@@ -16,13 +16,13 @@ class Model {
     this.game = {
       // Stores the players discovered places and some infor about them.
       map: {
-        obtained: true,
+        obtained: false,
         currentLocation: null,
         mainLocations: [], //Name of the locations where the player can travel to
         locations: {},
       },
       inventory: {
-        obtained: true,
+        obtained: false,
         size: 3,
         objects: {}
       },
@@ -63,13 +63,13 @@ class Model {
     return {
       // Stores the players discovered places and some infor about them.
       map: {
-        obtained: true,
+        obtained: false,
         currentLocation: null,
         mainLocations: [], //Name of the locations where the player can travel to
         locations: {},
       },
       inventory: {
-        obtained: true,
+        obtained: false,
         size: 3,
         objects: {}
       },
