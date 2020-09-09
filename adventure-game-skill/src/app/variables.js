@@ -34,6 +34,16 @@ exports.playerDoorColor = function (voxaEvent) {
     return "rosa";
 };
 
+exports.generalFreeRoamReprompt = function (voxaEvent) {
+  const instros = ["<say-as interpret-as='interjection'>mmh</say-as>. ¿Qué debería hacer ahora?", 
+    "<say-as interpret-as='interjection'>mmh</say-as>. ¿Qué hago?", 
+    "<say-as interpret-as='interjection'>mmh</say-as>. ¿Qué puedo hacer?", 
+    "<say-as interpret-as='interjection'>mmh</say-as>.", 
+    "<say-as interpret-as='interjection'>mmh</say-as>. Está quedando buen día para hacer algo."];
+
+  return intros[Math.floor(Math.random() * intros.length)];
+};
+
 ///// VOICES /////
 exports.playerVoice = playerVoice = function (voxaEvent) {
   if (voxaEvent.model.game.choices.sex === "male")

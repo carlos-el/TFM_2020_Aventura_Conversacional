@@ -21,11 +21,13 @@
       },
 
       "tellMainMenuOptionView": {
-        "say": "¿Qué quieres hacer? ¿Empezar una nueva partida, continuar tu última partida o jugar el tutorial?"
+        "say": "¿Qué quieres hacer? ¿Empezar una nueva partida, continuar tu última partida o jugar el tutorial?",
+        "reprompt": "¿Empezar una nueva partida, continuar tu última partida o jugar el tutorial?"
       },
 
       "startGameView": {
-        "say": "Empezar una nueva partida sobreescribirá la partida que haya guardado previamente. ¿Está seguro de que quiere realizar esta acción?"
+        "say": "Empezar una nueva partida sobreescribirá la partida que haya guardado previamente. ¿Está seguro de que quiere realizar esta acción?",
+        "reprompt": "¿Está seguro de que quiere sobreescribir la última partida?"
       },
       "startTutorialView": {
         "say": "De acuerdo, allá van algunos consejos."
@@ -43,7 +45,8 @@
         "say": "Partida de respaldo cargada con éxito. Guarde cuando pueda para sobreescribir su partida anterior."
       },
       "askLoadAlternativeGameView": {
-        "say": "La última vez el juego se cerró inesperadamente. ¿Quiere continuar por donde lo dejó en ese momento?"
+        "say": "La última vez el juego se cerró inesperadamente. ¿Quiere continuar por donde lo dejó en ese momento?",
+        "reprompt": "¿Quiere continuar por donde lo dejó en ese momento?"
       },
       "gameLoadErrorView": {
         "say": "No hemos podido encontrar una partida guardada para su cuenta."
@@ -72,148 +75,195 @@
       },
 
       "DescribeInspectElementOrObjectView": {
-        "say": "<voice name='{playerVoice}'>{describeInspectElementOrObject}</voice>"
+        "say": "<voice name='{playerVoice}'>{describeInspectElementOrObject}</voice>",
+        "reprompt": "<voice name='{playerVoice}'>{generalFreeRoamReprompt}</voice>"
       },
       "DescribePickUpObjectView": {
-        "say": "<voice name='{playerVoice}'>{describePickUpObject}</voice>"
+        "say": "<voice name='{playerVoice}'>{describePickUpObject}</voice>",
+        "reprompt": "<voice name='{playerVoice}'>{generalFreeRoamReprompt}</voice>"
       },
       "DescribePathView": {
-        "say": "<voice name='{playerVoice}'>{describePath}</voice>"
+        "say": "<voice name='{playerVoice}'>{describePath}</voice>",
+        "reprompt": "<voice name='{playerVoice}'>{generalFreeRoamReprompt}</voice>"
       },
       "DescribePathProblemView": {
-        "say": "<voice name='{playerVoice}'>{describePathProblem}</voice>"
+        "say": "<voice name='{playerVoice}'>{describePathProblem}</voice>",
+        "reprompt": "<voice name='{playerVoice}'>{generalFreeRoamReprompt}</voice>"
       },
       "DescribeToDirectLocationView": {
-        "say": "<voice name='{playerVoice}'>{describeToDirectLocation}</voice>"
+        "say": "<voice name='{playerVoice}'>{describeToDirectLocation}</voice>",
+        "reprompt": "<voice name='{playerVoice}'>{generalFreeRoamReprompt}</voice>"
       },
       "DescribeLocationView": {
-        "say": "<voice name='{playerVoice}'>{describeLocationFullQuote}</voice>"
+        "say": "<voice name='{playerVoice}'>{describeLocationFullQuote}</voice>",
+        "reprompt": "<voice name='{playerVoice}'>{generalFreeRoamReprompt}</voice>"
       },
       "DescribeLocationWithStoryView": {
-        "say": "<voice name='{playerVoice}'>{describeLocationFullQuoteWithStory}</voice>"
+        "say": "<voice name='{playerVoice}'>{describeLocationFullQuoteWithStory}</voice>",
+        "reprompt": "<voice name='{playerVoice}'>{generalFreeRoamReprompt}</voice>"
       },
       "DescribeDropObjectView": {
-        "say": "<voice name='{playerVoice}'>{describeDropObject}</voice>"
+        "say": "<voice name='{playerVoice}'>{describeDropObject}</voice>",
+        "reprompt": "<voice name='{playerVoice}'>{generalFreeRoamReprompt}</voice>"
       },
       "DescribeUseObjectView": {
-        "say": "<voice name='{playerVoice}'>{describeUseObject}</voice>"
+        "say": "<voice name='{playerVoice}'>{describeUseObject}</voice>",
+        "reprompt": "<voice name='{playerVoice}'>{generalFreeRoamReprompt}</voice>"
       },
       "DescribeCombineObjectView": {
-        "say": "<voice name='{playerVoice}'>{describeCombineObject}</voice>"
+        "say": "<voice name='{playerVoice}'>{describeCombineObject}</voice>",
+        "reprompt": "<voice name='{playerVoice}'>{generalFreeRoamReprompt}</voice>"
       },
       "DescribeTalkToView": {
-        "say": "{describeTalkTo}"
+        "say": "{describeTalkTo}",
+        "reprompt": "<voice name='{playerVoice}'>{generalFreeRoamReprompt}</voice>"
       },
       "DescribeTalkToAlreadyTalkedView": {
-        "say": "{describeTalkToAlready}"
+        "say": "{describeTalkToAlready}",
+        "reprompt": "<voice name='{playerVoice}'>{generalFreeRoamReprompt}</voice>"
       },
       "DrescribeBuyObjectView": {
-        "say": "<voice name='{playerVoice}'>{describeObjectBuy}</voice>"
+        "say": "<voice name='{playerVoice}'>{describeObjectBuy}</voice>",
+        "reprompt": "<voice name='{playerVoice}'>{generalFreeRoamReprompt}</voice>"
       },
       "DescribeGiveToAdministratorView": {
-        "say": "<voice name='{playerVoice}'>Toma, te he traido esto. <voice name='{administratorVoice}'>Vaya muchas gracias, con estó estamos un poco más cerca de subir el campamento al próximo nivel.</voice></voice>"
+        "say": "<voice name='{playerVoice}'>Toma, te he traido esto. <voice name='{administratorVoice}'>Vaya muchas gracias, con estó estamos un poco más cerca de subir el campamento al próximo nivel.</voice></voice>",
+        "reprompt": "<voice name='{playerVoice}'>{generalFreeRoamReprompt}</voice>"
       },
       "DescribeGiveToAdministratorLevelsUpView": {
-        "say": "<voice name='{playerVoice}'>{describeGiveToAdministratorLevelsUp}</voice>"
+        "say": "<voice name='{playerVoice}'>{describeGiveToAdministratorLevelsUp}</voice>",
+        "reprompt": "<voice name='{playerVoice}'>{generalFreeRoamReprompt}</voice>"
       },
 
       "DescribeCheckResourcesView": {
-        "say": "<voice name='{playerVoice}'>{describeCheckResources}</voice>"
+        "say": "<voice name='{playerVoice}'>{describeCheckResources}</voice>",
+        "reprompt": "<voice name='{playerVoice}'>{generalFreeRoamReprompt}</voice>"
       },
       "DescribeCheckInventoryView": {
-        "say": "<voice name='{playerVoice}'>{describeCheckInventory}</voice>"
+        "say": "<voice name='{playerVoice}'>{describeCheckInventory}</voice>",
+        "reprompt": "<voice name='{playerVoice}'>{generalFreeRoamReprompt}</voice>"
       },
       "DescribeCheckWhoIsHereView": {
-        "say": "<voice name='{playerVoice}'>{describeNpcs}</voice>"
+        "say": "<voice name='{playerVoice}'>{describeNpcs}</voice>",
+        "reprompt": "<voice name='{playerVoice}'>{generalFreeRoamReprompt}</voice>"
       },
       "DescribeCheckMapView": {
-        "say": "<voice name='{playerVoice}'>{describeCheckMap}</voice>"
+        "say": "<voice name='{playerVoice}'>{describeCheckMap}</voice>",
+        "reprompt": "<voice name='{playerVoice}'>{generalFreeRoamReprompt}</voice>"
       },
       "DescribeCheckWhereCanIGoView": {
-        "say": "<voice name='{playerVoice}'>{describeExistingPaths}</voice>"
+        "say": "<voice name='{playerVoice}'>{describeExistingPaths}</voice>",
+        "reprompt": "<voice name='{playerVoice}'>{generalFreeRoamReprompt}</voice>"
       },
       "DescribeHelp": {
-        "say": "<voice name='{playerVoice}'>Veamos. Cuando esté explorando puedo comprobar ¿cuántos recursos tengo? También puedo preguntarme, dónde estoy para saber quíen o que hay en este lugar. Si quiero saber lo que tengo solo tengo que, abrir mi mochila. Puedo viajar directamente a los lugares que reconozca al, abrir mi mapa. Por último también puedo pararme a pensar y preguntarme ¿qué tengo que hacer?.</voice><break time='1s'/> Si necesitas algo más de ayuda para avanzar puedes guardar tu partida y completar el tutorial disponible en el menú de inicio."
+        "say": "<voice name='{playerVoice}'>Veamos. Cuando esté explorando puedo comprobar ¿cuántos recursos tengo? También puedo preguntarme, dónde estoy para saber quíen o que hay en este lugar. Si quiero saber lo que tengo solo tengo que, abrir mi mochila. Puedo viajar directamente a los lugares que reconozca al, abrir mi mapa. Por último también puedo pararme a pensar y preguntarme ¿qué tengo que hacer?.</voice><break time='1s'/> Si necesitas algo más de ayuda para avanzar puedes guardar tu partida y completar el tutorial disponible en el menú de inicio.",
+        "reprompt": "<voice name='{playerVoice}'>{generalFreeRoamReprompt}</voice>"
       },
       "DescribeCloseGame": {
-        "say": "¿Quieres guardar la partida antes de salir?" 
+        "say": "¿Quieres guardar la partida antes de salir?",
+        "reprompt": "Entonces ¿Quieres guardar la partida antes de salir?"
       },
 
 
       "NotUnderstoodFallbackView": {
-        "say": "Lo siento, no he entendido lo que querías decir."
+        "say": "Lo siento, no he entendido lo que querías decir.",
+        "reprompt": "¿Puedes repetírmelo?"
       },
       "FreeRoamFallbackView": {
-        "say": "<voice name='{playerVoice}'>Creo que no entiendo muy bien que tengo que hacer.</voice>"
+        "say": "<voice name='{playerVoice}'>Creo que no entiendo muy bien que tengo que hacer.</voice>",
+        "reprompt": "<voice name='{playerVoice}'>{generalFreeRoamReprompt}</voice>"
       },
       "DescribeFallbackNotFoundView": {
-        "say": "<voice name='{playerVoice}'>No puedo encontrar ese objeto por aquí.</voice>"
+        "say": "<voice name='{playerVoice}'>No puedo encontrar ese objeto por aquí.</voice>",
+        "reprompt": "<voice name='{playerVoice}'>{generalFreeRoamReprompt}</voice>"
       },
       "DescribeFallbackNotFoundInInventoryView": {
-        "say": "<voice name='{playerVoice}'>Ese objeto no esta en mi mochila</voice>"
+        "say": "<voice name='{playerVoice}'>Ese objeto no esta en mi mochila</voice>",
+        "reprompt": "<voice name='{playerVoice}'>{generalFreeRoamReprompt}</voice>"
       },
       "DescribePickUpObjectFailFullInventoryView": {
-        "say": "<voice name='{playerVoice}'>Vaya, tengo la mochila llena. Tendré que hacer hueco antes de coger cualquier objeto.</voice>"
+        "say": "<voice name='{playerVoice}'>Vaya, tengo la mochila llena. Tendré que hacer hueco antes de coger cualquier objeto.</voice>",
+        "reprompt": "<voice name='{playerVoice}'>{generalFreeRoamReprompt}</voice>"
       },
       "DescribePickUpObjectFailNoInventoryView": {
-        "say": "<voice name='{playerVoice}'>No tengo una mochila donde guardar esto. Debo enconttrar algo para levar mis cosas.</voice>"
+        "say": "<voice name='{playerVoice}'>No tengo una mochila donde guardar esto. Debo enconttrar algo para levar mis cosas.</voice>",
+        "reprompt": "<voice name='{playerVoice}'>{generalFreeRoamReprompt}</voice>"
       },
       "DescribeDropObjectFailNoInventoryView": {
-        "say": "<voice name='{playerVoice}'>No tengo nada, debería buscar algo para guardar mis cosas.</voice>"
+        "say": "<voice name='{playerVoice}'>No tengo nada, debería buscar algo para guardar mis cosas.</voice>",
+        "reprompt": "<voice name='{playerVoice}'>{generalFreeRoamReprompt}</voice>"
       },
       "DescribeUseObjectCantUseView": {
-        "say": "<voice name='{playerVoice}'>{describeUseObjectFail}</voice>"
+        "say": "<voice name='{playerVoice}'>{describeUseObjectFail}</voice>",
+        "reprompt": "<voice name='{playerVoice}'>{generalFreeRoamReprompt}</voice>"
       },
       "DescribeUseObjectFailNotFoundView": {
-        "say": "<voice name='{playerVoice}'>No veo por ninguna parte donde tengo que usar el objeto.</voice>"
+        "say": "<voice name='{playerVoice}'>No veo por ninguna parte donde tengo que usar el objeto.</voice>",
+        "reprompt": "<voice name='{playerVoice}'>{generalFreeRoamReprompt}</voice>"
       },
       "DescribeUseObjectFailNotFoundInInventoryView": {
-        "say": "<voice name='{playerVoice}'>No tengo el objeto que tengo que usar en mi mochila. Debo conseguirlo antes.</voice>"
+        "say": "<voice name='{playerVoice}'>No tengo el objeto que tengo que usar en mi mochila. Debo conseguirlo antes.</voice>",
+        "reprompt": "<voice name='{playerVoice}'>{generalFreeRoamReprompt}</voice>"
       },
       "DescribeCombineObjectFailNoObjectFoundView": {
-        "say": "<voice name='{playerVoice}'>No llevo en la mochila todos los objetos que tengo que combinar.</voice>"
+        "say": "<voice name='{playerVoice}'>No llevo en la mochila todos los objetos que tengo que combinar.</voice>",
+        "reprompt": "<voice name='{playerVoice}'>{generalFreeRoamReprompt}</voice>"
       },
       "DescribeCombineObjectFailView": {
-        "say": "<voice name='{playerVoice}'>{describeCombineObjectFail}</voice>"
+        "say": "<voice name='{playerVoice}'>{describeCombineObjectFail}</voice>",
+        "reprompt": "<voice name='{playerVoice}'>{generalFreeRoamReprompt}</voice>"
       },
       "DescribePathFailNoPathView": {
-        "say": "<voice name='{playerVoice}'>No parece haber un camino en esa dirección. Tendré que ir en otra dirección.</voice>"
+        "say": "<voice name='{playerVoice}'>No parece haber un camino en esa dirección. Tendré que ir en otra dirección.</voice>",
+        "reprompt": "<voice name='{playerVoice}'>{generalFreeRoamReprompt}</voice>"
       },
       "DescribeToDirectLocationFailAlreadyThereView": {
-        "say": "<voice name='{playerVoice}'>Ya estoy en ese lugar. No tengo por que moverme más.</voice>"
+        "say": "<voice name='{playerVoice}'>Ya estoy en ese lugar. No tengo por que moverme más.</voice>",
+        "reprompt": "<voice name='{playerVoice}'>{generalFreeRoamReprompt}</voice>"
       },
       "DescribeToDirectLocationFailNotFoundView": {
-        "say": "<voice name='{playerVoice}'>No veo que ese lugar aparezca como localización principal en mi mapa.</voice>"
+        "say": "<voice name='{playerVoice}'>No veo que ese lugar aparezca como localización principal en mi mapa.</voice>",
+        "reprompt": "<voice name='{playerVoice}'>{generalFreeRoamReprompt}</voice>"
       },
       "DescribeTalkToFailPersonNotFoundView": {
-        "say": "<voice name='{playerVoice}'>Esa persona no esta aquí, no puedo hablar con ella.</voice>"
+        "say": "<voice name='{playerVoice}'>Esa persona no esta aquí, no puedo hablar con ella.</voice>",
+        "reprompt": "<voice name='{playerVoice}'>{generalFreeRoamReprompt}</voice>"
       },
       "DrescribeBuyObjectFailNoObjectView": {
-        "say": "<voice name='{playerVoice}'>No veo que nadie venda ese objeto por aquí.</voice>"
+        "say": "<voice name='{playerVoice}'>No veo que nadie venda ese objeto por aquí.</voice>",
+        "reprompt": "<voice name='{playerVoice}'>{generalFreeRoamReprompt}</voice>"
       },
       "DrescribeBuyObjectFailCantPayView": {
-        "say": "<voice name='{playerVoice}'>No tengo lo necesario para comprar ese objeto. Volveré cuando lo tenga.</voice>"
+        "say": "<voice name='{playerVoice}'>No tengo lo necesario para comprar ese objeto. Volveré cuando lo tenga.</voice>",
+        "reprompt": "<voice name='{playerVoice}'>{generalFreeRoamReprompt}</voice>"
       },
       "DescribeGiveToAdministratorFailZeroView": {
-        "say": "<voice name='{playerVoice}'>Si no le voy a dar nada mejor no hablar con el la verdad.</voice>"
+        "say": "<voice name='{playerVoice}'>Si no le voy a dar nada mejor no hablar con él la verdad.</voice>",
+        "reprompt": "<voice name='{playerVoice}'>{generalFreeRoamReprompt}</voice>"
       },
       "DescribeGiveToAdministratorFailNotAcceptingView": {
-        "say": "<voice name='{playerVoice}'>Este no es el lugar adecuado para darle los recursos al administrador.</voice>"
+        "say": "<voice name='{playerVoice}'>Este no es el lugar adecuado para darle los recursos al administrador.</voice>",
+        "reprompt": "<voice name='{playerVoice}'>{generalFreeRoamReprompt}</voice>"
       },
       "DescribeGiveToAdministratorFailNoResourcesView": {
-        "say": "<voice name='{playerVoice}'>¡No tengo tantos recursos!. Debería revisar cuantos tengo antes de hacer esto.</voice>"
+        "say": "<voice name='{playerVoice}'>¡No tengo tantos recursos!. Debería revisar cuantos tengo antes de hacer esto.</voice>",
+        "reprompt": "<voice name='{playerVoice}'>{generalFreeRoamReprompt}</voice>"
       },
       "DescribeCheckInventoryFailNoBagView": {
-        "say": "<voice name='{playerVoice}'>No tengo una mochila donde guardar mis cosas. Debería hacerme con una.</voice>"
+        "say": "<voice name='{playerVoice}'>No tengo una mochila donde guardar mis cosas. Debería hacerme con una.</voice>",
+        "reprompt": "<voice name='{playerVoice}'>{generalFreeRoamReprompt}</voice>"
       },
       "DescribeCheckWhoIsHereFailNoOneView": {
-        "say": "<voice name='{playerVoice}'>Aquí no hay nadie con quien hablar.</voice>"
+        "say": "<voice name='{playerVoice}'>Aquí no hay nadie con quien hablar.</voice>",
+        "reprompt": "<voice name='{playerVoice}'>{generalFreeRoamReprompt}</voice>"
       },
       "DescribeCheckWhereCanIGoFailNoWhereView": {
-        "say": "<voice name='{playerVoice}'>No veo ningún camino por el que pueda ir. Debo encontrar la manera de salir de aquí.</voice>"
+        "say": "<voice name='{playerVoice}'>No veo ningún camino por el que pueda ir. Debo encontrar la manera de salir de aquí.</voice>",
+        "reprompt": "<voice name='{playerVoice}'>{generalFreeRoamReprompt}</voice>"
       },
       "DescribeCheckMapFailNoMapView": {
-        "say": "<voice name='{playerVoice}'>No tengo ningún mapa. Debería conseguir uno pasa saber donde puedo ir.</voice>"
+        "say": "<voice name='{playerVoice}'>No tengo ningún mapa. Debería conseguir uno pasa saber donde puedo ir.</voice>",
+        "reprompt": "<voice name='{playerVoice}'>{generalFreeRoamReprompt}</voice>"
       },
 
 
@@ -222,10 +272,12 @@
         "say": "<audio src='soundbank://soundlibrary/transportation/amzn_sfx_car_into_driveway_01'/> <audio src='soundbank://soundlibrary/transportation/amzn_sfx_car_close_door_1x_01'/> <audio src='soundbank://soundlibrary/transportation/amzn_sfx_car_close_door_1x_02'/> <audio src='soundbank://soundlibrary/human/amzn_sfx_human_walking_03'/> <voice name='{fatherVoice}'> Como los abuelos no están tienes que venir conmigo al trabajo. Te quedarás en la guardería del laboratorio hasta que salga, ¿vale?. Hola Sandra, mis padres están de viaje, se quedará contigo hasta que acabe mi turno.</voice> <voice name='{sandraVoice}'>Claro, no hay problema. Buenos dias joven</voice>"
       },
       "scene1_askPlayerName_NarrativeView": {
-        "say": "<voice name='{sandraVoice}'>Bueno, ¿cómo te llamas?</voice>"
+        "say": "<voice name='{sandraVoice}'>Bueno, ¿cómo te llamas?</voice>",
+        "reprompt": "<voice name='{sandraVoice}'>¿Cómo te llamas?</voice>"
       },
       "scene1_getPlayerNameConfirm_NarrativeView": {
-        "say": "<voice name='{sandraVoice}'>¿Entonces tu nombre es {playerName}, cierto?</voice>"
+        "say": "<voice name='{sandraVoice}'>¿Entonces tu nombre es {playerName}, cierto?</voice>",
+        "reprompt": "<voice name='{sandraVoice}'>¿Tu nombre es {playerName}, cierto?</voice>"
       },
       "scene1_nameNotUnderstoodView": {
         "say": "<voice name='{sandraVoice}'>Lo siento, no he entendido tu nombre.</voice>"
@@ -235,10 +287,12 @@
         "say": "<voice name='{sandraVoice}'>Bueno, espero que nos llevemos bien {playerName}. Vaya, parece que te has levantado algo tarde, aún tienes legañas jajaja. Puedes lavarte la cara en los baños, estan ahí enfrente.</voice> Te dirijes hacia los baños lentamente. Cuando llegas hay dos puertas. La puerta de la derecha tiene un triangulo pintado por encima del pomo y es de color rosa y la de la izquierda tiene un círculo en el mismo sitio y es azul."
       },
       "scene1_askPlayerSex_NarrativeView": {
-        "say": "¿Por que puerta entras? ¿La rosa de la derecha o la azul de la izquierda?"
+        "say": "¿Por que puerta entras? ¿La rosa de la derecha o la azul de la izquierda?",
+        "reprompt": "¿La rosa o la azul?"
       },
       "scene1_getPlayerSexConfirm_NarrativeView": {
-        "say": "Entonces ¿escoges la puerta {playerDoorColor}?"
+        "say": "Entonces ¿escoges la puerta {playerDoorColor}?",
+        "reprompt": "¿Escoges la puerta {playerDoorColor}?"
       },
       "scene1_doorNotUnderstoodView": {
         "say": "Lo siento, no he entendido que puerta has escogido."
@@ -251,7 +305,8 @@
         "say": "Despues de desperezarte y refrescarte sales del baño. Te encuentras en el parque de juegos de la guardería. A la derecha, entorno a un pequeño tobogán está Sandra junto a unos cuantos niños. A la izquierda, en un rincón, hay una pila de juguetes. Mientras los miras Sandra te dice:<voice name='{sandraVoice}'> Anda, ven a jugar con nosotros.</voice>"
       },
       "scene1_askPlaygroundSide_NarrativeView": {
-        "say": "¿Qué haces? ¿Jugar con los juguetes o jugar con los niños?"
+        "say": "¿Qué haces? ¿Jugar con los juguetes o jugar con los niños?",
+        "reprompt": "¿Con los juguetes o con los niños?"
       },
       "scene1_1_explosionAlone_NarrativeView": {
         "say": "Miras a Sandra durante un segundo. Después bajas la cabeza y te diriges lentamente hacia la pila de juguetes. Pasas un rato jugando con algunos cochecitos y peluches hasta que, de repente, <audio src='soundbank://soundlibrary/explosions/explosions/explosions_01'/> escuchas un sonido atronador. La habitación comienza a temblar y se desprenden enormes bloques de escombros del techo mientras corres hacia la puerta junto con el resto de niños."
