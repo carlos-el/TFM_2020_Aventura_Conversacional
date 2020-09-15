@@ -1,0 +1,28 @@
+extends layout
+
+block content
+  h1 ¡Bienvenido a la clasificación de Expedición Salvamento!
+  h2 Introduce tu identificador para saber en que puesto estás.
+  br
+
+  form(action='/ranking#ranking', method='GET')
+    p
+      | Identificador de usuario: 
+    input(type='text', name='id', value='')
+    |          
+    input(type='submit', value='Submit')
+
+  br
+  br
+
+  table.table
+      tr
+        th Identificador
+        th Puntuación
+        th Posición
+      tbody
+        each user in users
+          tr
+            td #{user._id}
+            td #{user.campQuantity}
+            td #{user.position}

@@ -1,0 +1,80 @@
+extends layout
+
+block content
+  h1 ¡Bienvenido a la lista de comandos de Expedición Salvamento!
+  h3 
+    | En la siguiente tabla encontrarás los comandos disponibles en el juego.
+    br
+    | Ten en cuenta que algunos de ellos también pueden ser invocados de otra manera, pero usando estas reglas no te equivocarás.
+
+  br
+
+  table.table
+        tbody
+            tr.headRow
+                th.command Comandos de ayuda
+                th.use Utilidad
+            tr
+                td Abrir mapa *(Si tienes un mapa).
+                td Muestra la localización actual y los lugares a los que puedes viajar directamente.
+            tr
+                td Abrir mochila *(Si tienes una mochila).
+                td Muestra los objetos de la mochila y el espacio restante.
+            tr
+                td ¿Qué/Cuántos [recursos/chatarra/alimento/agua] tengo?
+                td Muestra cuántos recursos tienes en el inventario.
+            tr
+                td ¿Dónde estoy?
+                td Da información sobre la localización actual.
+            tr
+                td ¿Quién hay aquí?
+                td Da información sobre los personajes de la localización actual.
+            tr
+                td ¿Hacia dónde puedo ir?
+                td Da información sobre los caminos que se pueden tomar.
+            tr
+                td ¿Qué puedo hacer?
+                td Da información sobre las acciones generales que se pueden realizar.
+            tr.headRow
+                th.command Comandos de interacción con el entorno
+                th.use Utilidad
+            tr
+                td Coger [objeto].
+                td Mete en la mochila el objeto seleccionado.
+            tr
+                td Soltar [objeto].
+                td Tira un objeto de la mochila al suelo.
+            tr
+                td Combinar [objeto] con [objeto].
+                td Combina dos objetos de la mochila para crear otro.
+            tr
+                td Investigar/inspeccionar [elemento/objeto].
+                td Ofrece información sobre el elemento u objeto seleccionado.
+            tr
+                td Usar [objeto] en [elemento].
+                td Usa el objeto seleccionado en el elemento especificado *(El objeto debe estar en la mochila y el elemento presente en la localización actual).
+            tr
+                td Viajar/ir a [localización/norte/sur/este/oeste].
+                td Viaja hacia un punto cardinal o hacia la localización seleccionada si ya se ha visitado
+            tr.headRow
+                th.command Comandos de interacción con personajes
+                th.use Utilidad
+            tr
+                td Hablar con [personaje].
+                td Interactua con el personaje especificado.
+            tr
+                td Comprar [objeto/recurso] a [personaje].
+                td Compras el objeto o recurso seleccionado.
+            tr
+                td Dar pack de [cantidad] a Tom.
+                td Das la cantidad de recursos seleccionada al administrador del campamento. Un pack incluye una unidad de cada recurso. Sole es posible darle los recursos en packs.
+            tr.headRow
+                th.command Comandos adicionales.
+                th.use Utilidad
+            tr
+                td Guardar partida.
+                td Guarda la partida en curso *(solo si no se está en una escena).
+            tr
+                td Salir del juego
+                td Cierra la aplicación.
+
