@@ -29,9 +29,6 @@
         "say": "Empezar una nueva partida sobreescribirá la partida que haya guardado previamente. ¿Está seguro de que quiere realizar esta acción?",
         "reprompt": "¿Está seguro de que quiere sobreescribir la última partida?"
       },
-      "startTutorialView": {
-        "say": "De acuerdo, allá van algunos consejos."
-      },
       "saveGameView": {
         "say": "Partida guardada con éxito. Puede continuar jugando."
       },
@@ -186,7 +183,7 @@
         "reprompt": "<voice name='{playerVoice}'>{generalFreeRoamReprompt}</voice>"
       },
       "DescribePickUpObjectFailNoInventoryView": {
-        "say": "<voice name='{playerVoice}'>No tengo una mochila donde guardar esto. Debo enconttrar algo para levar mis cosas.</voice>",
+        "say": "<voice name='{playerVoice}'>No tengo una mochila donde guardar esto. Debo encontrar algo para llevar mis cosas.</voice>",
         "reprompt": "<voice name='{playerVoice}'>{generalFreeRoamReprompt}</voice>"
       },
       "DescribeDropObjectFailNoInventoryView": {
@@ -267,6 +264,37 @@
       },
 
 
+      "tuto1_tellAboutNotificationsGameWeb": {
+        "say": "Bienvenido al tutorial de ¡Exploración Salvamento! Si vas a jugar de manera habitual te recomendamos que actives las notificacines de esta skill para tener una mejor experiencia. Durante este tutorial te explicaremos el funcionamiento del juego y otras características que de lo contrario deberás descubrir por tí mismo."
+      },
+      "tuto1_askTest": {
+        "say": "Sabiendo esto, ¿quieres hacer el tutorial?",
+        "reprompt": "¿Quieres hacer el tutorial?"
+      },
+      "tuto1_take": {
+        "say": "De acuerdo, allá van algunos consejos."
+      },
+      "tuto1_dontTake": {
+        "say": "De acuerdo. Entonces volvamos al menú principal."
+      },
+      "tuto1_tellEverything": {
+        "say": "Lo primero que debes saber es que siempre que no estés dentro de una narrativa puedes guardar la partida cuando quieras. Si estás en una simplemente sal del juego y cuando lo retomes carga la partida de respaldo. El juego consta de dos partes principales. Una de ellas son las escenas. Estas narran parte de la historia del juego y eventualmente se te hará tomar decisiones de entre una lista de opciones que previamente se te mencionarán. La otra parte principal es el mundo abierto. Cuando las escenas que estés llevando a cabo terminen tendrás acceso a un mundo abierto que podrás explorar y que en ocasiones te llevará a nuevas escenas. En este mundo abierto podrás visitar distintas localizaciones. Cada localización tendrá objetos que podrás coger y combinar entre ellos, elementos que inspeccionar o sobre los que usar dichos objetos y caminos para viajar entre localizaciones. En tu viaje encontrarás personajes con los que podrás hablar. A algunos de ellos podrás comprarles objetos. También habrá un campamento que podrás subir de nivel. Para avanzar en la historia deberás ir resolviendo las misiones que se te presenten. Ten cuidado por que tu manera de resolver los puzles y las decisiones que tomes afectarán a la trama. Eso ha sido todo sobre el juego en general. En cuanto a las acciones que puede realizar en el mundo del juego, puedes consultarlas todas en la web de la aplicación. Con tu identificador de usuario también podrás consultar una clasificación basada en el nivel de tu campamento y algunas ayudas más. Esperamos que te guste el juego."
+      },
+      "tutoFallback": {
+        "say": "No he entendido lo que querías decir. ¿Puedes repetirlo?",
+        "reprompt": "¿Puedes repetirlo?"
+      },
+
+
+
+
+
+
+
+
+
+
+
 
       "scene1_intro_NarrativeView": {
         "say": "<audio src='soundbank://soundlibrary/transportation/amzn_sfx_car_into_driveway_01'/> <audio src='soundbank://soundlibrary/transportation/amzn_sfx_car_close_door_1x_01'/> <audio src='soundbank://soundlibrary/transportation/amzn_sfx_car_close_door_1x_02'/> <audio src='soundbank://soundlibrary/human/amzn_sfx_human_walking_03'/> <voice name='{fatherVoice}'> Como los abuelos no están tienes que venir conmigo al trabajo. Te quedarás en la guardería del laboratorio hasta que salga, ¿vale?. Hola Sandra, mis padres están de viaje, se quedará contigo hasta que acabe mi turno.</voice> <voice name='{sandraVoice}'>Claro, no hay problema. Buenos dias joven</voice>"
@@ -319,6 +347,469 @@
       },
       "scene1_2_wakeUpWithSandra_NarrativeView": {
         "say": "<audio src='soundbank://soundlibrary/aircrafts/futuristic/futuristic_15'/> <voice name='{playerVoice}'>Aggggh, mi cabeza. Solo era un sueño</voice>. <voice name='{sandraVoice}'>Vaya, ya era hora de que despertaras. Pareces aturdid{sexSuffix}. Toma algo de agua.</voice> <voice name='{playerVoice}'>Hola Sandra, ¿que me ha pasado?</voice> <voice name='{sandraVoice}'>¿No te acuerdas? Ibas corriendo detrás de un conejo y te has dado un golpe en la cabeza con una rama. Ha sido lo más penoso que he visto en mucho tiempo. Deberias ir pensando en levantarte. Hemos ido bastante al sur. Tenemos que recoger lo que hemos encontrado y volver al campamento. Te estaré esperando más adelante.</voice> <voice name='{playerVoice}'>De acuerdo. Dame un segundo y me pongo en marcha. Vale, creo que ya empiezo a recordar.</voice>"
+      },
+
+
+
+
+      "scene2_talkToSandraAtCamp": {
+        "say": "<voice name='{playerVoice}'> Hola Sandra, ya he llegado.</voice> <voice name='{sandraVoice}'> Vaya, perfecto. Le daré todo lo que hemos encontrado a Tom, el administrador del campamento. Oye {playerName}, como últimamente estamos mucho de exploración voy a darte una mochila. No es muy grande pero te servirá para llevar lo que encuentres. Así ya no tendrás que echarlo todo en la mía.</voice> <voice name='{playerVoice}'> Muchas gracias, la usaré bien. Por cierto ¿de qué estan hablando Takumi y Tom? Parecen preocupados.</voice> <voice name='{sandraVoice}'> Ni idea. Vayamos a preguntarles.</voice> <audio src='soundbank://soundlibrary/human/amzn_sfx_walking_on_grass_01'/> <voice name='{sandraVoice}'> ¿Qué ocurre aquí?</voice> <voice name='{takumiVoice}'> Menos mal que habeis llegado chicos. Tenemos un problema. Chad y Sydney salieron en un grupo de exploración ayer y aún no han vuelto. No es nada normal. Deberían haber regresado esta mañana, cuando salisteis vosotros. Es muy probable que les haya pasado algo.</voice> <voice name='{tomVoice}'> Fueron hacia el prueblo pesquero, como siempre. Conocen el camino. Es demasiado extraño que no hayan vuelto. Los necesitamos aquí. Sydney estaba reparando maquinaria clave y Chad es buen cazador. Sin ellos las cosas se complicarán demasiado.</voice> <voice name='{sandraVoice}'> De acuerdo. Iremos a buscarlos ¿verdad {playerName}?</voice> <voice name='{takumiVoice}'> Gracias. No se que haríamos sin vosotros. Recordad. Se fueron hacia el pueblo pesquero del norte.</voice> <break time='300ms'/> <voice name='{sandraVoice}'> Bueno {playerName}, ya sabes que hay que hacer. Yo me pondré en marcha, Tu ven cuando estes listo. Nos vemos.</voice> <break time='500ms'/>  <voice name='{playerVoice}'> Hasta luego.</voice>" 
+      },
+
+
+
+
+      "scene3_goToFishermanVillage": {
+        "say": "<voice name='{playerVoice}'>Ya hemos llegado al pueblo pesquero. Parece que aquí no hay nadie. Sandra, ¿seguro que vinieron aquí?</voice> <voice name='{sandraVoice}'> No creo que Tom y Takumi se equivocaran. Deberíamos buscar signos de ellos por aquí. <break time='500ms'/> Mira {playername}, allí hay algunas pisadas. Parece que llevan hasta una de las casetas de los pescadores. Entremos.</voice> <break time='500ms'/><audio src='soundbank://soundlibrary/doors/doors_squeaky/squeaky_06'/> <voice name='{playerVoice}'> No veo a nadie aquí dentro pero todo está patas arriba. Es como si alguien hubiera estado enzarzado en una pelea.</voice> <voice name='{sandraVoice}'> Sí, y mira el suelo. Hay unas gotas de sangre. Son recientes, no están secas del todo. Parece que salieron por la puerta de atras de la cabaña. Las huellas van en dirección al puente, sigámoslas.</voice> <break time='300ms'/><audio src='soundbank://soundlibrary/human/amzn_sfx_walking_on_grass_01'/> <voice name='{playerVoice}'> ¡No puede ser! El puente levadizo está alzado. No podemos pasar. Parece que el grupo que cruzó no quería que nadie los siguiera.</voice> <voice name='{sandraVoice}'> No importa. Encendamos el generador que hay al lado del puente. Así podremos bajarlo y seguirlos.</voice><break time='500ms'/> <audio src='soundbank://soundlibrary/transportation/amzn_sfx_motorcycle_engine_rev_01'/> <voice name='{sandraVoice}'> ¡No me lo puedo creer! ¡Parece que no tiene gasolina! </voice> <voice name='{playerVoice}'> ¿Como? ¿No hay otra manera de bajarlo? </voice> <voice name='{sandraVoice}'> Por desgracia no. Tenemos que encontrar la manera de cruzar. Mira {playerName}, volvamos al campamento y contemos que ha ocurrido. Talvez puedan echarnos un cable. Me voy adelantando. Nos vemos allí.</voice> <voice name='{playerVoice}'> De acuerdo. Nos vemos.</voice>" 
+      },
+
+
+
+
+      "scene4_enterGasStation": {
+        "say": "<voice name='{playerVoice}'> Ya estoy llegando a la gasolinera. <audio src='soundbank://soundlibrary/animals/amzn_sfx_dog_med_woof_1x_01'/> Vaya parece que hay un perro con la pata atrapada debajo de una viga que se ha desprendido de la estructura del edificio. Debería intentar salvarlo, pero sin asustarlo o puede que se haga más daño. Parece que aún no me ha visto todavía. Me pregunto como puedo acercarme hasta él. Ya que no me ha visto, ¿debería acercarme por detrás?</voice>",
+        "reprompt": "<voice name='{playerVoice}'>Ya que no me ha visto, ¿debería acercarme por detrás?</voice>"
+      },
+      "scene4_1_approachBack": {
+        "say": "<voice name='{playerVoice}'>Sí, me acercaré por detrás. <audio src='soundbank://soundlibrary/footsteps/concrete/concrete_01'/> <break time='1s'/> <audio src='soundbank://soundlibrary/animals/amzn_sfx_dog_small_bark_2x_01'/> ¡Parece que se ha dado cuenta y se ha asustando! Está intentando soltarse con mucha fuerza ¡Tengo que levantar rápido la viga! <audio src='soundbank://soundlibrary/doors/doors_metal/metal_02'/> <audio src='soundbank://soundlibrary/animals/amzn_sfx_dog_small_bark_2x_01'/> <break time='500ms'/> Lo he liberado pero parece que se ha ido muy asustado.</voice>"
+      },
+      "scene4_2_approachFront": {
+        "say": "<voice name='{playerVoice}'><say-as interpret-as='interjection'>mmh</say-as>. Es verdad, será mejor que me acerque por delante. <audio src='soundbank://soundlibrary/footsteps/concrete/concrete_01'/><break time='500ms'/></voice> Parece que cerca del perro hay un poco de comida y una pelota. Devía estar jugando o comiendo cuando quedó atrapado. <audio src='soundbank://soundlibrary/animals/amzn_sfx_dog_med_woof_1x_01'/><break time='500ms'/> Está algo nervioso. Le puedo dar algo para tranquilizarlo. Qué le doy ¿la pelota o la comida?",
+        "reprompt": "<voice name='{playerVoice}'>Qué le doy ¿la pelota o la comida?</voice>"
+      },
+      "scene4_2_1_giveFoodAndLiftBeam": {
+        "say": "<voice name='{playerVoice}'>Le daré la comida, parece que tiene hambre. Ahora que está entretenido intentaré levantar la viga. <audio src='soundbank://soundlibrary/doors/doors_metal/metal_02'/><break time='500ms'/> Listo. Ya eres libre perrito. <audio src='soundbank://soundlibrary/animals/amzn_sfx_dog_med_bark_2x_02'/> Bueno, continuaré explorando.</voice>"
+      },
+      "scene4_2_2_giveBallDogScaresFastLift": {
+        "say": "<voice name='{playerVoice}'>Talvez la pelota lo tranquilice. No parece estar muy pendiente de la pelota. Aún así me acercaré para levantar la viga. <audio src='soundbank://soundlibrary/animals/amzn_sfx_dog_small_bark_2x_01'/> ¡Se ha asustado! ¡La levantaré rapidamente! <audio src='soundbank://soundlibrary/doors/doors_metal/metal_02'/> <break time='500ms'/> <audio src='soundbank://soundlibrary/animals/amzn_sfx_dog_small_bark_2x_01'/> Se ha ido corriendo. Bueno al menos esta libre.</voice>"
+      },
+
+
+
+
+      "scene5_crossBridge1": {
+        "say": "<voice name='{playerVoice}'> Ya hemos conseguido llegar al otro lado del puente.</voice> <voice name='{sandraVoice}'> Mira {playerName}, Chad está allí tirado en el suelo. Vayamos a ayudarlo. </voice> <voice name='{chadVoice}'> <say-as interpret-as='interjection'>aggggh</say-as>. </voice> <voice name='{sandraVoice}'> ¿Cómo estás? ¡Pareces herido!</voice> <voice name='{chadVoice}'> Tranquila Sandra. Solo es un raguño, estoy bien.</voice> <voice name='{sandraVoice}'>¿Qué ha ocurrido? ¿Y sydney?</voice> <voice name='{chadVoice}'> han sido esos malditos rabiosos infectados. Estabamos en el pueblo pescando y de repente aparecieron por todos sitios. Nos tendieron un emboscada. Atraparon a Sydney y se la llevaron. Yo intenté seguirlos para liberarla pero no puede con ellos.</voice> <voice name='{sandraVoice}'>¿Cómo? ¿Solo la raptaron? ¿No le hicieron nada? ¿Estas seguro que han sido los rabiosos?</voice> <voice name='{chadVoice}'> Sí, lo sé. Es raro ¿verdad? Parecian coordinados. Había uno de ellos que parecía dirigirlos. Nunca pensé que esos bichos fueran inteligentes.</voice> <voice name='{playerVoice}'> Y, ¿para que querrían llevarse a Sydney?</voice> <voice name='{sandraVoice}'> No lo sé pero si alguno de ellos relamente es inteligente puede que tengan un plan. En cualquier caso deberíamos ir salvarla a cualquier coste. Sin ella y sus habilidades es posible que no podamos mantener el campamento mucho más tiempo.</voice> <voice name='{chadVoice}'> Estoy de acuerdo. Creo que los rabiosos huyeron hacia el oeste y depués deben de haber ido hacia el campamento militar.</voice> <voice name='{sandraVoice}'> Vale. {playerName}, En cuanto Chad se recupere deberíais intentar seguirles la pista. Yo mientras iré a cuidar el campamento y a avisarles de lo que ha ocurrido. Confío en vosotros.</voice>"
+      },
+
+
+
+
+      "scene6_reachBridge1FromOtherSide": {
+        "say": "<voice name='{playerVoice}'> Ya hemos conseguido llegar al otro lado del puente.</voice> <voice name='{sandraVoice}'> Chad está allí tirado en el suelo. ¡No se mueve!</voice> <audio src='soundbank://soundlibrary/human/amzn_sfx_person_running_01'/> <voice name='{sandraVoice}'> ¡No puede ser {playerName}! No tiene pulso. Hay sangre por todos lados. Tiene heridas por todo el cuerpo. Parece que se ha desangrado. ¡Maldita sea! Llegamos demasiado tarde.</voice> <voice name='{playerVoice}'> Sandra, Sydney no está aquí. Eso significa que debe de estar viva. Tal vez los rabiosos se la hayan llevado.</voice> <voice name='{sandraVoice}'> ¿Cómo? ¿Crees que han podido raptarla? Nunca pensé que esos malditos bichos infectados tuvieran algún tipo de voluntad.</voice> <voice name='{playerVoice}'> No lo sé, pero es la única explicación que se me ocurre. Es posible que tengan un plan. En cualquier caso deberíamos seguir búscandola. Sin ella y sus habilidades mecánicas no creo que podamos sobrevivir en el campamento mucho más.</voice> <voice name='{sandraVoice}'> Llevas razón. Yo iŕe al campamento a informar. Tú intenta encontrarla. También debemos de enterrar a Chad. Lo dejo en tus manos.</voice>"
+      },
+
+
+
+
+      "scene7_crossBridge2": {
+        "say": "<voice name='{playerVoice}'>No he cruzado por donde quería pero, al menos estoy en el otro lado. Ahora que he logrado llegar a la otra orilla debería dirigirme al final del puente que hay en el pueblo de pescadores. Quizás allí encuentre a Chad y Sydney. Espero que no sea demasiado tarde.</voice>"
+      },
+
+
+
+
+      "scene8_reachBridge2FromOtherSide": {
+        "say": "<voice name='{playerVoice}'>Parece que aquí es donde termina el puente que cruza la central hidroeléctrica. También podía haber cruzado por este sitio caundo estaba buscando a Chad y a Sydney, aunque supongo que hubiera sido más lento.</voice>"
+      },
+
+
+
+
+      "scene9_findEnemies": {
+        "say": "<voice name='{playerVoice}'> Ya estamos llegando al campus militar. <say-as interpret-as='interjection'>mmh</say-as>. <amazon:effect name='whispered'>Se escuchan ruidos ahí delante. <audio src='soundbank://soundlibrary/monsters/human_vocals/human_vocals_01'/> Parece que no estamos solos. Hay un gran grupo de rabiosos en mitad del camino. Tenemos suerte de que no nos hayan visto entre estos matorrales. ¡Mira! La mayoría del grupo avanza hacia el norte. ¿Cómo? Están cruzando por un cúmulo de esporas infecciosas. Parece que a ellos no les afectan. Dos de los rabiosos se han quedado atrás. Esto es muy raro. Es como si estuvieran patrullando.</amazon:effect> </voice>"
+      },
+      "scene9_1_chadCanConfront": {
+        "say": "<voice name='{playerVoice}'><amazon:effect name='whispered'>¿Chad, a tí que te parece?</amazon:effect></voice> <voice name='{chadVoice}'><amazon:effect name='whispered'>Desde luego es muy raro. De todas maneras necesitamos pasar. Ahora son solo dos así que podríamos ir a por ellos de frente. ¿Tú que opinas? ¿Vamos a por ellos de frente?</amazon:effect> </voice>"
+      },
+      "scene9_1_askPlayerIfConfront": {
+        "say": "<voice name='{chadVoice}'><amazon:effect name='whispered'>¿Tú que opinas {playerName}? ¿Vamos a por ellos de frente? ¿Sí o no?</amazon:effect></voice>",
+        "reprompt": "<voice name='{chadVoice}'><amazon:effect name='whispered'>¿Tú que opinas {playerName}? ¿Vamos a por ellos de frente? ¿Sí o no?</amazon:effect></voice>"
+      }, 
+      "scene9_1_1chadConfront": {
+        "say": "<voice name='{playerVoice}'><amazon:effect name='whispered'>Sí. Será mejor que tomemos la iniciativa. <break time='500ms'/> <audio src='soundbank://soundlibrary/human/amzn_sfx_walking_on_grass_01'/> ¡Espera un segundo! Parece que uno de ellos se acerca hacia nosotros. Chad, encargate de él. Yo veré que puedo hacer con el otro.</amazon:effect></voice> <voice name='{chadVoice}'><amazon:effect name='whispered'>Sin problema.</amazon:effect><break time='300ms'/> <audio src='soundbank://soundlibrary/monsters/human_vocals/human_vocals_10'/></voice>"
+      },
+      "scene9_1_1_1playerConfront": {
+        "say": "<voice name='{playerVoice}'> ¡No! ¡Parece que el otro se ha dado cuenta! No lo dejaré escapar. <audio src='soundbank://soundlibrary/human/amzn_sfx_person_running_01'/> <audio src='soundbank://soundlibrary/doors/doors_metal/metal_03'/> <audio src='soundbank://soundlibrary/monsters/pigmy_bats/pigmy_bats_01'/></voice> <break time='500ms'/><voice name='{chadVoice}'>Buen uso de la palanca. Dos menos. Ya podemos continuar.</voice>"
+      },
+      "scene9_1_1_2playerWaitsForChad": {
+        "say": "<voice name='{playerVoice}'><audio src='soundbank://soundlibrary/monsters/human_vocals/human_vocals_02'/> ¡No! Parece que el otro se ha dado cuenta y está huyendo. No creo que sea buena idea seguirlo.</voice> <voice name='{chadVoice}'>Al menos hemos acabado con uno de esos bichos. Ya podemos continuar.</voice>"
+      },
+      "scene9_1_2_waitTillEnemiesGone": {
+        "say": "<voice name='{playerVoice}'><amazon:effect name='whispered'>No. Podríamos tener problemas. Esperemos un poco a ver que pasa.</amazon:effect></voice> <voice name='{chadVoice}'><amazon:effect name='whispered'>De acuerdo.</amazon:effect></voice> <break time='500ms'/> <audio src='soundbank://soundlibrary/human/amzn_sfx_walking_on_grass_01'/> <voice name='{playerVoice}'><amazon:effect name='whispered'>Mira. Parece que se van.</amazon:effect> Perfecto, ya podemos continuar, aunque debemos tener cuidado. Podríamos encontrárnoslos otra vez.</voice>"
+      },
+      "scene9_2_thinkConfrontBoth": {
+        "say": "<voice name='{playerVoice}'> <amazon:effect name='whispered'>Son dos. No sé si podré con ellos.</amazon:effect> </voice>"
+      },
+      "scene9_2_1_askPlayerIfConfrontBoth": {
+        "say": "<voice name='{playerVoice}'><amazon:effect name='whispered'>¿Debería enfrentarme a ellos yo solo?</amazon:effect></voice>",
+        "reprompt": "<voice name='{playerVoice}'><amazon:effect name='whispered'>¿Debería enfrentarme a ellos yo solo?</amazon:effect></voice>"
+      },
+      "scene9_2_1_1_bothEnemiesScape": {
+        "say": "<voice name='{playerVoice}'><amazon:effect name='whispered'>Sí, puede que tenga una oportunidad. Me acercaré más escondido entre los arbustos. Igual puedo sorprenderlos y atacarlos con la palanca. <audio src='soundbank://soundlibrary/wood/breaks/breaks_03'/> <break time='300ms'/> <audio src='soundbank://soundlibrary/footsteps/running/running_07'/> </amazon:effect> <say-as interpret-as='interjection'>argh</say-as>. Parece que he pisado una rama y el ruido los ha asustado. Han huido. Espero no encontrarmelos luego. Continuaré buscando a Sydney.</voice>"
+      },
+      "scene9_2_1_2_firstEnemyScapes": {
+        "say": "<voice name='{playerVoice}'><amazon:effect name='whispered'>Dos son demasiado para mí solo. Será mejor esperar. <break time='500ms'/> <audio src='soundbank://soundlibrary/human/amzn_sfx_walking_on_grass_01'/> Uno se está llendo. Es posible que ahora pueda acabar con el otro.</amazon:effect></voice>"
+      },
+      "scene9_2_1_2_askPlayerIfConfrontOne": {
+        "say": "<voice name='{playerVoice}'><amazon:effect name='whispered'>¿Debería enfrentarme al enemigo que queda?</amazon:effect></voice>",
+        "reprompt": "<voice name='{playerVoice}'><amazon:effect name='whispered'>¿Debería enfrentarme al enemigo que queda?</amazon:effect></voice>"
+      },
+      "scene9_2_1_2_1_playerKillsOne": {
+        "say": "<voice name='{playerVoice}'><amazon:effect name='whispered'> Está solo. Intentaré acabar con él. <break time='500ms'/> <audio src='soundbank://soundlibrary/human/amzn_sfx_walking_on_grass_01'/> Parece que se está acercando. Perfecto, lo sorprenderé. <audio src='soundbank://soundlibrary/human/amzn_sfx_person_running_01'/> <audio src='soundbank://soundlibrary/doors/doors_metal/metal_03'/> <audio src='soundbank://soundlibrary/monsters/pigmy_bats/pigmy_bats_01'/> <break time='500ms'/></amazon:effect></voice>"
+      },
+      "scene9_2_1_2_2_secondEnemyScapes": {
+        "say": "<voice name='{playerVoice}'><amazon:effect name='whispered'> Será mejor evitar problemas. Esperaré a que se vaya.  <break time='500ms'/> <audio src='soundbank://soundlibrary/human/amzn_sfx_walking_on_grass_01'/> Listo. Ya puedo continuar buscando a Sydney.</amazon:effect></voice>"
+      },
+      "scene9_discardConfront": {
+        "say": "<voice name='{playerVoice}'><amazon:effect name='whispered'> Mejor que no lo intente. No tengo nada para luchar. <break time='500ms'/> <audio src='soundbank://soundlibrary/human/amzn_sfx_walking_on_grass_01'/> Parece que se van. Perfecto. Ya puedo seguir buscando a Sydney.</amazon:effect></voice>"
+      },
+
+
+
+
+      "scene10_entersMilitaryBuilding": {
+        "say": "<voice name='{playerVoice}'>Esta es la entrada al edificio principal de la base militar. Parece que nadie ha querido acercarse aquí en mucho tiempo. Normal teniendo cuenta lo cerca que empezó la infección y la gran cantidad de gente que se contagió aquí. Las paredes parece que van a caerse en cualquier momento. Tendré cuidado.</voice>"
+      },
+      "scene10_1_seeEnemy": {
+        "say": "<voice name='{playerVoice}'><audio src=soundbank://soundlibrary/monsters/human_vocals/human_vocals_13/>. <amazon:effect name='whispered'>Parece que hay un rabioso dentro del edificio. Seguramente sea de los que escapó en la entrada del campus militar. Si armo mucho lío puede que tenga problemas.</amazon:effect> <audio src='soundbank://soundlibrary/monsters/human_vocals/human_vocals_03'/> ¡No pueder ser! ¡Me ha visto y viene a por mí!</voice>"
+      },
+      "scene10_1_1_killWithLever": {
+        "say": "<voice name='{playerVoice}'>De acuerdo, debo mantener la calma. Es solo uno y no son muy listos. Seguro que puedo con él. Esperaré a que se acerque y le daré con mi palanca. <audio src='soundbank://soundlibrary/monsters/human_vocals/human_vocals_04'/><audio src='soundbank://soundlibrary/footsteps/running/running_06'/> ¡Ahora! <audio src='soundbank://soundlibrary/metal/metal_02'/> <break time='500ms'/> Al final no ha sido para tanto. De todas maneras espero que no haya más.</voice>"
+      },
+      "scene10_1_2_fightAndPilarDown": {
+        "say": "<voice name='{playerVoice}'>Esto no es bueno no tengo nada con lo que defenderme. Hay un grande a unos cuantos metros. ¡Se lo tiraré encima cuando se acerque! <audio src='soundbank://soundlibrary/monsters/human_vocals/human_vocals_04'/><audio src='soundbank://soundlibrary/footsteps/running/running_06'/> ¡Ahora! <audio src='soundbank://soundlibrary/wood/breaks/breaks_02'/> <audio src='soundbank://soundlibrary/rocks/debris/debris_03'/> Vaya parece que ha funcionado, aunque el golpe del armario ha hecho que se caiga un pilar. Bueno, al menos estoy a salvo.</voice>"
+      },
+      "scene10_2_noEnemy": {
+        "say": "<voice name='{playerVoice}'>Parece que la entrada esta despejada. Aún así debería avanzar con cautela.</voice>"
+      },
+
+
+
+
+      "scene11_meetsHugoInIndustrial": {
+        "say": "<voice name='{playerVoice}'>Este el camino hacia el polígono industrial. <say-as interpret-as='interjection'>mmh</say-as> Hay una persona al lado de la carretera. No parece peligrosa aunque debo ir con cuidado. Hablaré con ella, puede que averigue algo. <audio src='soundbank://soundlibrary/footsteps/concrete/concrete_01'/><break time='500ms'/> Oye, que haces parado a un lado del camino.</voice> <voice name='{hugoVoice}'> Oh, vaya no te habia visto. Hacía mucho que no me encontraba con otro transeunte. Verás yo antes tenía un almacén en la calle este del polígono y he venido a buscar algunas cosas.</voice> <voice name='{playerVoice}'> Y ¿por qué estás aquí sin hacer nada en vez de ir a por tus cosas? </voice> <voice name='{hugoVoice}'> Parece que esas malditas esporas que empezaron a aparecer despues de la explosión están ahora por todas partes. Como ya sabrás no conviene acercarse mucho si no quieres perder la cabeza, y yo desde luego no quiero. Tu pareces bastante listo. <break time='500ms'/> ¡Tengo una idea! Sí entras a la calle este y limpias todas las esporas que haya pondré a tu disposición algunos intercambios de recursos muy suculentos. Estoy seguro de que por el polígono podrás encontrar los materiales que necesites para deshacerte de ellas. ¡Buena suerte!</voice>. <audio src='soundbank://soundlibrary/footsteps/concrete/concrete_01'/><break time='1s'/><voice name='{playerVoice}'> <say-as interpret-as='interjection'>mmh</say-as>. Este tío parece un poco raro, aunque supongo que debería ayudarle. Veré que puedo hacer.</voice>"
+      },
+      
+
+
+
+      "scene12_findEnemies": {
+        "say": "<voice name='{playerVoice}'><say-as interpret-as='interjection'>mmh</say-as>. <amazon:effect name='whispered'><audio src='soundbank://soundlibrary/monsters/human_vocals/human_vocals_01'/> ¡Mira Sandra! ¡El grupo de rabiosos está ahí delante y tienen a Sydney con ellos! Hay uno que destaca. Está más tranquilo que los otros. Debe ser su líder. Parece que va hacia el norte.</amazon:effect> <audio src='soundbank://soundlibrary/monsters/human_vocals/human_vocals_11'/></voice> <voice name='{sandraVoice}'> Sí, ¡también parece que se han dado cuenta de nuestra presencia!</voice>"
+      },
+      "scene12_1_chadAndSandraTellsWhatTheyDo": {
+        "say": "<voice name='{chadVoice}'> ¡Hemos tenido suerte! Con el revuelo Sydney a conseguido escapar y esta corriendo hacia el almacén del laboratorio.</voice> <voice name='{sandraVoice}'> Sí, y un rabioso la sigue.</voice> <voice name='{playerVoice}'> Ya nos ocuparemos de eso más tarde. Uno viene a por nosotros. ¡Cuidado Sandra! </voice> <voice name='{sandraVoice}'> <audio src='soundbank://soundlibrary/monsters/human_vocals/human_vocals_04'/> ¡Ayudadme! ¡Lo tengo encima!</voice>"
+      },
+      "scene12_1_1_askPlayerUseLeverOrGun": {
+        "say": "<voice name='{playerVoice}'> ¡Sandra necesita ayuda! ¿Qué uso la palanca o la pistola?</voice>",
+        "reprompt": "<voice name='{playerVoice}'> ¡Sandra necesita ayuda! ¿Qué uso la palanca o la pistola?</voice>"
+      },
+      "scene12_1_1_1_killEnemyWithLever": {
+        "say": "<voice name='{playerVoice}'> Con la pistola puede que hiera a Sandra. Usaré la palanca. <audio src='soundbank://soundlibrary/metal/metal_02'/> <break time='500ms'/> En toda la cabeza. Sandra, ¿estás bien?</voice> <voice name='{sandraVoice}'> Sí, es solo un rasguño.</voice>"
+      },
+      "scene12_3_sandraThanksAndGoToSaveSydney": {
+        "say": "<voice name='{sandraVoice}'> Gracias por salvarme. Ya esamos fuera de peligro. Parece que su líder ha ido hacia el norte pero Sydney a logrado escapar al almacén. Debemos ayudarla, uno de los rabiosos la ha seguido. ¡Vamos!</voice>"
+      },
+      "scene12_1_1_2_killEnemyWithGun": {
+        "say": "<voice name='{playerVoice}'> Acabaré con ese bicho de un disparo. <audio src='soundbank://soundlibrary/guns/handguns/handgun_shot_02'/> En toda la cabeza. Sandra, ¿estás bien?</voice> <voice name='{sandraVoice}'> Sí, es solo un rasguño, aunque ¡tú podias haberme matado si hubieses fallado! De todas maneras</voice>"
+      },
+      "scene12_1_2_saveSandraWithChad": {
+        "say": "<voice name='{chadVoice}'> ¡Yo me ocupo! <say-as interpret-as='interjection'>argh</say-as>. <audio src='soundbank://soundlibrary/metal/metal_02'/> Uno menos. Sandra ¿estás bien?</voice> <voice name='{sandraVoice}'> Sí</voice>"
+      },
+      "scene12_2_sandraTellsWhatTheyDo": {
+        "say": "<voice name='{sandraVoice}'> ¡Hemos tenido suerte! Con el revuelo Sydney a conseguido escapar y esta corriendo hacia el almacén del laboratorio.</voice> <voice name='{playerVoice}'> Sí, y un rabioso la sigue.</voice> <voice name='{playerVoice}'> Ya nos ocuparemos de eso más tarde. Uno viene a por nosotros. ¡Cuidado Sandra! </voice> <voice name='{sandraVoice}'> <audio src='soundbank://soundlibrary/monsters/human_vocals/human_vocals_04'/> ¡Ayudadme! ¡Lo tengo encima!</voice>"
+      },
+      "scene12_2_askGoForSandra": {
+        "say": "<voice name='{playerVoice}'> Sandra está en apuros pero tengo que ayudar a Sydney. ¿Qué hago? ¿La ayudo?</voice>",
+        "reprompt": "<voice name='{playerVoice}'> ¿Ayudo a Sandra?</voice>"
+      },
+      "scene12_2_figthYourEnemy": {
+        "say": "<voice name='{playerVoice}'> ¡No puedo dejarla a su suerte! Tengo que ayudarla. Sydney tendrá que esperar. </voice>"
+      },
+      "scene12_2_1_useLeverForSave": {
+        "say": "<voice name='{playerVoice}'> <say-as interpret-as='interjection'>argh</say-as>. <audio src='soundbank://soundlibrary/metal/metal_02'/> <break time='500ms'/> En toda la cabeza.</voice>"
+      },
+      "scene12_2_2_useHandsForSave": {
+        "say": "<voice name='{playerVoice}'> <say-as interpret-as='interjection'>argh</say-as>. <audio src='soundbank://soundlibrary/human/hit_punch_slap/hit_punch_slap_10'/><audio src='soundbank://soundlibrary/human/hit_punch_slap/hit_punch_slap_09'/><audio src='soundbank://soundlibrary/human/hit_punch_slap/hit_punch_slap_10'/> Hemos podido con él. <break time='500ms'/> Sandra, pareces herida</voice> <voice name='{sandraVoice}'> No importa. Estoy bien.</voice>"
+      },
+
+
+
+
+      "scene13_enterLaboratoryWarehouse": {
+        "say": "<voice name='{playerVoice}'> Ya estamos dentro del almacén. Todo esta lleno de estanterias y armarios. ¡Mira Snadra! Parece que Sydney está en la esquina del final. Ese rabioso la ha seguido y esta en el otro lado de la sala. ¡Tenemos que hacer algo!</voice>"
+      },
+      "scene13_tryToShootButCant": {
+        "say": "<voice name='{playerVoice}'>Talvez pueda intentar disparar al rabioso con la pistola.</voice> <voice name='{sandraVoice}'>¡Quieto {playerName}! En este almacén puede haber sustancias inflamables. ¡Si fallas es posible que saltemos por los aires!</voice> <voice name='{playerVoice}'>Llevas razón. ¿Que podemos hacer entonces? No se me ocurre nada y no tenemos tiempo.</voice>"
+      },
+      "scene13_askPushClosetOrCharge": {
+        "say": "<voice name='{playerVoice}'> quizás pueda atacar rápido al rabioso. O tirar unas cuantas estanterías para distraerlo. ¿Qué hago? ¿Ataco o empujo las estanterías?</voice>",
+        "reprompt": "<voice name='{playerVoice}'>¿Qué hago? ¿Ataco o empujo las estanterías?</voice>"
+      },
+
+      "scene13_trapEnemyAndSydney": {
+        "say": "<voice name='{playerVoice}'>Tiraré las estanterías. Puede que así quite su atención de Sydney. <audio src='soundbank://soundlibrary/doors/doors_locker_doors/locker_doors_05'/> Sí, parece que algunos armarios han caido encima del rabioso y está atrapado.</voice> <voice name='{sandraVoice}'> Es cierto, pero Sydney tampoco puede escapar. Las estanterias le ha cerrado el paso.</voice>"
+      },
+      "scene13_askGoForEnemyOrForSydney": {
+        "say": "<voice name='{playerVoice}'>¿Qué hago ahora? ¿Ataco al rabioso o salvo a Sydney?</voice>",
+        "reprompt": "<voice name='{playerVoice}'>¿Qué hago ahora? ¿Ataco al rabioso o salvo a Sydney?</voice>"
+      },
+      "scene13_cantReachEnemyGoesForSydney": {
+        "say": "<voice name='{playerVoice}'>Intentaré alcanzar a Sydney. <say-as interpret-as='interjection'>argh</say-as>. Es muy difícil. Hay demasiados muebles en el camino.</voice> <voice name='{sandraVoice}'> ¡Cuidado {playerName}! ¡El rabioso se ha liberado y va hacia Sydney! </voice> <voice name='{playerVoice}'> ¡No puede ser! ¡No llegaré a tiempo! </voice>" 
+      },
+      "scene13_dogSavesSydney": {
+        "say": "<voice name='{playerVoice}'> <audio src='soundbank://soundlibrary/glass/break_shatter_smash/break_shatter_smash_02'/><audio src='soundbank://soundlibrary/animals/amzn_sfx_dog_med_bark_2x_03'/><audio src='soundbank://soundlibrary/monsters/pigmy_bats/pigmy_bats_03'/> ¡Vaya el perro de la gasolinera ha entrado por la ventana!</voice> <voice name='{sandraVoice}'> ¡Está parando al rabioso! ¡Vamos Sydney escapa mientras puedas! </voice> <voice name='{sydneyVoice}'> ¡Sí! ¡Ya voy! Salgamos todos de aquí mientras el rabioso está aturdido.</voice>" 
+      },
+      "scene13_sydneyDiesByEnemy": {
+        "say": "<voice name='{playerVoice}'> <audio src='soundbank://soundlibrary/monsters/human_vocals/human_vocals_04'/><audio src='soundbank://soundlibrary/monsters/human_vocals/human_vocals_06'/> ¡No! ¡Sydney!</voice> <voice name='{sandraVoice}'> Salgamos de aquí {playerName}. Ya no hay nada que podamos hacer por ella.</voice>"
+      },
+      "scene13_enemyScapesGoesForYou": {
+        "say": "<voice name='{playerVoice}'> Intentaré acabar con el rabioso mientras está atrapado. <say-as interpret-as='interjection'>argh</say-as>. <break time='300ms'/> Es difícil llegar hasta él. Hay demasiados muebles en el camino.</voice> <voice name='{sandraVoice}'> ¡Cuidado {playerName}! ¡El rabioso se ha liberado y va a por tí! </voice> <audio src='soundbank://soundlibrary/monsters/human_vocals/human_vocals_04'/> <audio src='soundbank://soundlibrary/human/hit_punch_slap/hit_punch_slap_01'/>"
+      },
+      "scene13_dogSavesYou": {
+        "say": "<voice name='{sandraVoice}'> <audio src='soundbank://soundlibrary/animals/amzn_sfx_dog_med_bark_2x_03'/> El perro esta distrayendo al rabioso. ¡Ahora! Salgamos todos de aquí antes de que se le pase el aturdimiento.</voice> <voice name='{playerVoice}'> ¡Sí! ¡Vamos! </voice>"
+      },
+      "scene13_chadSavesYou": {
+        "say": "<voice name='{chadVoice}'> ¡Yo te ayudaré! <say-as interpret-as='interjection'>argh</say-as>. <audio src='soundbank://soundlibrary/metal/metal_02'/> <break time='500ms'/></voice> <voice name='{playerVoice}'> Gracias Chad. Salgamos de aquí.</voice>"
+      },
+      "scene13_sandraSavesYou": {
+        "say": "<voice name='{sandraVoice}'>¡Tranquilo {playerName}! ¡Ya lo tengo! <say-as interpret-as='interjection'>argh</say-as>. <audio src='soundbank://soundlibrary/metal/metal_02'/> <break time='500ms'/></voice> <voice name='{playerVoice}'> Gracias Sandra. Salgamos de aquí.</voice>"
+      },
+      "scene13_sydneyTriesToHelpAndDies": {
+        "say": "<voice name='{sydneyVoice}'>¡No! ¡{playerName} yo te ayudaré!</voice> <voice name='{playerVoice}'>¡Sydney sal de aquí! El rabioso irá a por tí. ¡No!</voice> <audio src='soundbank://soundlibrary/monsters/human_vocals/human_vocals_04'/><audio src='soundbank://soundlibrary/monsters/human_vocals/human_vocals_06'/> <voice name='{sandraVoice}'> Salgamos de aquí {playerName}. Ya no hay nada que podamos hacer por ella.</voice>"
+      },
+
+      "scene13_goForEnemyButCantReach": {
+        "say": "<voice name='{playerVoice}'> Cargaré contra el rabioso. <audio src='soundbank://soundlibrary/human/amzn_sfx_person_running_01'/> ¡No! parece que no tengo tiempo suficiente, el rabioso ya va a por ella.</voice>"
+      },
+
+      "scene13_dogDistractEnemy": {
+        "say": "<voice name='{playerVoice}'> <audio src='soundbank://soundlibrary/glass/break_shatter_smash/break_shatter_smash_02'/><audio src='soundbank://soundlibrary/animals/amzn_sfx_dog_med_bark_2x_03'/> ¡Genial! ¡El perro que ayudé en la gasolinera a entrado por la ventana para ayudar! ¡Ahora Sydney! ¡Corre! </voice>"
+      },
+      "scene13_askHelpDog": {
+        "say": "<voice name='{playerVoice}'> El perro se ha quedado solo contra el rabioso ¿Debería ayudarle? ¿Sí o no?</voice>",
+        "reprompt": "<voice name='{playerVoice}'> El perro se ha quedado solo contra el rabioso ¿Debería ayudarle? ¿Sí o no?</voice>"
+      },
+      "scene13_goHelpDog": {
+        "say": "<voice name='{playerVoice}'> Supongo que no podemos dejarlo a su suerte.</voice>"
+      },
+      "scene13_killEnemyWithLever": {
+        "say": "<voice name='{playerVoice}'> Acabaré con el rabioso con la palanca. <say-as interpret-as='interjection'>argh</say-as>. <audio src='soundbank://soundlibrary/metal/metal_02'/><audio src='soundbank://soundlibrary/monsters/pigmy_bats/pigmy_bats_01'/>  Listo. Salgamos de aquí.</voice>"
+      },
+      "scene13_chadKillsEnemy": {
+        "say": "<voice name='{chadVoice}'> Tranquilo {playerName}, yo ayudaré al animal. <say-as interpret-as='interjection'>argh</say-as>. <audio src='soundbank://soundlibrary/metal/metal_02'/><audio src='soundbank://soundlibrary/monsters/pigmy_bats/pigmy_bats_01'/></voice> <voice name='{playerVoice}'> Listo. Salgamos de aquí. </voice>"
+      },
+      "scene13_sandraKillsenemy": {
+        "say": "<voice name='{sandraVoice}'> Tranquilo {playerName}, yo ayudaré al animal. <say-as interpret-as='interjection'>argh</say-as>. <audio src='soundbank://soundlibrary/metal/metal_02'/><audio src='soundbank://soundlibrary/monsters/pigmy_bats/pigmy_bats_01'/></voice> <voice name='{playerVoice}'> Listo. Salgamos de aquí. </voice>"
+      },
+      "scene13_sydneyGetsCaught": {
+        "say": "<voice name='{playerVoice}'> ¡No! El rabioso ha pasado del perro y ha vuelto a por Sydney.</voice> <audio src='soundbank://soundlibrary/monsters/human_vocals/human_vocals_04'/><audio src='soundbank://soundlibrary/monsters/human_vocals/human_vocals_06'/> <voice name='{sandraVoice}'> Salgamos de aquí {playerName}. Ya no hay nada que podamos hacer por ella.</voice>"
+      },
+      "scene13_enemyScapesDogAndCatchesSydney": {
+        "say": "<voice name='{playerVoice}'> ¡No! El rabioso ha pasado del perro y ha vuelto a por Sydney.</voice> <audio src='soundbank://soundlibrary/monsters/human_vocals/human_vocals_04'/><audio src='soundbank://soundlibrary/monsters/human_vocals/human_vocals_06'/> <voice name='{sandraVoice}'> Salgamos de aquí {playerName}. Ya no hay nada que podamos hacer por ella.</voice>"
+      },
+
+      "scene13_sydneyFightsEnemy": {
+        "say": "<voice name='{sydneyVoice}'><audio src='soundbank://soundlibrary/monsters/human_vocals/human_vocals_04'/> ¡Socorro! ¡Ayudadme! ¡Es muy fuerte!</voice>"
+      },
+      "scene13_sydneyLosesFightAndDies": {
+        "say": "<voice name='{playerVoice}'> ¡No! ¡Sydney! </voice> <audio src='soundbank://soundlibrary/monsters/human_vocals/human_vocals_04'/><audio src='soundbank://soundlibrary/monsters/human_vocals/human_vocals_06'/> <voice name='{sandraVoice}'> Salgamos de aquí {playerName}. Ya no hay nada que podamos hacer por ella.</voice>"
+      },
+      "scene13_chadHelpsButSydneyDies": {
+        "say": "<voice name='{chadVoice}'> ¡Tranquila Sydney! Voy a por tí</voice> <voice name='{sandraVoice}'> Chad vuelve. No llegarás a tiempo.</voice> <voice name='{chadVoice}'> ¡No!</voice> <audio src='soundbank://soundlibrary/monsters/human_vocals/human_vocals_04'/><audio src='soundbank://soundlibrary/monsters/human_vocals/human_vocals_06'/> <voice name='{sandraVoice}'> Salgamos de aquí {playerName}. Ya no hay nada que podamos hacer por ella.</voice>"
+      },
+      "scene13_askUseLeverToHelp": {
+        "say": "<voice name='{playerVoice}'> Puedo ayudarla pero el rabioso está muy cerca ¿Uso la palanca? ¿Sí o no?</voice>",
+        "reprompt": "<voice name='{playerVoice}'> Puedo ayudarla pero el rabioso está muy cerca ¿Uso la palanca? ¿Sí o no?</voice>"
+      },
+      "scene13_killEnemyWithLever2": {
+        "say": "<voice name='{playerVoice}'> Acabaré con el rabioso con la palanca. <say-as interpret-as='interjection'>argh</say-as>. <audio src='soundbank://soundlibrary/metal/metal_02'/><audio src='soundbank://soundlibrary/monsters/pigmy_bats/pigmy_bats_01'/>  Listo. Salgamos de aquí.</voice>"
+      },
+      "scene13_sydneyDies": {
+        "say": "<voice name='{playerVoice}'> ¡No puedo quitarle al rabioso de encima! </voice> <audio src='soundbank://soundlibrary/monsters/human_vocals/human_vocals_04'/><audio src='soundbank://soundlibrary/monsters/human_vocals/human_vocals_06'/> <voice name='{sandraVoice}'> Salgamos de aquí {playerName}. Ya no hay nada que podamos hacer por ella.</voice>"
+      },
+      "scene13_emptyJoin": {
+        "say": ""
+      },
+
+
+
+
+
+      "scene14_faceFinalFightDescribeScene": {
+        "say": "<voice name='{playerVoice}'>Ya estamos en el laboratorio. Esta es la última parada. No hay vuelta atrás. Tenemos que pararlos como sea. Veamos, el laboratorio tiene un pasillo con 4 habitaciones a los lados. Parece que para llegar al final tenemos que pasar por dos de ellas.</voice>"
+      },
+      "scene14_describe2Enemies": {
+        "say": "<voice name='{playerVoice}'>Parece que hay 2 enemigos. Cada uno en una habitación a cada lado del pasillo. Tiene pinta de que el líder de estos bichos debe de estar por aquí también. Espero que no sea tan fuerte como listo.</voice>"
+      },
+      "scene14_describe3Enemies": {
+        "say": "<voice name='{playerVoice}'> Parece que hay 3 enemigos. Dos en las habitaciones de la izquierda y uno en la de la derecha. Tiene pinta de que el líder de estos bichos debe de estar por aquí también. Espero que no sea tan fuerte como listo. </voice>"
+      },
+      "scene14_thinkWhatToDo": {
+        "say": "<voice name='{playerVoice}'>Me pregunto como deberíamos afrontar esto.</voice>"
+      },
+      "scene14_sydneyTellsAboutEnemyAndArtifact": {
+        "say": "<voice name='{sydneyVoice}'> {playerName}, el artefacto que les ayudé a construir está en la última habitación del pasillo a la izquierda. Por los escombros tendremos que pasar por las habitaciones adyacentes, no podemos ir directamente por el centro. Recuerda. Destruir el artefacto debe ser nuestra prioridad.</voice>"
+      },
+      "scene14_chadTellsAboutEnemyAndArtifact": {
+        "say": "<voice name='{chadVoice}'> {playerName}, el artefacto de los rabiosos que debemos destruir debe estar en el laboratorio principal que explotó. Es el que está al final del pasillo a la izquierda. Vamos a destruirlo y a darles para el pelo a esos rabiosos.</voice>"
+      },
+      "scene14_gessAboutEnemyAndArtifact": {
+        "say": "<voice name='{sandraVoice}'> {playerName}, parece que el artefacto de los rabiosos que debemos destruir debe estar en el laboratorio principal que explotó. Es el que está al final del pasillo a la izquierda. Acabemos con esto y destruyamos esa cosa. </voice>"
+      },
+      "scene14_askGoSneakyOrCharge": {
+        "say": "<voice name='{playerVoice}'>Ahora que sé todo esto me pregunto si debemos ir silenciosamente o atacar directamente. ¿Silenciosamente o atacar?</voice>",
+        "reprompt": "<voice name='{playerVoice}'>¿Silenciosamente o atacar?</voice>"
+      },
+      "scene14_decideToGoSneaky": {
+        "say": "<voice name='{playerVoice}'>Talvez si vamos silenciosamente tengamos más oportunidades de completar nuestro objetivo.</voice>"
+      },
+      "scene14_askGoAloneForOneWayOrTogether": {
+        "say": "<voice name='{playerVoice}'> Me pregunto como deberíamos acercarnos ¿juntos o separados?</voice>",
+        "reprompt": "<voice name='{playerVoice}'> Me pregunto como deberíamos acercarnos ¿juntos o separados?</voice>"
+      },
+      "scene14_askGoAloneForOneWayOrTogether2": {
+        "say": "<voice name='{playerVoice}'> Me pregunto como deberíamos acercarnos sandra y yo ¿juntos o separados?</voice>",
+        "reprompt": "<voice name='{playerVoice}'> Me pregunto como deberíamos acercarnos sandra y yo ¿juntos o separados?</voice>"
+      },
+      "scene14_goAloneRightWay": {
+        "say": "<voice name='{playerVoice}'> Será mejor que nos dividamos, yo iré solo por la derecha.</voice>"
+      },
+      "scene14_describePartnerGoForEnemyAndGetNoticed": {
+        "say": "<voice name='{playerVoice}'> Avancemos. </voice> <voice name='{sandraVoice}'> De acuerdo, allá vamos. </voice> <audio src='soundbank://soundlibrary/footsteps/concrete/concrete_01'/> <break time='500ms'/> <audio src='soundbank://soundlibrary/monsters/human_vocals/human_vocals_03'/> <break time='500ms'/> <voice name='{playerVoice}'>Parece que el grupo ha acabado con algunos rabiosos y los han descubierto. </voice>"
+      },
+      "scene14_describePartyGoForEnemyAndGetNoticed": {
+        "say": "<voice name='{playerVoice}'> Avancemos. </voice> <voice name='{sandraVoice}'> De acuerdo, allá vamos. </voice> <audio src='soundbank://soundlibrary/footsteps/concrete/concrete_01'/> <break time='500ms'/> <audio src='soundbank://soundlibrary/monsters/human_vocals/human_vocals_03'/> <break time='500ms'/> <voice name='{playerVoice}'>Parece que Sandra ha acabado con algunos rabiosos y la han descubierto. </voice>"
+      },
+      "scene14_askGoHelpOrGoDestroyArtifact": {
+        "say": "<voice name='{playerVoice}'> ¿Que hago ahora? Parece que los rabiosos están distraídos, podría intentar destruir el artefacto. ¿Los ayudo o destruyo el artefacto? </voice>",
+        "reprompt": "<voice name='{playerVoice}'> ¿Los ayudo o destruyo el artefacto?</voice>"
+      },
+      "scene14_crawlToEnemyBack": {
+        "say": "<voice name='{playerVoice}'> No puedo dejarlos solos. Los ayudaré. Además parece que ahora el líder está distraído. Puedo acercarme por su espalda.</voice>"
+      },
+      "scene14_chadAndDogBaitBoss": {
+        "say": "<voice name='{playerVoice}'> Parece que Chad me ha visto y sabe lo que quiero hacer <break time='500ms'/></voice> <voice name='{chadVoice}'> ¡Tú! Bicho asqueroso ¡Te estoy esperando! <audio src='soundbank://soundlibrary/animals/amzn_sfx_dog_med_bark_2x_03'/></voice>"
+      },
+      "scene14_chadBaitsBoss": {
+        "say": "<voice name='{playerVoice}'> Parece que Chad me ha visto y sabe lo que quiero hacer <break time='500ms'/></voice> <voice name='{chadVoice}'> ¡Tú! Bicho asqueroso ¡Te estoy esperando!</voice>"
+      },
+      "scene14_sandraBaitsBoss": {
+        "say": "<voice name='{playerVoice}'> Parece que Chad me ha visto y sabe lo que quiero hacer <break time='500ms'/></voice> <voice name='{sandraVoice}'> ¡Tú! Bicho asqueroso ¡Te estoy esperando!</voice>"
+      },
+      "scene14_getToBossBack": {
+        "say": "<voice name='{playerVoice}'> Perfecto, con esa distracción he podido colocarme a su espalda. </voice>"
+      },
+      "scene14_killWithLever": {
+        "say": "<voice name='{playerVoice}'> Ya eres mío bicho del infierno. <say-as interpret-as='interjection'>argh</say-as>. <audio src='soundbank://soundlibrary/metal/metal_02'/><audio src='soundbank://soundlibrary/monsters/pigmy_bats/pigmy_bats_01'/></voice> <voice name='{sandraVoice}'> Bien hecho {playername}. Hemos acabado con esa cosa asquerosa e inteligente. Ya no nos molestará más.</voice>"
+      },
+      "scene14_grabBossAndSandraKillsBoss": {
+        "say": "<voice name='{playerVoice}'> Saltaré a su espalda y lo agarraré. <say-as interpret-as='interjection'>argh</say-as> <audio src='soundbank://soundlibrary/monsters/human_vocals/human_vocals_07'/> Ya lo tengo Sandra. Dale con todo ahora que no puede defenderse.</voice> <voice name='{sandraVoice}'> <say-as interpret-as='interjection'>argh</say-as>. <audio src='soundbank://soundlibrary/metal/metal_02'/><audio src='soundbank://soundlibrary/monsters/pigmy_bats/pigmy_bats_01'/> Bien hecho {playername}. Hemos acabado con esa cosa asquerosa e inteligente. Ya no nos molestará más.</voice>"
+      },
+      "scene14_destroyArtifactEasily": {
+        "say": "<voice name='{playerVoice}'> Sin esos rabiosos de por medio podremos destruir facilmente el artefacto. <audio src='soundbank://soundlibrary/explosions/explosions/explosions_07'/> Al final lo hemos logrado. Nos hemos deshecho de el artefacto y de su líder. Nunca creí que nos costaría tanto.</voice>"
+      },
+
+      "scene14_goForArtifactButBossNoticesAndFollowsYou": {
+        "say": "<voice name='{playerVoice}'> Intentaré destruir el artefacto. Esa es la prioridad. <break time='500ms'/> <audio src='soundbank://soundlibrary/monsters/human_vocals/human_vocals_01'/> ¿Cómo? Ese bicho asqueroso se había dado cuenta de que iba a por el artefacto ha venido a por mí. <audio src='soundbank://soundlibrary/human/hit_punch_slap/hit_punch_slap_03'/> <say-as interpret-as='interjection'>argh</say-as> No puedo con él. ¡No! ¡Va a activar el artefacto! <audio src='soundbank://soundlibrary/aircrafts/jets/jet_01'/></voice> <voice name='{sandraVoice}'> ¡Lo ha logrado! No me lo puedo creer. Todo está temblando por el artefacto. Salgamos de aquí antres de que se derrumbe. Ya no podemos hacer nada.</voice>"
+      },
+      "scene14_bossGetsYouAndStartArtifact": {
+        "say": "<audio src='soundbank://soundlibrary/aircrafts/jets/jet_01'/></voice> <voice name='{sandraVoice}'> ¡Lo ha logrado y además ha escapado! No me lo puedo creer. Todo está temblando por el artefacto. Salgamos de aquí antres de que se derrumbe. Ya no podemos hacer nada.</voice>"
+      },
+      "scene14_bossEscapesRunning": {
+        "say": "<voice name='{sandraVoice}'> Por desgracia parece que su maldito líder ha escapado.</voice>"
+      },
+      "scene14_chadInterceptBoss": {
+        "say": "<voice name='{chadVoice}'> ¡Yo lo pararé! <audio src='soundbank://soundlibrary/human/hit_punch_slap/hit_punch_slap_03'/> Ahora {playerName}. Mientras lo agarro. ¡Destruye el artefacto!</voice> <voice name='{playerVoice}'> Sí, voy. <audio src='soundbank://soundlibrary/explosions/explosions/explosions_07'/></voice>"
+      },
+      "scene14_sidneyInterceptBoss": {
+        "say": "<voice name='{sydneyVoice}'> ¡Yo lo pararé! <audio src='soundbank://soundlibrary/human/hit_punch_slap/hit_punch_slap_03'/> Ahora {playerName}. Mientras lo agarro. ¡Destruye el artefacto!</voice> <voice name='{playerVoice}'> Sí, voy. <audio src='soundbank://soundlibrary/explosions/explosions/explosions_07'/></voice>"
+      },
+      "scene14_dogInterceptBoss": {
+        "say": "<voice name='{sandraVoice}'> <audio src='soundbank://soundlibrary/animals/amzn_sfx_dog_med_woof_1x_01'/> Ahora {playerName}. El perro lo ha agarrado. ¡Destruye el artefacto mientras puedas!</voice> <voice name='{playerVoice}'> Sí, voy. <audio src='soundbank://soundlibrary/explosions/explosions/explosions_07'/></voice>"
+      },
+      "scene14_youManageToDestroyArtifact": {
+        "say": "<voice name='{playerVoice}'> Parece que al final lo hemos logrado. Vayamonos de aquí, el edificio está empezando a temblar por la explosión. Puede que se caiga.</voice>"
+      },
+
+      "scene14_goTogetherRightWay": {
+        "say": "<voice name='{playerVoice}'> Será mejor que vayamos juntos por el camino de la derecha. Así tendremos más posibilidades.</voice>"
+      },
+      "scene14_sandraFacesLastEnemy": {
+        "say": "<voice name='{sandraVoice}'> <say-as interpret-as='interjection'>argh</say-as>. </voice> <voice name='{playerVoice}'> Parece que un enemigo ha visto a Sandra y su líder viene a por mí. <say-as interpret-as='interjection'>argh</say-as><audio src='soundbank://soundlibrary/human/hit_punch_slap/hit_punch_slap_10'/> No puedo con él. </voice> <voice name='{sandraVoice}'> {playerName} he podido con él. ¡Voy a por el artefacto! </voice> <voice name='{playerVoice}'> ¡No! ¡Cuidado! Su líder no te dejará. Va tras de tí.</voice>"
+      },
+      "scene14_askUseGunOnBoss": {
+        "say": "<voice name='{playerVoice}'> Tengo que ayudarla. Puedo disparar al rabioso con mi pistola, pero es arriesgaso. Sandra está en la línea de tiro. ¿Disparo? ¿sí o no? </voice>",
+        "reprompt": "<voice name='{playerVoice}'> ¿Disparo? ¿sí o no?</voice>"
+      },
+      "scene14_disableBoss": {
+        "say": "<voice name='{playerVoice}'><audio src='soundbank://soundlibrary/guns/handguns/handgun_shot_02'/> <break time='500ms'/> ¡Acerté! Ese bicho ya no puede caminar bien. Sandra destruye el artefacto. !Ahora¡</voice> <voice name='{sandraVoice}'> ¡Estoy en ello! <audio src='soundbank://soundlibrary/explosions/explosions/explosions_07'/>  ¡Lo hemos logrado!</voice><voice name='{playerVoice}'> Vayamosnos de aquí parece que el edificio se va a caer por la explosión. </voice> <voice name='{sandraVoice}'> ¿Y el líder? </voice>"
+      },
+      "scene14_bossEscapes": {
+        "say": "<voice name='{playerVoice}'>Parece que ha escapado.</voice>"
+      },
+      "scene14_bossGetsRidOfSydneyAndUsesArtifact": {
+        "say": "<voice name='{playerVoice}'> No puedo jugarmela a darle a Sandra. Será mejor que me esté quieto.</voice> <voice name='{sandraVoice}'> <say-as interpret-as='interjection'>argh</say-as> ¡No!</voice> <audio src='soundbank://soundlibrary/aircrafts/jets/jet_01'/> <voice name='{playerVoice}'>Ese bicho a pillado a Sandra y ha activado el artefacto. Ya no queda nada que hacer. Será mejor que salgamos de aquí. Parece que con el estruendo el edificio se va a caer.</voice><voice name='{sandraVoice}'> ¿Y ese rabioso asqueroso? </voice>"
+      },
+
+      "scene14_defeatOneEnemy": {
+        "say": "<voice name='{playerVoice}'> Hay un enemigo en el camino. Encarguémonos de él sin hacer ruido. <audio src='soundbank://soundlibrary/monsters/pigmy_bats/pigmy_bats_01'/> Uno menos.</voice>"
+      },
+      "scene14_partnerFigthsEnemyLeft": {
+        "say": "<voice name='{playerVoice}'> Parece que hay otro más. Sandra ocupaté de él. Yo iré a por su jefe. </voice> <voice name='{sandraVoice}'> De acuerdo. </voice>"
+      },
+      "scene14_partyFigthsEnemyLeft": {
+        "say": "<voice name='{playerVoice}'> Parece que hay otro más. Chicos ocupaos de él. Yo iré a por su jefe. </voice> <voice name='{sandraVoice}'> De acuerdo. </voice>"
+      },
+      "scene14_faceBossAlone": {
+        "say": "<voice name='{playerVoice}'> Tengo que entretenerlo como sea. ¡Eh tú! ¡Bicho feo, ven a por mí! <audio src='soundbank://soundlibrary/monsters/human_vocals/human_vocals_04'/></voice> Vaya parece que ha funcionado bastante bien, se ha centrado en mí."
+      },
+      "scene14_sydneyAskForTimeAndDestroysArtifact": {
+        "say": "<voice name='{sydneyVoice}'> ¡Yo me ocuparé {playerName}! Tú mantenlo entretenido.</voice> <voice name='{playerVoice}'> ¡Date prisa! ¡Es muy fuerte! No sé si podré aguantar mucho más.</voice> <voice name='{sydneyVoice}'> Ya está. Artefacto destruido. <audio src='soundbank://soundlibrary/explosions/explosions/explosions_07'/> Salgamos de aquí.</voice>"
+      },
+      "scene14_chadSavesYouFromBoss": {
+        "say": "<voice name='{playerVoice}'> ¡Quitadme al rabioso de encima! ¡No puedo con él! </voice> <voice name='{chadVoice}'> ¡Tranquilo, yo te ayudo! <audio src='soundbank://soundlibrary/human/hit_punch_slap/hit_punch_slap_10'/> Corramos ahora que está aturdido.</voice>"
+      },
+      "scene14_dogSavesYouFromBoss": {
+        "say": "<voice name='{playerVoice}'> ¡Quitadme al rabioso de encima! ¡No puedo con él! <audio src='soundbank://soundlibrary/animals/amzn_sfx_dog_med_bark_growl_01'/> Gracias perrito. Corramos ahora que podemos.</voice> "
+      },
+      "scene14_sandraSavesYouFromBoss": {
+        "say": "<voice name='{playerVoice}'> ¡Quitadme al rabioso de encima! ¡No puedo con él! </voice> <voice name='{sandraVoice}'> ¡Tranquilo, yo te ayudo! <audio src='soundbank://soundlibrary/human/hit_punch_slap/hit_punch_slap_10'/> Corramos ahora que está aturdido.</voice>"
+      },
+      "scene14_bossEscapesUsingWindow": {
+        "say": "<voice name='{sandraVoice}'> Parece que va ha huir por la ventana. Vayamonos nosotros tambíen, el edificio esta empezando a temblar por la explosión. </voice>"
+      },
+
+      "scene14_sandraTriesToDestroyButCantWhileChadGetsLastEnemy": {
+        "say": "<voice name='{chadVoice}'> Todavía queda un enemigo. Yo me ocuparé de él. <audio src='soundbank://soundlibrary/monsters/human_vocals/human_vocals_04'/> Sandra acaba con el artefacto mientras lo entretengo.</voice> "
+      },
+      "scene14_sandraEndsLastEnemyTriesToDestroyButCant": {
+        "say": "<voice name='{sandraVoice}'> Todavía queda un enemigo. Yo me ocuparé de él. <audio src='soundbank://soundlibrary/monsters/human_vocals/human_vocals_04'/> Listo. Uno menos. Acabaré con el artefacto mientras {playerName} entretiene al líder.</voice> "
+      },
+      "scene14_sandraTriesToDestroyButCantWhileDogGetsLastEnemy": {
+        "say": "<voice name='{chadVoice}'> Todavía queda un enemigo. EL perro se estáaa ocupando de él. <audio src='soundbank://soundlibrary/animals/amzn_sfx_dog_med_bark_growl_01'/> Sandra acaba con el artefacto mientras lo entretiene.</voice> "
+      },
+      "scene14_bossNoticesAndUsesArtifact": {
+        "say": "<voice name='{playerVoice}'> ¡Cuidado! El líder se ha dado cuenta y está detrás de tí. </voice> <voice name='{sandraVoice}'> <say-as interpret-as='interjection'>argh</say-as>. </voice> <voice name='{playerVoice}'> ¡No! ¡Va ha usar el artefacto! <audio src='soundbank://soundlibrary/aircrafts/jets/jet_01'/> </voice><voice name='{sandraVoice}'> ¡Y el rabioso! </voice>"
+      },
+      
+      "scene14_decideToCharge": {
+        "say": "<voice name='{playerVoice}'> creo que será mejor que vayamos directos a por el artefacto.</voice>"
+      },
+      "scene14_sandraTellsNoWayToDoThat": {
+        "say": "<voice name='{sandraVoice}'> {playerName} es mejor que no lo hagamos así. Hay demasiados enemigos en este sitio y su líder parece muy fuerte. Es mejor ser precavido.</voice><voice name='{playerVoice}'> De acuerdo. </voice>"
+      },
+
+      "scene14_sandraFinalSpeechSaveCampAndDefeatBoss": {
+        "say": "<break time='500ms'/><voice name='{sandraVoice}'> Al final hemos conseguido escapar de ese sitio. Las cosas podian haber salido mejor. Hemos acabado con los planes de esos rabiosos y también con su líder. Por desgracia no pudimos salvar a Sydney. Tendremos que tratar de sobrevivir sin ella. </voice>"
+      },
+      "scene14_sandraFinalSpeechSaveCampAndSydneyAndDefeatBoss": {
+        "say": "<break time='500ms'/><voice name='{sandraVoice}'> Al final hemos conseguido escapar de ese sitio. Las cosas no podian haber salido mejor. Hemos acabado con los planes de esos rabiosos y también con su líder. Además conseguimos salvar a Sydney. A partir de ahora viviremos mucho más tranquilos. </voice>"
+      },
+      "scene14_sandraFinalSpeechSaveCampAtLeast": {
+        "say": "<break time='500ms'/><voice name='{sandraVoice}'> Al final hemos conseguido escapar de ese sitio. Las cosas no nos han salido bien pero al menos logramos pararles los pies a los rabiosos y desbaratar sus planes. </voice>"
+      },
+      "scene14_sandraFinalSpeechPrepareForNewProblems": {
+        "say": "<break time='500ms'/><voice name='{sandraVoice}'> Al final hemos conseguido escapar de ese sitio. No hemos logrado ninguno de nuestros objetivos. Tenemos que prepararnos para lo que viene. Lo vamos a tener muy difícil para sobrevivir. </voice>"
       }
 
     }

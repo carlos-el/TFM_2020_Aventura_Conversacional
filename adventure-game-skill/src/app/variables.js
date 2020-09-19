@@ -35,7 +35,7 @@ exports.playerDoorColor = function (voxaEvent) {
 };
 
 exports.generalFreeRoamReprompt = function (voxaEvent) {
-  const instros = ["<say-as interpret-as='interjection'>mmh</say-as>. ¿Qué debería hacer ahora?", 
+  const intros = ["<say-as interpret-as='interjection'>mmh</say-as>. ¿Qué debería hacer ahora?", 
     "<say-as interpret-as='interjection'>mmh</say-as>. ¿Qué hago?", 
     "<say-as interpret-as='interjection'>mmh</say-as>. ¿Qué puedo hacer?", 
     "<say-as interpret-as='interjection'>mmh</say-as>.", 
@@ -54,11 +54,26 @@ exports.playerVoice = playerVoice = function (voxaEvent) {
 exports.sandraVoice = sandraVoice = function (voxaEvent) {
   return nc.npcs["sandra"].voice;
 };
+exports.takumiVoice = takumiVoice = function (voxaEvent) {
+  return nc.npcs["takumi"].voice;
+};
 exports.fatherVoice = fatherVoice = function (voxaEvent) {
   return "Hans";
 };
 exports.administratorVoice = administratorVoice = function (voxaEvent) {
   return nc.npcs["tom"].voice;
+};
+exports.tomVoice = tomVoice = function (voxaEvent) {
+  return nc.npcs["tom"].voice;
+};
+exports.hugoVoice = hugoVoice = function (voxaEvent) {
+  return nc.npcs["hugo"].voice;
+};
+exports.chadVoice = chadVoice = function (voxaEvent) {
+  return nc.npcs["chad"].voice;
+};
+exports.sydneyVoice = sydneyVoice = function (voxaEvent) {
+  return nc.npcs["sydney"].voice;
 };
 
 ///// INSPECT VARIABLES /////
