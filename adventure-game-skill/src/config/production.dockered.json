@@ -1,0 +1,18 @@
+{
+	"server": {
+		"port": 3000,
+		"hostSkill": true
+	},
+
+	"db": {
+		"port": 27017,
+		"url": "mongodb://localhost:",
+		"path": "/adventure-game-skill"
+	},
+
+	"notification_server": {
+		"port": 4000,
+		"url": "localhost",
+		"path": "/notifications"
+	}
+}
