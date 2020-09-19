@@ -64,7 +64,7 @@ module.exports = class ElementCollection {
                 useObjectActionTaken: function (voxaEvent, object) { return false; },
             }),
             brokenTruck: new Element({
-                names: ["camión", "camión", "camión averiado", "camión averiado"],
+                names: ["camión", "camion", "camion averiado", "camión averiado"],
                 mentionQuote: "un camión averiado",
                 mentionAlreadyInspectedQuote: "un camión averiado",
                 inspectQuote: "Es solo un camión averiado aunque debería mirar si tiene algo en el remolque. <audio src='soundbank://soundlibrary/doors/doors_metal/metal_02'/> Vaya, parece que le quedan una cuantas botetllas de agua. Las cogeré.",
@@ -123,7 +123,7 @@ module.exports = class ElementCollection {
                 useObjectActionTaken: function (voxaEvent, object) { return false; },
             }),
             sofa_closed: new Element({
-                names: ["sofá"],
+                names: ["sofá", "sofa"],
                 mentionQuote: "un sofá",
                 mentionAlreadyInspectedQuote: "un sofá",
                 inspectQuote: "Un sofá no muy cómodo. <say-as interpret-as='interjection'>mmh</say-as>. Parece que hay algo debajo de la piel del asiento.",
@@ -143,7 +143,7 @@ module.exports = class ElementCollection {
                 },
             }),
             sofa_open: new Element({
-                names: ["sofá", "sofá rajado"],
+                names: ["sofá", "sofá rajado", "sofa", "sofa rajado"],
                 mentionQuote: "un sofá rajado",
                 mentionAlreadyInspectedQuote: "un sofá rajado",
                 inspectQuote: "Un sofá rajado. Parece dentro del tapizado hay un objeto pequeño. Vaya parece un relicario. Se ha caído al suelo. Debería cogerlo.",
@@ -334,7 +334,7 @@ module.exports = class ElementCollection {
                 useObjectActionTaken: function (voxaEvent, object) { return false; },
             }),
             merchantWarehouse: new Element({
-                names: ["almacén", "almacén del mercader"],
+                names: ["almacén", "almacén del mercader", "almacen", "almacen del mercader"],
                 mentionQuote: "un almacén no muy grande",
                 mentionAlreadyInspectedQuote: "un almacén no muy grande",
                 inspectQuote: "Un almacén de mercancías. No es muy grande y pasa bastante desapercibido. Debe ser del mercader que hay en la entrada del polígono. Vaya dentro hay mucha comida en una caja. ¡Estoy de suerte! También hay un cargador de balas y un cartucho de dinamita. Debería recoger ambas cosas.",
@@ -644,7 +644,7 @@ module.exports = class ElementCollection {
                 },
             }),
             generator: new Element({
-                names: ["generador", "generador eléctrico"],
+                names: ["generador", "generador eléctrico", "generador electrico"],
                 mentionQuote: "un generador eléctrico",
                 mentionAlreadyInspectedQuote: "un generador eléctrico",
                 inspectQuote: "Es el generador eléctrico que da energía al puente. Parece que no le queda nada de combustible. Si consigo un poco podría elevar el puente fácilmente.",
@@ -678,7 +678,7 @@ module.exports = class ElementCollection {
                 },
             }),
             generatorDummy: new Element({
-                names: ["generador", "generador eléctrico"],
+                names: ["generador", "generador eléctrico", "generador electrico"],
                 mentionQuote: "un generador eléctrico",
                 mentionAlreadyInspectedQuote: "un generador eléctrico",
                 inspectQuote: "Es el generador eléctrico que da energía al puente. No necesito usarlo más, el puente ya está bajado.",
@@ -844,7 +844,7 @@ module.exports = class ElementCollection {
                 },
             }),
             shelf: new Element({
-                names: ["estantería"],
+                names: ["estantería", "estanteria"],
                 mentionQuote: "una estantería",
                 mentionAlreadyInspectedQuote: "una estantería",
                 inspectQuote: "Una estantería de aluminio típica de un almacén. Parece que alguien la ha usado de alacena. Tiene unas buenas raciones de agua y comida. Me las llevaré.",
