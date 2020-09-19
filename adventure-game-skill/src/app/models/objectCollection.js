@@ -13,7 +13,7 @@ module.exports = class objectCollection {
                 },
             }),
             lanternEmpty: new Object({
-                names: ["linterna sin batería", "linterna"],
+                names: ["linterna sin batería", "linterna", "linterna sin bateria"],
                 isMale: false,
                 mentionQuote: "una linterna sin batería",
                 inspectQuote: "Una linterna sin bateria. Debería de encontrarle alguna antes de poder usarla.",

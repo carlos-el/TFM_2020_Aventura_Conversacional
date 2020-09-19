@@ -138,7 +138,7 @@ module.exports = class Map {
                         },
                         go: function (game) {
                             if (!("riverBankPowerPlant" in game.map.locations) && 
-                            !("fishermanVillage" in game.map.locations)) {
+                            !("road_fishermanVillage_highway" in game.map.locations)) {
                                 return "scene7_crossBridge2";
                             }
 
@@ -580,7 +580,7 @@ module.exports = class Map {
                 }
             }),
             littleVillage: new Location({
-                names: [], // (only needed if main == true)
+                names: ["aldea", "aldea pequeña", "pequeña aldea"], // (only needed if main == true)
                 locationQuote: "una aldea",
                 storyQuote: "Apenas tiene un puñado de casas. La mayoría de pescadores que vinieron a trabajar al polígono industrial depués de la construcción de la central hidroeléctrica.",
                 main: true,

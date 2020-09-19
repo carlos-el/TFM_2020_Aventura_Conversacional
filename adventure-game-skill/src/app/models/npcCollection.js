@@ -11,7 +11,7 @@ module.exports = class NpcCollection {
                 voice: "Conchita",
                 states: {
                     1: new NpcState({ // in road_Camp_hydroelectricPowerPlantOutskirts
-                        mentionQuote: "está esperándome, debería hablar con ella",
+                        mentionQuote: ", está esperándome, debería hablar con ella",
                         talkActionTaken: function (game, alreadyTalked) {
                             // Set already talked to true in this location
                             game.map.locations[game.map.currentLocation].npcs["sandra"] = true;
@@ -106,7 +106,7 @@ module.exports = class NpcCollection {
 
                             return "";
                         },
-                        speech: "¡Ya estamos muy cerca de conseguir nuestro objetivo! Los rabiosos han escapado hacia las instalaciones del laboratorio en el Norte. No se como han podido cruzar por ese cúmulo de esporas pero nosotros debemos de encontrar rápido una manera de hacer lo mismo. Tengo entendido que la mejor manera de deshacerse de ellos sin infectarse es con fuego. Deberías preguntar en el campamento si alguien puede hecharte un cable con eso. Cuando estés listo acaba con el cúmulo esporas y cruzaremos contigo.",
+                        speech: "¡Bien hecho! ¡Ya estamos muy cerca de conseguir nuestro objetivo! Chad y tu pillasteis a los rabiosos huyendo hacia las instalaciones del laboratorio en el Norte. No se como han podido cruzar por ese cúmulo de esporas pero nosotros debemos de encontrar rápido una manera de hacer lo mismo. Tengo entendido que la mejor manera de deshacerse de ellos sin infectarse es con fuego. Deberías preguntar en el campamento si alguien puede hecharte un cable con eso. Cuando estés listo acaba con el cúmulo esporas y cruzaremos contigo.",
                         speechAlreadyTalked: "¡Ya estamos muy cerca de conseguir nuestro objetivo! Los rabiosos han escapado hacia las instalaciones del laboratorio en el Norte. No se como han podido cruzar por ese cúmulo de esporas pero nosotros debemos de encontrar rápido una manera de hacer lo mismo. Tengo entendido que la mejor manera de deshacerse de ellos sin infectarse es con fuego. Deberías preguntar en el campamento si alguien puede hecharte un cable con eso. Cuando estés listo acaba con el cúmulo esporas y cruzaremos contigo.",
                     }),
                     7: new NpcState({ // in militaryLaboratoryOutskirts, tells to go to save Sydney, goes to 8 or 9 on scene 13.
