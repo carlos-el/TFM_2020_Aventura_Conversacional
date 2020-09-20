@@ -1,4 +1,5 @@
 const MongoClient = require('mongodb').MongoClient;
+const notificationSender = require('./trapNotificationSender');
 const config = require('../config');
 
 module.exports = class UserDator {
@@ -7,8 +8,8 @@ module.exports = class UserDator {
     }
 
     static async getDator() {
-        // "config.mongodb.url" +"/"+ "config.mongodb.dbname"
-        const database = await MongoClient.connect("mongodb://localhost:27017" + "/" + "adventure-game-skill");
+        const database = await MongoClient.connect(config.db.url + config.db.port.toString() + config.db.path);
+
         return new UserDator(database.db())
     }
 
@@ -25,11 +26,40 @@ module.exports = class UserDator {
     }
 
     async saveUserGame(userId, game) {
-        // If the user is already in the database, update it.
-        if (await this.db.collection('users').findOne({ userId: userId })) {
-            await this.db.collection('users').updateOne({ userId: userId }, { $set: { game: game } })
+        const user = await this.db.collection('users').findOne({ userId: userId })
+        if (user) {
+            let quantity = 0;
+            // if we can get the quantity then set it
+            if ("tom" in game.merchants) {
+                if (game.merchants["tom"]["bought"]["pack"]) {
+                    quantity = game.merchants["tom"]["bought"]["pack"]
+                }
+            }
+
+            // If an user has a trap he must be already in the DB so we get the user traps and send the notifications
+            let traps = user.traps
+            var trapName = ""
+            for (trapName in traps) {
+                // if the notification was not sent for this trap
+                if (!traps[trapName].notificationSent) {
+                    traps[trapName].notificationSent = true
+                    const trapHours = parseInt(traps[trapName].trapObjectUsed.substr(traps[trapName].trapObjectUsed.length - 3, 2));
+                    notificationSender.sendTrapNotification(user.userId, new Date(traps[trapName].timeSet + (trapHours * 3600000)))
+                }
+            }
+
+            // Update database with new game, camp level and traps notifications sent.
+            await this.db.collection('users').updateOne({ userId: userId }, { $set: { game: game, campQuantity: quantity, traps: traps } })
         } else { // If it is not then insert it.
-            await this.db.collection('users').insertOne({ userId: userId, game: game })
+            let quantity = 0;
+            // if we can get the quantity then set it
+            if ("tom" in game.merchants) {
+                if (game.merchants["tom"]["bought"]["pack"]) {
+                    quantity = game.merchants["tom"]["bought"]["pack"]
+                }
+            }
+            await this.db.collection('users').insertOne({ userId: userId, game: game, traps: {}, campQuantity: quantity })
+
         }
     }
 
@@ -37,7 +67,7 @@ module.exports = class UserDator {
         // If the user is already in the database, update it.
         if (await this.db.collection('users').findOne({ userId: userId })) {
             console.log("Saving alternative game")
-            await this.db.collection('users').updateOne({ userId: userId }, { $set: { alternativeGame: { game: game, lastState: lastState } } })
+            await this.db.collection('users').insertOne({ userId: userId, game: null, traps: {}, campQuantity: 0, alternativeGame: { game: game, lastState: lastState } })
         } else { // If it is not then insert it.
             await this.db.collection('users').insertOne({ userId: userId, game: null, alternativeGame: { game: game, lastState: lastState } })
         }
@@ -72,20 +102,20 @@ module.exports = class UserDator {
             let userTraps = user.traps;
             // if the user has already traps add the trap and update the database
             if (userTraps) {
-                userTraps[elementWithTrap] = { trapObjectUsed: trapObjectUsed, elementToReplace: elementToReplace, timeSet: timeSet };
+                userTraps[elementWithTrap] = { trapObjectUsed: trapObjectUsed, elementToReplace: elementToReplace, timeSet: timeSet, notificationSent: false };
                 await this.db.collection('users').updateOne({ userId: userId }, { $set: { traps: userTraps } })
             } else {
                 //In other case just set the new trap
                 let traps = {};
-                traps[elementWithTrap] = { trapObjectUsed: trapObjectUsed, elementToReplace: elementToReplace, timeSet: timeSet };
+                traps[elementWithTrap] = { trapObjectUsed: trapObjectUsed, elementToReplace: elementToReplace, timeSet: timeSet, notificationSent: false };
                 await this.db.collection('users').updateOne({ userId: userId }, { $set: { traps: traps } })
             }
         } else { // If it is not then insert it.
             console.log("Saving trap use without user being in the database")
             // Just save the trap, the next time adding a trap the user will be already in the database
             let traps = {};
-            traps[elementWithTrap] = { trapObjectUsed: trapObjectUsed, elementToReplace: elementToReplace, timeSet: timeSet };
-            await this.db.collection('users').insertOne({ userId: userId, game: null, traps: traps })
+            traps[elementWithTrap] = { trapObjectUsed: trapObjectUsed, elementToReplace: elementToReplace, timeSet: timeSet, notificationSent: false };
+            await this.db.collection('users').insertOne({ userId: userId, game: null, traps: traps, campQuantity: 0 })
         }
     }
 
@@ -93,14 +123,14 @@ module.exports = class UserDator {
         const user = await this.db.collection("users").findOne({ userId: userId });
         // If the user is  in the database
         if (user) {
-            if(user.traps){
+            if (user.traps) {
                 console.log("Getting trap: found")
                 return user.traps[elementWithTrap];
             }
 
             console.log("Getting trap: null")
             return null;
-        } else { 
+        } else {
             console.log("Getting trap: null")
             return null;
         }
@@ -116,7 +146,7 @@ module.exports = class UserDator {
                 delete userTraps[elementWithTrap];
                 await this.db.collection('users').updateOne({ userId: userId }, { $set: { traps: userTraps } })
             }
-        } 
+        }
         // in other case do nothing
     }
 
@@ -125,7 +155,7 @@ module.exports = class UserDator {
         // If the user is already in the database, remove all traps.
         if (user) {
             await this.db.collection('users').updateOne({ userId: userId }, { $set: { traps: null } })
-        } 
+        }
         // in other case do nothing
     }
 }
