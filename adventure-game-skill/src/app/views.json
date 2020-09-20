@@ -2,12 +2,7 @@
   "es": {
     "translation": {
       "LaunchMainMenu": {
-        "card": {
-          "text": "Hola, bienvenido",
-          "title": "Aventura Conversacional",
-          "type": "Standard"
-        },
-        "say": "Hola, bienvenido al juego."
+        "say": "Hola, bienvenido a Expedición Salvamento."
       },
       "notDesiredIntentView": {
         "say": "Intent no deseado"
@@ -265,7 +260,12 @@
 
 
       "tuto1_tellAboutNotificationsGameWeb": {
-        "say": "Bienvenido al tutorial de ¡Exploración Salvamento! Si vas a jugar de manera habitual te recomendamos que actives las notificacines de esta skill para tener una mejor experiencia. Durante este tutorial te explicaremos el funcionamiento del juego y otras características que de lo contrario deberás descubrir por tí mismo."
+        "card": {
+          "text": "Identificador {userIdentifier}",
+          "title": "www.expedicionsalvamento.com",
+          "type": "Standard"
+        },
+        "say": "Bienvenido al tutorial de ¡Expedición Salvamento! Si vas a jugar de manera habitual te recomendamos que actives las notificacines de esta skill para tener una mejor experiencia. Para saber más, puede visitar nuestra página web: www.expedicionsalvamento.com. Su identificador de usuario es {userIdentifier}. Durante este tutorial te explicaremos el funcionamiento del juego y otras características que de lo contrario deberás descubrir por tí mismo."
       },
       "tuto1_askTest": {
         "say": "Sabiendo esto, ¿quieres hacer el tutorial?",

@@ -10,7 +10,9 @@ const oc = new ObjectCollection();
 const nc = new NpcCollection();
 const c = new Camp();
 
-
+exports.userIdentifier = function (voxaEvent) {
+  return voxaEvent.userDator.getUserIdentifier(voxaEvent.user.id)
+};
 
 exports.playerName = function (voxaEvent) {
   return voxaEvent.model.game.choices.name;
