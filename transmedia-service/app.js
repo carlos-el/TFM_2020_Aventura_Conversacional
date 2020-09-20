@@ -4,6 +4,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var expressMongoDb = require('express-mongo-db');
+var config = require('./config');
 
 var homeRouter = require('./routes/home');
 var mapRouter = require('./routes/map');
@@ -16,7 +17,7 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
-app.use(expressMongoDb('mongodb://localhost:27017' + '/' + 'adventure-game-skill'));
+var db = expressMongoDb(config.db.url + config.db.port + config.db.path)
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -25,8 +26,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', homeRouter);
 app.use('/map', mapRouter);
-app.use('/ranking', rankingRouter);
 app.use('/commands', commandRouter);
+// This routes last so db errors does not propagates
+app.use(db);
+app.use('/ranking', rankingRouter);
 
 
 // catch 404 and forward to error handler
@@ -42,7 +45,11 @@ app.use(function(err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  res.render('error');
+  if(res.statusCode == 500){
+    res.render('error', {message: "Internal Server Error", error: {status: 500}});
+  }else {
+    res.render('error');
+  }
 });
 
 module.exports = app;
