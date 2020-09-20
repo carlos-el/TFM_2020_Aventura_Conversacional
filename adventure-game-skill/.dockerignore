@@ -1,0 +1,6 @@
+.dockerignore
+.eslintrc.json
+.nvmrc
+.prettierrc
+Dockerfile
+node_modules
