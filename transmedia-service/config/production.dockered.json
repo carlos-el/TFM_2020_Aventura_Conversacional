@@ -1,0 +1,11 @@
+{
+	"server": {
+		"port": 5000
+	},
+
+	"db": {
+		"url": "mongodb://db:",
+		"port": 27017,
+		"path": "/adventure-game-skill"
+	}
+}
