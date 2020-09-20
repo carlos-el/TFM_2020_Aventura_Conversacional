@@ -6,7 +6,7 @@
 
 	"db": {
 		"port": 27017,
-		"url": "mongodb://db:",
+		"url": "mongodb://localhost:",
 		"path": "/adventure-game-skill"
 	},
 
