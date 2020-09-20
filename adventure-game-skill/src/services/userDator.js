@@ -13,6 +13,15 @@ module.exports = class UserDator {
         return new UserDator(database.db())
     }
 
+    async getUserIdentifier(userId){
+        const user = await this.db.collection("users").findOne({ userId: userId });
+        if(user){
+            return user._id.toString()
+        } else {
+            return "inexistente. Comience una partida para crear uno. Puede consultarlo siempre que quiera en este tutorial."
+        }
+    }
+
     async getUserGame(userId) {
         // returns null if the object with the specified id does not exists
         const user = await this.db.collection("users").findOne({ userId: userId });
