@@ -1,0 +1,16 @@
+{
+	"server": {
+		"port": 4000
+	},
+
+	"amazon_notification_service": {
+		"url": "api.eu.amazonalexa.com",
+		"path": "/v1/proactiveEvents/"
+	},
+
+	"amazon_credential_service": {
+		"url": "api.amazon.com",
+		"path": "/auth/o2/token"
+	}
+
+}
