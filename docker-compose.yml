@@ -10,10 +10,10 @@ services:
       - "27017:27017"
     environment:
       MONGO_INITDB_DATABASE: adventure-game-skill
-      # MONGO_INITDB_ROOT_USERNAME: root
-      # MONGO_INITDB_ROOT_PASSWORD: root
-    # volumes: ## leave this volume
-    #   - ./mongo/data:/data/db 
+      # MONGO_INITDB_ROOT_USERNAME: desired username
+      # MONGO_INITDB_ROOT_PASSWORD: desired pass
+    volumes: ## leave this volume
+      - db-data:/data/db 
 
   skill: 
     build: ./adventure-game-skill
@@ -37,6 +37,11 @@ services:
     build: ./transmedia-service
     restart: always
     ports:
-      - 8081:5000
+      - 80:5000
+    depends_on:
+      - db
     environment:
       NODE_ENV: ${ENV}
+
+volumes:
+  db-data:
