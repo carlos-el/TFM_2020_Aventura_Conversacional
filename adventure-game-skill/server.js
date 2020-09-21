@@ -30,6 +30,10 @@ if (config.server.hostSkill) {
   });
 }
 
+expressApp.use('/', function (req, res) {
+  res.status(200).json();
+},)
+
 expressApp.listen(config.server.port, () => {
   console.log("");
   console.log(chalk.green("Listening on:"));
