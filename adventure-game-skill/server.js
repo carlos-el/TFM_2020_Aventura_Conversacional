@@ -33,6 +33,9 @@ if (config.server.hostSkill) {
 // expressApp.use('/', function (req, res) {
 //   res.status(200).json();
 // },)
+expressApp.use(function (req, res, next) {
+  res.status(400).json()
+});
 
 expressApp.listen(config.server.port, () => {
   console.log("");
