@@ -1,7 +1,7 @@
 {
     "interactionModel": {
         "languageModel": {
-            "invocationName": "aventura conversacional",
+            "invocationName": "expedicion salvamento",
             "intents": [
                 {
                     "name": "AMAZON.CancelIntent",
@@ -87,7 +87,7 @@
                         },
                         {
                             "name": "position",
-                            "type": "AMAZON.RelativePosition"
+                            "type": "positionLeftRight"
                         }
                     ],
                     "samples": [
@@ -119,7 +119,7 @@
                     "slots": [
                         {
                             "name": "position",
-                            "type": "AMAZON.RelativePosition"
+                            "type": "positionLeftRight"
                         }
                     ],
                     "samples": [
@@ -198,13 +198,25 @@
                         {
                             "name": "cardinal",
                             "type": "cardinal"
+                        },
+                        {
+                            "name": "article",
+                            "type": "article"
+                        },
+                        {
+                            "name": "location",
+                            "type": "location"
                         }
                     ],
                     "samples": [
-                        "viajar hacia el {cardinal}",
-                        "viajar al {cardinal}",
-                        "ir hacia el {cardinal}",
-                        "ir al {cardinal}"
+                        "viajar hacia {article} {location}",
+                        "viajar a {article} {location}",
+                        "ir hacia {article} {location}",
+                        "ir a {article} {location}",
+                        "viajar hacia {article} {cardinal}",
+                        "viajar a {article} {cardinal}",
+                        "ir hacia {article} {cardinal}",
+                        "ir  {article} {cardinal}"
                     ]
                 },
                 {
@@ -249,10 +261,14 @@
                         {
                             "name": "article",
                             "type": "article"
+                        },
+                        {
+                            "name": "articleTwo",
+                            "type": "article"
                         }
                     ],
                     "samples": [
-                        "usa {article} {object} en {article} {element}",
+                        "usa {article} {object} en {articleTwo} {element}",
                         "usar {object} en {element}"
                     ]
                 },
@@ -409,11 +425,6 @@
                     ]
                 },
                 {
-                    "name": "ActionCheckWhatToDo",
-                    "slots": [],
-                    "samples": []
-                },
-                {
                     "name": "ActionCheckMap",
                     "slots": [],
                     "samples": [
@@ -423,6 +434,105 @@
                         "ver mi mapa",
                         "ver el mapa",
                         "abrir mapa"
+                    ]
+                },
+                {
+                    "name": "SceneGetFoodOrBallIntent",
+                    "slots": [
+                        {
+                            "name": "choice",
+                            "type": "sceneFoodOrBallSlot"
+                        }
+                    ],
+                    "samples": [
+                        "la {choice}"
+                    ]
+                },
+                {
+                    "name": "SceneGetUseLeverOrGun",
+                    "slots": [
+                        {
+                            "name": "choiceLeverOrGun",
+                            "type": "sceneLeverOrGunSlot"
+                        }
+                    ],
+                    "samples": [
+                        "uso la {choiceLeverOrGun}",
+                        "usar la {choiceLeverOrGun}",
+                        "la {choiceLeverOrGun}"
+                    ]
+                },
+                {
+                    "name": "SceneGetAttackOrPush",
+                    "slots": [
+                        {
+                            "name": "choiceAttackOrPush",
+                            "type": "sceneAttackOrPushSlot"
+                        }
+                    ],
+                    "samples": [
+                        "{choiceAttackOrPush} estanterias",
+                        "{choiceAttackOrPush} las estanterias",
+                        "{choiceAttackOrPush}"
+                    ]
+                },
+                {
+                    "name": "SceneGetAttackOrSave",
+                    "slots": [
+                        {
+                            "name": "choiceAttackOrSave",
+                            "type": "sceneAttackOrSave"
+                        }
+                    ],
+                    "samples": [
+                        "{choiceAttackOrSave} a sidnei",
+                        "{choiceAttackOrSave} a sidney",
+                        "{choiceAttackOrSave} a sydney",
+                        "{choiceAttackOrSave} al rabioso",
+                        "{choiceAttackOrSave}"
+                    ]
+                },
+                {
+                    "name": "SceneGetSneakyOrAttack",
+                    "slots": [
+                        {
+                            "name": "choiceSneakyOrAttack",
+                            "type": "sceneSneakyOrAttack"
+                        }
+                    ],
+                    "samples": [
+                        "{choiceSneakyOrAttack} directamente",
+                        "ir {choiceSneakyOrAttack}",
+                        "{choiceSneakyOrAttack}"
+                    ]
+                },
+                {
+                    "name": "SceneGetAloneOrTogether",
+                    "slots": [
+                        {
+                            "name": "choiceAloneOrTogether",
+                            "type": "sceneAloneOrTogether"
+                        }
+                    ],
+                    "samples": [
+                        "deberiamos acercarnos {choiceAloneOrTogether}",
+                        "acercarnos {choiceAloneOrTogether}",
+                        "ir {choiceAloneOrTogether}",
+                        "{choiceAloneOrTogether}"
+                    ]
+                },
+                {
+                    "name": "SceneGetHelpOrDestroy",
+                    "slots": [
+                        {
+                            "name": "choiceHelpOrDestroy",
+                            "type": "sceneHelpOrDestroy"
+                        }
+                    ],
+                    "samples": [
+                        "{choiceHelpOrDestroy} el artefacto",
+                        "los {choiceHelpOrDestroy}",
+                        "{choiceHelpOrDestroy}"
                     ]
                 }
             ],
@@ -462,8 +572,146 @@
                     "values": [
                         {
                             "name": {
+                                "value": "red",
+                                "synonyms": [
+                                    "red de pajaros",
+                                    "red para pajaros"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "botella",
+                                "synonyms": [
+                                    "botella de pesca"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "dinamita",
+                                "synonyms": [
+                                    "cartucho",
+                                    "cartucho de dinamita"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "balas",
+                                "synonyms": [
+                                    "cargador de pistola",
+                                    "cargador",
+                                    "bala"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "pistola",
+                                "synonyms": [
+                                    "arma"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "lata",
+                                "synonyms": [
+                                    "gasolina",
+                                    "lata de gasolina"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "tuberia",
+                                "synonyms": [
+                                    "tuberia de acero"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "mechero"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "soplete",
+                                "synonyms": [
+                                    "soplete roto"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "lanzallamas",
+                                "synonyms": [
+                                    "lanza llamas"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "cuchillo",
+                                "synonyms": [
+                                    "cuchilla"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "relicario",
+                                "synonyms": [
+                                    "relicario con cadena",
+                                    "colgante con relicario",
+                                    "colgante"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "mascara de gas"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "mascara"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "palanca"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "gancho arrojadizo",
+                                "synonyms": [
+                                    "cuerda con gancho"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "cuerda",
+                                "synonyms": [
+                                    "soga"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "gancho"
+                            }
+                        },
+                        {
+                            "name": {
                                 "value": "cepo",
                                 "synonyms": [
+                                    "cepo grande",
+                                    "cepo enorme",
                                     "cepo pequeño"
                                 ]
                             }
@@ -496,17 +744,32 @@
                     "values": [
                         {
                             "name": {
-                                "value": "trampa",
+                                "value": "poza",
                                 "synonyms": [
-                                    "sendero con trampa"
+                                    "poza pequeña"
                                 ]
                             }
                         },
                         {
                             "name": {
-                                "value": "camino",
+                                "value": "red",
                                 "synonyms": [
-                                    "camino de animales"
+                                    "arbol con red"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "arbol"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "trampa",
+                                "synonyms": [
+                                    "trampa en una poza",
+                                    "trampa en poza",
+                                    "sendero con trampa"
                                 ]
                             }
                         },
@@ -514,33 +777,300 @@
                             "name": {
                                 "value": "sendero",
                                 "synonyms": [
+                                    "camino de animales",
+                                    "camino",
                                     "sendero de animales"
                                 ]
                             }
                         },
                         {
                             "name": {
-                                "value": "verja de metal"
+                                "value": "artefacto",
+                                "synonyms": [
+                                    "artefacto extraño"
+                                ]
                             }
                         },
                         {
                             "name": {
-                                "value": "verja metálica"
+                                "value": "torre",
+                                "synonyms": [
+                                    "torre de vigilancia"
+                                ]
                             }
                         },
                         {
                             "name": {
-                                "value": "verja"
+                                "value": "tumba",
+                                "synonyms": [
+                                    "tumba de chad"
+                                ]
                             }
                         },
                         {
                             "name": {
-                                "value": "bolsa de tela"
+                                "value": "cadaver",
+                                "synonyms": [
+                                    "cadaver de chad"
+                                ]
                             }
                         },
                         {
                             "name": {
-                                "value": "bolsa"
+                                "value": "esqueleto"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "bolsa",
+                                "synonyms": [
+                                    "bolsa de deporte"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "arcon",
+                                "synonyms": [
+                                    "arcon metalico"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "estanteria"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "derrumbe",
+                                "synonyms": [
+                                    "derrumbe de rocas"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "manantial"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "frigorifico"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "generador",
+                                "synonyms": [
+                                    "generador electrico"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "caseta",
+                                "synonyms": [
+                                    "caseta del vigilante",
+                                    "caseta para barcas"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "cabaña",
+                                "synonyms": [
+                                    "cabaña de madera"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "puente",
+                                "synonyms": [
+                                    "puente levadizo",
+                                    "puente de cemento"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "puerta",
+                                "synonyms": [
+                                    "puerta bloqueada",
+                                    "puerta de metal"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "grua"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "caja",
+                                "synonyms": [
+                                    "caja fuerte",
+                                    "caja de fusibles",
+                                    "caja de madera colgada",
+                                    "caja de madera"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "cumulo",
+                                "synonyms": [
+                                    "cumulo de esporas"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "almacen",
+                                "synonyms": [
+                                    "almacen del mercader"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "coche",
+                                "synonyms": [
+                                    "coche siniestrado"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "taquilla",
+                                "synonyms": [
+                                    "taquilla abierta"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "escritorio",
+                                "synonyms": [
+                                    "escritorio de madera"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "ordenador",
+                                "synonyms": [
+                                    "ordenador de escritorio roto",
+                                    "ordenador de escritorio",
+                                    "ordenador roto"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "valla",
+                                "synonyms": [
+                                    "valla de hierro rota",
+                                    "valla de hierro",
+                                    "valla metalica",
+                                    "valla de metal"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "contenedor",
+                                "synonyms": [
+                                    "contenedor de basura",
+                                    "contenedor de mercancias"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "armario",
+                                "synonyms": [
+                                    "armario bastante grande",
+                                    "armario grande"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "sofa",
+                                "synonyms": [
+                                    "sofa rajado"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "mesa",
+                                "synonyms": [
+                                    "mesa del comedor"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "muro",
+                                "synonyms": [
+                                    "muro de cemento"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "moto",
+                                "synonyms": [
+                                    "moto destrozada"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "camion",
+                                "synonyms": [
+                                    "camion averiado"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "surtidor",
+                                "synonyms": [
+                                    "surtidor de combustible"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "maquina",
+                                "synonyms": [
+                                    "maquina de filtrado de agua",
+                                    "maquina de filtrado"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "molino",
+                                "synonyms": [
+                                    "pequeño molino de viento",
+                                    "molino de viento"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "arbusto",
+                                "synonyms": [
+                                    "arbusto con muchas bayas",
+                                    "arbusto con algunas bayas",
+                                    "arbusto con bayas"
+                                ]
                             }
                         }
                     ]
@@ -575,6 +1105,11 @@
                     "values": [
                         {
                             "name": {
+                                "value": "al"
+                            }
+                        },
+                        {
+                            "name": {
                                 "value": "las"
                             }
                         },
@@ -600,22 +1135,44 @@
                     "values": [
                         {
                             "name": {
-                                "value": "administrador"
+                                "value": "hugo",
+                                "synonyms": [
+                                    "mercader"
+                                ]
                             }
                         },
                         {
                             "name": {
-                                "value": "tom"
+                                "value": "perro",
+                                "synonyms": [
+                                    "el perro"
+                                ]
                             }
                         },
                         {
                             "name": {
-                                "value": "mercader"
+                                "value": "sydney"
                             }
                         },
                         {
                             "name": {
-                                "value": "takumi"
+                                "value": "chad"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "tom",
+                                "synonyms": [
+                                    "administrador"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "takumi",
+                                "synonyms": [
+                                    "mercader"
+                                ]
                             }
                         },
                         {
@@ -646,6 +1203,191 @@
                         {
                             "name": {
                                 "value": "agua"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "sceneFoodOrBallSlot",
+                    "values": [
+                        {
+                            "name": {
+                                "value": "comida"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "pelota"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "sceneLeverOrGunSlot",
+                    "values": [
+                        {
+                            "name": {
+                                "value": "pistola"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "palanca"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "sceneAttackOrPushSlot",
+                    "values": [
+                        {
+                            "name": {
+                                "value": "empujar"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "empujo"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "atacar"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "ataco"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "sceneAttackOrSave",
+                    "values": [
+                        {
+                            "name": {
+                                "value": "salvo"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "salvar"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "ataco"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "atacar"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "sceneSneakyOrAttack",
+                    "values": [
+                        {
+                            "name": {
+                                "value": "ataco"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "atacar"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "silenciosamente"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "silencioso"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "sceneAloneOrTogether",
+                    "values": [
+                        {
+                            "name": {
+                                "value": "separado"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "junto"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "separados"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "juntos"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "sceneHelpOrDestroy",
+                    "values": [
+                        {
+                            "name": {
+                                "value": "destruyo"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "destruir"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "ayudo"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "ayudar"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "ayudarlos"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "location",
+                    "values": [
+                        {
+                            "name": {
+                                "value": "campamento"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "positionLeftRight",
+                    "values": [
+                        {
+                            "name": {
+                                "value": "derecha"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "izquierda"
                             }
                         }
                     ]
