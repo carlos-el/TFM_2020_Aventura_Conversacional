@@ -19,7 +19,7 @@ services:
     build: ./adventure-game-skill
     restart: always
     ports:
-      - 443:3000
+      - 3000:3000
     depends_on:
       - db
     environment:
@@ -37,7 +37,7 @@ services:
     build: ./transmedia-service
     restart: always
     ports:
-      - 80:5000
+      - 5000:5000
     depends_on:
       - db
     environment:

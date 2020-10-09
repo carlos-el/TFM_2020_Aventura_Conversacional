@@ -1,0 +1,69 @@
+{
+  "manifest": {
+    "apis": {
+      "custom": {
+        "endpoint": {
+          "sslCertificateType": "Wildcard",
+          "uri": "https://expedicionsalvamento.com/alexa"
+        },
+        "interfaces": []
+      }
+    },
+    "events": {
+      "endpoint": {
+        "sslCertificateType": "Wildcard",
+        "uri": "https://expedicionsalvamento.com/alexa"
+      },
+      "publications": [
+        {
+          "eventName": "AMAZON.MediaContent.Available"
+        }
+      ]
+    },
+    "manifestVersion": "1.0",
+    "permissions": [
+      {
+        "name": "alexa::devices:all:notifications:write"
+      }
+    ],
+    "privacyAndCompliance": {
+      "allowsPurchases": false,
+      "containsAds": false,
+      "isChildDirected": false,
+      "isExportCompliant": true,
+      "locales": {
+        "es-ES": {}
+      },
+      "usesPersonalInfo": false
+    },
+    "publishingInformation": {
+      "automaticDistribution": {
+        "isActive": false
+      },
+      "category": "CHOOSE_YOUR_OWN_STORY",
+      "distributionCountries": [
+        "ES"
+      ],
+      "isAvailableWorldwide": false,
+      "locales": {
+        "es-ES": {
+          "description": "Expedición salvamento es un juego de \"escoge tu propia aventura\" y de exploración donde tendrás a tu disposición un mapa con una gran cantidad de localizaciones para explorar y por las que podrás moverte libremente. \n\nUsa tu perspicacia e ingenio para avanzar en la historia y salvar a tu grupo de supervivientes en un mundo post-apocalíptico que no te pondrá las cosas nada fáciles.\n\nCuando estés explorando podrás realizar una gran cantidad de acciones, algunas de ellas son:\n- Investigar/inspeccionar [elemento/objeto].\n- Coger [objeto].\n- Usar [objeto] en [elemento].\n- Ir al [norte/sur/este/oeste]. \n- Hablar con [personaje].\n- ¿Dónde estoy?\n- Guardar partida.\n\n¡Intenta descubrirlas todas! \nTambién puede encontrar más información en nuestra página: www.expedicionsalvamento.com",
+          "examplePhrases": [
+            "Alexa, abre Expedición Salvamento."
+          ],
+          "keywords": [
+            "aventura",
+            "conversacional",
+            "exploración",
+            "decisiones"
+          ],
+          "largeIconUri": "https://s3.amazonaws.com/CAPS-SSE/echo_developer/1bcd/1da78efd58914086ac690555300a74f9/APP_ICON_LARGE?versionId=7BZ0n_2gAUwwmDRC9PQjfPut77_QkkbT&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20200921T035954Z&X-Amz-SignedHeaders=host&X-Amz-Expires=86400&X-Amz-Credential=AKIAWBV6LQ4QIH3MSWPB%2F20200921%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=15a49c1adce14164e63f9869840de39fc3d4c527c0f233fbd2dd6ac942293d2a",
+          "name": "Expedición Salvamento",
+          "smallIconUri": "https://s3.amazonaws.com/CAPS-SSE/echo_developer/1d2a/bedefcf8951b4fb191e7305d0fcbdc76/APP_ICON?versionId=fLPjZ8F8c_VEbMJjeoPRIuXZHSDRViKU&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20200921T035954Z&X-Amz-SignedHeaders=host&X-Amz-Expires=86400&X-Amz-Credential=AKIAWBV6LQ4QIH3MSWPB%2F20200921%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Signature=e9be160f19061f4934490b19f7a94c473ef4b6cdf9b3d7767165906e7daeaa87",
+          "summary": "Explora, investiga, resuelve puzzles y vive tu propia tu propia aventura en este juego donde tus decisiones importan en la historia."
+        }
+      },
+      "testingInstructions": "The skills only uses notification permission and it just suggest the users to activate notifications. It is a self hosted skill but it can be tried just playing the game. It is game developed for a Masters final assignment. Its not intended to work as a final product."
+    }
+  }
+}
